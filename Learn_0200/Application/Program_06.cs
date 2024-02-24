@@ -28,7 +28,7 @@ try
 	//var categoryCount =
 	//	applicationDbContext.Categories.Count();
 
-	//// SQL = TSQL = SELECT Count(*) FROM Categories
+	//// SQL = TSQL = SELECT COUNT(*) FROM Categories
 
 	//if (categoryCount == 0)
 	//{
@@ -56,10 +56,8 @@ try
 	//{
 	//	for (var index = 1; index <= 9; index++)
 	//	{
-	//		Category category;
-
-	//		category =
-	//			new()
+	//		var category =
+	//			new Category
 	//			{
 	//				Name = $"Category {index}",
 	//				IsActive = (index % 2 == 0),
@@ -83,7 +81,7 @@ try
 	//	for (var index = 1; index <= 9; index++)
 	//	{
 	//		var category =
-	//			new Category()
+	//			new Category
 	//			{
 	//				Name = $"Category {index}",
 	//				IsActive = (index % 2 == 0),
