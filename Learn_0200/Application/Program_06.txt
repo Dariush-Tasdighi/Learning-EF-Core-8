@@ -1,6 +1,6 @@
 ﻿- Adding IsActive Property to Category model
 
-- List (Zero or Many)
+- ToList (Zero or Many)
 
 - Learning Transaction
 

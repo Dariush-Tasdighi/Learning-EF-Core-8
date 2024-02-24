@@ -14,7 +14,7 @@ try
 
 	if (categories.Count == 0)
 	{
-		// ایجاد ده طبقه‌بندی
+		// ایجاد نه طبقه‌بندی
 	}
 	// **************************************************
 
@@ -28,9 +28,11 @@ try
 	//var categoryCount =
 	//	applicationDbContext.Categories.Count();
 
+	//// SQL = TSQL = SELECT Count(*) FROM Categories
+
 	//if (categoryCount == 0)
 	//{
-	//	// ایجاد ده طبقه‌بندی
+	//	// ایجاد نه طبقه‌بندی
 	//}
 	// **************************************************
 
@@ -40,7 +42,7 @@ try
 
 	//if (hasAnyCategory == false)
 	//{
-	//	// ایجاد ده طبقه‌بندی
+	//	// ایجاد نه طبقه‌بندی
 	//}
 	// **************************************************
 
@@ -80,10 +82,8 @@ try
 	//{
 	//	for (var index = 1; index <= 9; index++)
 	//	{
-	//		Category category;
-
-	//		category =
-	//			new()
+	//		var category =
+	//			new Category()
 	//			{
 	//				Name = $"Category {index}",
 	//				IsActive = (index % 2 == 0),
