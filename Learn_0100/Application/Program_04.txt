@@ -1,0 +1,360 @@
+﻿**************************************************
+Person person = new Person();
+
+person.Age = 51;
+person.FullName = "Dariush Tasdighi";
+
+person.ShowInformation();
+
+public class Person
+{
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+Person person = new Person();
+
+person.Age = 51;
+person.FullName = "Dariush Tasdighi";
+
+person.ShowInformation();
+
+public class Person : [[[object]]]
+{
+	[[[
+	public Person() : base()
+	{
+	}
+	]]]
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+الزامی است FullName فرض کنید که
+**************************************************
+[[[
+//Person person = new Person();
+Person person = new Person(fullName: "Dariush Tasdighi");
+]]]
+
+person.Age = 51;
+
+[[[
+//person.FullName = "Dariush Tasdighi";
+]]]
+
+person.ShowInformation();
+
+public class Person : object
+{
+	[[[
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+	]]]
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+تفکری که یک زمانی اوکی بود ولی به دلیلی که در ادامه
+خواهم گفت، دیگر روش خوبی نمی‌باشد
+**************************************************
+فرض کنید که در کلاس شخص، ما ۱۰۰ فیلد یا پراپرتی داریم
+و دو تا از آن‌ها خیلی مهم و پرکاربرد می‌باشد
+
+                         2
+(2,0) + (2,1) + (2,2) = 2  = 4 حالت
+**************************************************
+Person person1 = new Person();
+Person person2 = new Person(age: 51);
+Person person3 = new Person(fullName: "Dariush Tasdighi");
+Person person4 = new Person(fullName: "Dariush Tasdighi", age: 51);
+
+public class Person : object
+{
+	public Person() : base()
+	{
+	}
+
+	public Person(int age) : base()
+	{
+		Age = age;
+	}
+
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public Person(string fullName, int age) : base()
+	{
+		Age = age;
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+ولی به دلیل ویژگی جذابی که در ادامه گفته می‌شود
+نگاه فوق، دیگر حرفه‌ای نمی‌باشد
+
+پس
+
+اگر هیچ فیلد الزامی نداریم، صرفا و فقط از
+Default Constructor
+استفاده می‌کنیم
+
+و اگر مثلا دو فیلد الزامی داشته باشیم، صرفا و فقط از یک
+Constructor Overload
+ای استفاده می‌کنیم که هر دو پراپرتری را در بر داشته باشد
+**************************************************
+
+**************************************************
+طریقه حرفه‌ای ساخت شیء
+**************************************************
+// **********
+//Person person = new Person();
+//person.Age = 51;
+//person.FullName = "Dariush Tasdighi";
+// **********
+
+// **********
+//Person person = new Person() { FullName = "Dariush Tasdighi", Age = 5 };
+// **********
+
+// **********
+//Person person =
+//	new Person()
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//Person person =
+//	new()
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//var person =
+//	new Person()
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//var person =
+//	new Person
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5
+//	};
+// **********
+
+// **********
+//var person =
+//	new Person
+//	{
+//		FullName = "Dariush Tasdighi",
+//		Age = 5,
+//	};
+// **********
+
+// **********
+// Best Practice
+// **********
+var person =
+	new Person
+	{
+		Age = 5,
+		FullName = "Dariush Tasdighi",
+	};
+// **********
+
+public class Person : object
+{
+	public Person() : base()
+	{
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+// **********
+// Best Practice
+// **********
+var person =
+	new Person(fullName: "Dariush Tasdighi")
+	{
+		Age = 51,
+	};
+
+public class Person : object
+{
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	// 98 Other Properties
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+Nullable in .NET 6.x
+**************************************************
+public class Person : object
+{
+	public Person() : base()
+	{
+	}
+
+	public int Age { get; set; }
+
+	public string? FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+
+public class Person : object
+{
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+جمع‌بندی موارد تا قبل از دات‌نت نسخه ۸
+**************************************************
+var person =
+	new Person(fullName: "Dariush Tasdighi")
+	{
+		Age = 51,
+	};
+
+public class Person : object
+{
+	public Person(string fullName) : base()
+	{
+		FullName = fullName;
+	}
+
+	public int Age { get; set; }
+
+	public string FullName { get; set; }
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************
+
+**************************************************
+Primary Constructor in .NET 8.x
+**************************************************
+var person =
+	new Person(fullName: "Dariush Tasdighi")
+	{
+		Age = 51,
+	};
+
+person.ShowInformation();
+
+public class Person(string fullName) : object
+{
+	public int Age { get; set; }
+
+	public string FullName { get; set; } = fullName;
+
+	public void ShowInformation()
+	{
+		System.Console.WriteLine
+			($"I'm {FullName} and {Age} years old.");
+	}
+}
+**************************************************

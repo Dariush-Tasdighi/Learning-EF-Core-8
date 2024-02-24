@@ -1,0 +1,16 @@
+﻿- Adding IsActive Property to Category model
+
+- List (Zero or Many)
+
+- Learning Transaction
+
+	- Check is there any categories in db?
+
+		- In three ways
+
+	- Create 9 categories:
+
+		- Transactional
+		- Non-Transactional
+
+- LINQ

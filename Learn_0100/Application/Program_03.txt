@@ -1,0 +1,189 @@
+﻿**************************************************
+در صورتی که در هنگام ایجاد یک
+پروژه، گزینه ذیل را فعال کنیم
+Do not use top-level statesments
+**************************************************
+
+**************************************************
+namespace Application
+{
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
+			Console.WriteLine("Hello, World!");
+		}
+	}
+}
+**************************************************
+
+**************************************************
+Update:
+	Application.csproj:
+
+		<Project Sdk="Microsoft.NET.Sdk">
+
+			<PropertyGroup>
+				<Nullable>enable</Nullable>
+				<OutputType>Exe</OutputType>
+				<TargetFramework>net8.0</TargetFramework>
+				<!--<ImplicitUsings>enable</ImplicitUsings>-->
+			</PropertyGroup>
+
+		</Project>
+**************************************************
+
+**************************************************
+[[[using System;]]]
+
+namespace Application
+{
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
+			Console.WriteLine("Hello, World!");
+		}
+	}
+}
+**************************************************
+
+**************************************************
+namespace Application
+{
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
+			[[[System]]].Console.WriteLine([[[value: ]]]"Hello, World!");
+		}
+	}
+}
+**************************************************
+
+**************************************************
+[[[namespace Application;]]]
+
+internal class Program
+{
+	static void Main([[[string[] args]]])
+	{
+		System.Console.WriteLine(value: "Hello, World!");
+	}
+}
+**************************************************
+
+**************************************************
+قانون مهم
+هر آن‌چه ننویسیم، کامپایلر آن‌را می‌نویسید
+و یا برداشت می‌کند را به صراحت می‌نویسیم
+**************************************************
+
+**************************************************
+namespace Application;
+
+internal class Program [[[: object]]]
+{
+	[[[public Program() : base()
+	{
+	}]]]
+
+	[[[private]]] static void Main()
+	{
+		System.Console.WriteLine(value: "Hello, World!");
+	}
+}
+**************************************************
+
+**************************************************
+namespace Application;
+
+internal [[[static]]] class Program : object
+{
+	[[[static Program()
+	{
+	}]]]
+
+	private static void Main()
+	{
+		System.Console.WriteLine(value: "Hello, World!");
+	}
+}
+**************************************************
+
+**************************************************
+namespace Application;
+
+internal static class Program : object
+{
+	static Program()
+	{
+	}
+
+	private static void Main()
+	{
+		System.Console.WriteLine(value: $"Max Value of 'int': {int.MaxValue}");
+		System.Console.WriteLine(value: $"Max Value of 'long': {long.MaxValue}");
+	}
+}
+**************************************************
+
+**************************************************
+namespace Application;
+
+internal static class Program : object
+{
+	static Program()
+	{
+	}
+
+	private static void Main()
+	{
+		System.Console.WriteLine
+			(value: $"Max Value of 'int': {int.MaxValue}");
+
+		System.Console.WriteLine
+			(value: $"Max Value of 'long': {long.MaxValue}");
+	}
+}
+**************************************************
+
+**************************************************
+namespace Application;
+
+internal static class Program : object
+{
+	static Program()
+	{
+	}
+
+	private static void Main()
+	{
+		System.Console.WriteLine
+			(value: $"Max Value of 'int': {int.MaxValue.ToString(format: "#,##0")}");
+
+		System.Console.WriteLine
+			(value: $"Max Value of 'long': {long.MaxValue.ToString(format: "#,##0")}");
+	}
+}
+**************************************************
+
+**************************************************
+namespace Application;
+
+internal static class Program : object
+{
+	static Program()
+	{
+	}
+
+	private static void Main()
+	{
+		System.Console.WriteLine
+			(value: $"Max Value of 'int': {int.MaxValue:#,##0}");
+
+		System.Console.WriteLine
+			(value: $"Max Value of 'long': {long.MaxValue:#,##0}");
+	}
+}
+**************************************************

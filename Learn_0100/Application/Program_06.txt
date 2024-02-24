@@ -1,0 +1,182 @@
+﻿**************************************************
+**************************************************
+**************************************************
+*** Session 7 ************************************
+**************************************************
+**************************************************
+**************************************************
+
+**************************************************
+کم کم می‌خواهیم وارد دوره اصلی شویم
+
+EF Core 8
+LINQ to Entity Framework Core Code First 8:
+
+1. Code First
+2. Entity Framework (EF) / Entity Framework Core (EF Core)
+3. LINQ
+**************************************************
+
+**************************************************
+Standards & DataAnnotations:
+	We can use a lot of 'DataAnnotations' without install any Nugets!
+**************************************************
+
+**************************************************
+Standards without any DataAnnotations!
+**************************************************
+// Best Practice
+public int Id { get; set; }
+
+public int ID { get; set; }
+
+public int ProductId { get; set; }
+public int [ClassName]Id { get; set; }
+
+public int ProductID { get; set; }
+public int [ClassName]ID { get; set; }
+**************************************************
+
+**************************************************
+When we should use DataAnnotations!
+**************************************************
+// Error!
+public int Code { get; set; }
+
+[System.ComponentModel.DataAnnotations.Key]
+public int Code { get; set; }
+**************************************************
+
+**************************************************
+public int Id { get; set; }
+
+public long Id { get; set; }
+
+// Best Practice
+public System.Guid Id { get; set; }
+**************************************************
+
+**************************************************
+فلسفه لینک
+LINQ Philosophy
+**************************************************
+
+**************************************************
+قدیما
+**************************************************
+- Database (SQL, TSQL):
+
+sql = "SELECT * FROM Users Where Age > 20";
+sql = "SELECT * FROM Users Where Age > 20 ORDER BY FullName";
+**************************************************
+
+**************************************************
+- C# Objects:
+
+var currentDirectory =
+	new System.IO.DirectoryInfo(path: "C:\\Windows");
+
+var files =
+	currentDirectory.GetFiles();
+
+foreach (var file in files)
+{
+	if (file.Length > 20)
+	{
+		System.Console.WriteLine(value: file.Name);
+	}
+}
+**************************************************
+
+**************************************************
+- XML Nodes:
+
+...
+**************************************************
+
+**************************************************
+جدیدا
+**************************************************
+using System.Linq;
+
+var users =
+	databaseContext.Users
+	.Where(current => current.Age > 20)
+	.ToList()
+	;
+
+var users =
+	databaseContext.Users
+	.Where(current => current.Age > 20)
+	.OrderBy(current => current.FullName)
+	.ToList()
+	;
+
+foreach (var user in users)
+{
+	System.Console.WriteLine(value: user.FullName);
+}
+**************************************************
+
+**************************************************
+using System.Linq;
+
+var currentDirectory =
+	new System.IO.DirectoryInfo(path: "C:\\Windows");
+
+var files =
+	currentDirectory.GetFiles()
+	.Where(current => current.Length > 20)
+	.ToList()
+	;
+
+var files =
+	currentDirectory.GetFiles()
+	.Where(current => current.Length > 20)
+	.OrderBy(current => current.Name)
+	.ToList()
+	;
+
+foreach (var file in files)
+{
+	System.Console.WriteLine(value: file.Name);
+}
+**************************************************
+
+**************************************************
+Sample Model (Entity): Category
+**************************************************
+
+**************************************************
+Primary Constructor in .NET 8.x
+**************************************************
+namespace Models;
+
+public class Category(string name) : object()
+{
+	/// <summary>
+	/// Primary Key -> Unique (منحصر به فرد)
+	/// </summary>
+	public int Id { get; set; }
+
+	public string Name { get; set; } = name;
+}
+**************************************************
+
+**************************************************
+POCO -> Plain Old CLR Objects
+**************************************************
+namespace Models;
+
+public class Category(string name) : Base.Entity()
+{
+	public string Name { get; set; } = name;
+}
+**************************************************
+
+**************************************************
+You should install:
+
+- Microsoft SQL Server Developer Edition!
+- Microsoft SQL Server Management Studio (SSMS)
+**************************************************
