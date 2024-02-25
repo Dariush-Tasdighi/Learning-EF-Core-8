@@ -2,15 +2,13 @@
 
 - ToList (Zero or Many)
 
-- Learning Transaction
+- Check is there any records (categories) in table?
 
-	- Check is there any categories in db?
+	- In three ways!
 
-		- In three ways
+- Transaction
 
-	- Create 9 categories:
+	- Create 9 sample records (categories):
 
 		- Transactional
 		- Non-Transactional
-
-- LINQ

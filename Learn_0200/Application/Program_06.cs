@@ -1,300 +1,145 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿//using System;
+//using System.Linq;
+//using Microsoft.EntityFrameworkCore;
 
-try
-{
-	using var applicationDbContext = new ApplicationDbContext();
+//try
+//{
+//	using var applicationDbContext = new ApplicationDbContext();
 
-	// **************************************************
-	var categories =
-		applicationDbContext.Categories.ToList();
+//	// **************************************************
+//	var categories =
+//		applicationDbContext.Categories.ToList();
 
-	// SQL = TSQL = SELECT * FROM Categories
+//	// SQL = TSQL = SELECT * FROM Categories
 
-	if (categories.Count == 0)
-	{
-		// ایجاد نه طبقه‌بندی
-	}
-	// **************************************************
+//	if (categories.Count == 0)
+//	{
+//		// ایجاد نه طبقه‌بندی
+//	}
+//	// **************************************************
 
-	// **************************************************
-	// نکته بسیار مهم
-	//
-	// حواسمان باشد که ذهن‌مان شرطی نشود
-	// **************************************************
+//	// **************************************************
+//	// نکته بسیار مهم
+//	//
+//	// حواسمان باشد که ذهن‌مان شرطی نشود
+//	// **************************************************
 
-	// **************************************************
-	//var categoryCount =
-	//	applicationDbContext.Categories.Count();
+//	// **************************************************
+//	//var categoryCount =
+//	//	applicationDbContext.Categories.Count();
 
-	//// SQL = TSQL = SELECT COUNT(*) FROM Categories
+//	//// SQL = TSQL = SELECT COUNT(*) FROM Categories
 
-	//if (categoryCount == 0)
-	//{
-	//	// ایجاد نه طبقه‌بندی
-	//}
-	// **************************************************
+//	//if (categoryCount == 0)
+//	//{
+//	//	// ایجاد نه طبقه‌بندی
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	//var hasAnyCategory =
-	//	applicationDbContext.Categories.Any();
+//	// **************************************************
+//	//var hasAnyCategory =
+//	//	applicationDbContext.Categories.Any();
 
-	//if (hasAnyCategory == false)
-	//{
-	//	// ایجاد نه طبقه‌بندی
-	//}
-	// **************************************************
+//	//if (hasAnyCategory == false)
+//	//{
+//	//	// ایجاد نه طبقه‌بندی
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// Non-Transactional
-	// **************************************************
-	//var hasAnyCategory =
-	//	applicationDbContext.Categories.Any();
+//	// **************************************************
+//	// Non-Transactional
+//	// **************************************************
+//	//var hasAnyCategory =
+//	//	applicationDbContext.Categories.Any();
 
-	//if (hasAnyCategory == false)
-	//{
-	//	for (var index = 1; index <= 9; index++)
-	//	{
-	//		var category =
-	//			new Category
-	//			{
-	//				Name = $"Category {index}",
-	//				IsActive = (index % 2 == 0),
-	//			};
+//	//if (hasAnyCategory == false)
+//	//{
+//	//	for (var index = 1; index <= 9; index++)
+//	//	{
+//	//		var category =
+//	//			new Category
+//	//			{
+//	//				Name = $"Category {index}",
+//	//				IsActive = (index % 2 == 0),
+//	//			};
 
-	//		applicationDbContext.Add(entity: category);
+//	//		applicationDbContext.Add(entity: category);
 
-	//		applicationDbContext.SaveChanges();
-	//	}
-	//}
-	// **************************************************
+//	//		applicationDbContext.SaveChanges();
+//	//	}
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// Transactional
-	// **************************************************
-	//var hasAnyCategory =
-	//	applicationDbContext.Categories.Any();
+//	// **************************************************
+//	// Transactional
+//	// **************************************************
+//	//var hasAnyCategory =
+//	//	applicationDbContext.Categories.Any();
 
-	//if (hasAnyCategory == false)
-	//{
-	//	for (var index = 1; index <= 9; index++)
-	//	{
-	//		var category =
-	//			new Category
-	//			{
-	//				Name = $"Category {index}",
-	//				IsActive = (index % 2 == 0),
-	//			};
+//	//if (hasAnyCategory == false)
+//	//{
+//	//	for (var index = 1; index <= 9; index++)
+//	//	{
+//	//		var category =
+//	//			new Category
+//	//			{
+//	//				Name = $"Category {index}",
+//	//				IsActive = (index % 2 == 0),
+//	//			};
 
-	//		applicationDbContext.Add(entity: category);
-	//	}
+//	//		applicationDbContext.Add(entity: category);
+//	//	}
 
-	//	applicationDbContext.SaveChanges();
-	//}
-	// **************************************************
+//	//	applicationDbContext.SaveChanges();
+//	//}
+//	// **************************************************
+//}
+//catch (Exception ex)
+//{
+//	Console.WriteLine(value: ex.Message);
+//}
+//// **************************************************
 
-	// **************************************************
-	// LINQ
-	// **************************************************
-	//var categories =
-	//	applicationDbContext.Categories.ToList();
-	// **********
+//public class Category : object
+//{
+//	public Category() : base()
+//	{
+//	}
 
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.ToList()
-	//	;
+//	public int Id { get; set; }
 
-	//foreach (var category in categories)
-	//{
-	//	Console.WriteLine(value: category.ToString());
-	//}
-	// **********
+//	public string? Name { get; set; }
 
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6 && current.IsActive)
-	//	.ToList()
-	//	;
-	// **********
+//	/// <summary>
+//	/// New
+//	/// </summary>
+//	public bool IsActive { get; set; }
 
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6)
-	//	.Where(predicate: current => current.IsActive)
-	//	.ToList()
-	//	;
-	// **********
+//	public override string ToString()
+//	{
+//		var result =
+//			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
 
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6 || current.IsActive)
-	//	.ToList()
-	//	;
-	// **********
+//		return result;
+//	}
+//}
 
-	// **********
-	//var search = "Category";
+//public class ApplicationDbContext : DbContext
+//{
+//	public ApplicationDbContext() : base()
+//	{
+//		Database.EnsureCreated();
+//	}
 
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6)
-	//	.Where(predicate: current => current.IsActive)
-	//	.Where(predicate: current => current.Name != null &&
-	//		current.Name.ToLower().Contains(search.ToLower()))
-	//	.ToList()
-	//	;
-	// **********
+//	public DbSet<Category> Categories { get; set; }
 
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.OrderBy(keySelector: current => current.IsActive)
-	//	.Where(predicate: current => current.Id <= 6)
-	//	.ToList()
-	//	;
+//	protected override void OnConfiguring
+//		(DbContextOptionsBuilder optionsBuilder)
+//	{
+//		var connectionString =
+//			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-	//foreach (var category in categories)
-	//{
-	//	Console.WriteLine(value: category.ToString());
-	//}
-	// **********
-
-	// **********
-	// Best Practice
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6)
-	//	.OrderBy(keySelector: current => current.IsActive)
-	//	.ToList()
-	//	;
-
-	//foreach (var category in categories)
-	//{
-	//	Console.WriteLine(value: category.ToString());
-	//}
-	// **********
-
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6)
-	//	.OrderByDescending(keySelector: current => current.IsActive)
-	//	.ToList()
-	//	;
-
-	//foreach (var category in categories)
-	//{
-	//	Console.WriteLine(value: category.ToString());
-	//}
-	// **********
-
-	// **********
-	// دستور ذیل غلط است و درست کار نمی‌کند
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6)
-	//	.OrderBy(keySelector: current => current.IsActive)
-	//	.OrderBy(keySelector: current => current.Id)
-	//	.ToList()
-	//	;
-
-	//foreach (var category in categories)
-	//{
-	//	Console.WriteLine(value: category.ToString());
-	//}
-	// **********
-
-	// **********
-	// دستور ذیل غلط است و درست کار نمی‌کند
-	// **********
-	//var categories =
-	//	applicationDbContext.Categories
-	//	.Where(predicate: current => current.Id <= 6)
-	//	.OrderBy(keySelector: current => current.IsActive)
-	//	.ThenBy(keySelector: current => current.Id)
-	//	.ToList()
-	//	;
-
-	//foreach (var category in categories)
-	//{
-	//	Console.WriteLine(value: category.ToString());
-	//}
-	// **********
-
-	// **********
-	// به طور خلاصه
-	//
-	// OrderBy
-	// ThenBy
-	// ThenBy...
-	//
-	// OrderByDescending
-	// ThenBy
-	// ThenBy...
-	//
-	// OrderBy
-	// ThenByDescending
-	// ThenBy...
-	//
-	// OrderByDescending
-	// ThenByDescending
-	// ThenBy...
-	// **********
-}
-catch (Exception ex)
-{
-	Console.WriteLine(value: ex.Message);
-}
-// **************************************************
-
-public class Category : object
-{
-	public Category() : base()
-	{
-	}
-
-	public int Id { get; set; }
-
-	public string? Name { get; set; }
-
-	/// <summary>
-	/// New
-	/// </summary>
-	public bool IsActive { get; set; }
-
-	public override string ToString()
-	{
-		var result =
-			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
-
-		return result;
-	}
-}
-
-public class ApplicationDbContext : DbContext
-{
-	public ApplicationDbContext() : base()
-	{
-		Database.EnsureCreated();
-	}
-
-	public DbSet<Category> Categories { get; set; }
-
-	protected override void OnConfiguring
-		(DbContextOptionsBuilder optionsBuilder)
-	{
-		var connectionString =
-			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
-
-		optionsBuilder.UseSqlServer
-			(connectionString: connectionString);
-	}
-}
+//		optionsBuilder.UseSqlServer
+//			(connectionString: connectionString);
+//	}
+//}
