@@ -1,1 +1,30 @@
-﻿- Delete Record / Records
+﻿**************************************************
+- CRUD:
+
+	- Delete Record / Records
+**************************************************
+
+**************************************************
+Delete One Record
+**************************************************
+using var applicationDbContext = new ApplicationDbContext();
+
+var foundedCategory =
+	applicationDbContext.Categories
+	.Where(current => current.Id == 1)
+	.FirstOrDefault();
+
+if (foundedCategory is null)
+{
+	var errorMessage =
+		$"There is not any category with this Id (1)!";
+
+	Console.WriteLine(value: errorMessage);
+}
+else
+{
+	applicationDbContext.Categories.Remove(entity: foundedCategory);
+
+	applicationDbContext.SaveChanges();
+}
+**************************************************

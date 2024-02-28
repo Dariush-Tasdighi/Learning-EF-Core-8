@@ -1,128 +1,255 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿//using System;
+//using System.Linq;
+//using Microsoft.EntityFrameworkCore;
 
-try
-{
-	using var applicationDbContext = new ApplicationDbContext();
+//try
+//{
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-	var hasAnyCategory =
-		applicationDbContext.Categories.Any();
+//		var hasAnyCategory =
+//			applicationDbContext.Categories.Any();
 
-	if (hasAnyCategory == false)
-	{
-		for (var index = 1; index <= 9; index++)
-		{
-			var category =
-				new Category
-				{
-					Name = $"Category {index}",
-					IsActive = (index % 2 == 0),
-				};
+//		if (hasAnyCategory == false)
+//		{
+//			for (var index = 1; index <= 9; index++)
+//			{
+//				var category =
+//					new Category
+//					{
+//						Name = $"Category {index}",
+//						IsActive = (index % 2 == 0),
+//					};
 
-			applicationDbContext.Add(entity: category);
+//				applicationDbContext.Add(entity: category);
 
-			applicationDbContext.SaveChanges();
-		}
-	}
+//				applicationDbContext.SaveChanges();
+//			}
+//		}
+//	}
 
-	// **************************************************
-	// Update One Record
-	// **************************************************
-	var foundedCategory =
-		applicationDbContext.Categories
-		.Where(current => current.Id == 1)
-		.FirstOrDefault();
+//	//**************************************************
+//	//Update One Record
+//	//**************************************************
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-	if (foundedCategory is null)
-	{
-		var errorMessage =
-			$"There is not any category with this Id (1)!";
+//		var foundedCategory =
+//			applicationDbContext.Categories
+//			.Where(current => current.Id == 1)
+//			.FirstOrDefault();
 
-		Console.WriteLine(value: errorMessage);
-	}
-	else
-	{
-		// بعدا خیلی بیشتر توضیح خواهم داد
-		foundedCategory.Name = "Category 1";
-		// با اجرای دستور فوق، هیچ اتفاقی رخ نمی‌دهد
+//		if (foundedCategory is null)
+//		{
+//			var errorMessage =
+//				$"There is not any category with this Id (1)!";
 
-		foundedCategory.Name = "New Category Name!";
+//			Console.WriteLine(value: errorMessage);
+//		}
+//		else
+//		{
+//			var state1 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
 
-		applicationDbContext.SaveChanges();
-	}
-	// **************************************************
+//			// با اجرای دستور ذیل، هیچ اتفاقی رخ نمی‌دهد
+//			// در این خصوص بعدا خیلی بیشتر توضیح خواهم داد
+//			foundedCategory.Name = "Category 1";
 
-	// **************************************************
-	// Update More Than One Record
-	// **************************************************
-	//var foundedCategories =
-	//	applicationDbContext.Categories
-	//	.Where(current => current.IsActive == false)
-	//	.ToList()
-	//	;
+//			var state2 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//foreach (var foundedCategory in foundedCategories)
-	//{
-	//	foundedCategory.IsActive = true;
+//			foundedCategory.Name = "New Category Name!";
 
-	//	//applicationDbContext.SaveChanges();
-	//}
+//			var state3 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//applicationDbContext.SaveChanges();
-	// **************************************************
+//			applicationDbContext.SaveChanges();
 
-	// **************************************************
-	// دستور هیجان‌انگیز ذیل را قبلا نداشتیم
-	// **************************************************
-	//applicationDbContext.Categories
-	//	.Where(current => current.IsActive == false)
-	//	.ExecuteUpdate(setters => setters.SetProperty(property => property.IsActive, true));
-	// **************************************************
-}
-catch (Exception ex)
-{
-	Console.WriteLine(value: ex.Message);
-}
-// **************************************************
+//			var state4 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
+//		}
+//	}
+//	//**************************************************
 
-public class Category : object
-{
-	public Category() : base()
-	{
-	}
+//	// **************************************************
+//	// Update More Than One Record
+//	// روشی که اگر تعداد رکوردها خیلی
+//	// زیاد باشد، خیلی احمقانه به نظر می‌رسد
+//	// **************************************************
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-	public int Id { get; set; }
+//		var foundedCategories =
+//			applicationDbContext.Categories
+//			.Where(current => current.IsActive == false)
+//			.ToList()
+//			;
 
-	public string? Name { get; set; }
+//		foreach (var foundedCategory in foundedCategories)
+//		{
+//			foundedCategory.IsActive = true;
 
-	public bool IsActive { get; set; }
+//			//applicationDbContext.SaveChanges();
+//		}
 
-	public override string ToString()
-	{
-		var result =
-			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
+//		applicationDbContext.SaveChanges();
+//	}
+//	// **************************************************
 
-		return result;
-	}
-}
+//	// **************************************************
+//	// روشی که لااقل برای ویرایش تعداد زیادی رکورد
+//	// خیلی هوشمندانه‌تر می‌باشد، ولی متاسفانه خطر
+//	// SQL Injection
+//	// داشته و نیز باید به جای دستورات
+//	// LINQ
+//	// از دستورات
+//	// SQL = TSQL
+//	// استفاده نماییم
+//	// **************************************************
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-public class ApplicationDbContext : DbContext
-{
-	public ApplicationDbContext() : base()
-	{
-		Database.EnsureCreated();
-	}
+//		var sql =
+//			"UPDATE Categories SET IsActive = 1 WHERE IsActive = 0";
 
-	public DbSet<Category> Categories { get; set; }
+//		var affectedRows =
+//			applicationDbContext.Database.ExecuteSqlRaw(sql: sql);
 
-	protected override void OnConfiguring
-		(DbContextOptionsBuilder optionsBuilder)
-	{
-		var connectionString =
-			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+//		Console.WriteLine(value: affectedRows);
+//	}
+//	// **************************************************
 
-		optionsBuilder.UseSqlServer
-			(connectionString: connectionString);
-	}
-}
+//	// **************************************************
+//	// دستور هیجان‌انگیز ذیل را قبلا نداشتیم
+//	// **************************************************
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
+
+//		var affectedRows =
+//			applicationDbContext.Categories
+//				.Where(current => current.IsActive == false)
+//				.ExecuteUpdate(setters => setters.SetProperty(property => property.IsActive, true));
+
+//		Console.WriteLine(value: affectedRows);
+//	}
+//	// **************************************************
+
+//	// **************************************************
+//	// Update One Record!
+//	// AsNoTracking()
+//	// این دستور، سرعت و کارایی را بالا می‌برد
+//	// ولی تغییرات (ایجاد، ویرایش و حذف) را شناسایی نمی‌کند
+//	// **************************************************
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
+
+//		var foundedCategory =
+//			applicationDbContext.Categories
+//			.AsNoTracking()
+//			.Where(current => current.Id == 1)
+//			.FirstOrDefault();
+
+//		if (foundedCategory is null)
+//		{
+//			var errorMessage =
+//				$"There is not any category with this Id (1)!";
+
+//			Console.WriteLine(value: errorMessage);
+//		}
+//		else
+//		{
+//			var state1 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
+
+//			foundedCategory.Name = "New Category Name!";
+
+//			var state2 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
+
+//			// کار نمی‌کند
+//			applicationDbContext.SaveChanges();
+
+//			var state3 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
+//		}
+//	}
+//	// **************************************************
+
+//	// **************************************************
+//	// Update One Record
+//	// بدون این‌که داده را از بانک‌اطلاعاتی به
+//	// برنامه منتقل کنیم و صرفا آی‌دی آن رکورد را داریم
+//	// **************************************************
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
+
+//		var theCategory =
+//			new Category
+//			{
+//				Id = 1,
+//				IsActive = true,
+//				Name = "New Category",
+//			};
+
+//		var state1 =
+//			applicationDbContext.Entry(entity: theCategory).State;
+
+//		applicationDbContext.Entry(entity: theCategory).State = EntityState.Modified;
+
+//		var state2 =
+//			applicationDbContext.Entry(entity: theCategory).State;
+
+//		var affectedRows =
+//			applicationDbContext.SaveChanges();
+
+//		var state3 =
+//			applicationDbContext.Entry(entity: theCategory).State;
+//	}
+//	// **************************************************
+//}
+//catch (Exception ex)
+//{
+//	Console.WriteLine(value: ex.Message);
+//}
+//// **************************************************
+
+//public class Category : object
+//{
+//	public Category() : base()
+//	{
+//	}
+
+//	public int Id { get; set; }
+
+//	public string? Name { get; set; }
+
+//	public bool IsActive { get; set; }
+
+//	public override string ToString()
+//	{
+//		var result =
+//			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
+
+//		return result;
+//	}
+//}
+
+//public class ApplicationDbContext : DbContext
+//{
+//	public ApplicationDbContext() : base()
+//	{
+//		Database.EnsureCreated();
+//	}
+
+//	public DbSet<Category> Categories { get; set; }
+
+//	protected override void OnConfiguring
+//		(DbContextOptionsBuilder optionsBuilder)
+//	{
+//		var connectionString =
+//			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+
+//		optionsBuilder.UseSqlServer
+//			(connectionString: connectionString);
+//	}
+//}

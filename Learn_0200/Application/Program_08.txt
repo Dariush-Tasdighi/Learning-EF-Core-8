@@ -1,1 +1,99 @@
-﻿- Update Record / Records
+﻿**************************************************
+- CRUD:
+
+	- Update Record / Records
+**************************************************
+
+**************************************************
+Update One Record
+**************************************************
+var foundedCategory =
+	applicationDbContext.Categories
+	.Where(current => current.Id == 1)
+	.FirstOrDefault();
+
+if (foundedCategory is null)
+{
+	var errorMessage =
+		$"There is not any category with this Id (1)!";
+
+	Console.WriteLine(value: errorMessage);
+}
+else
+{
+	foundedCategory.Name = "New Category Name!";
+
+	applicationDbContext.SaveChanges();
+}
+**************************************************
+
+**************************************************
+Delete One Record
+**************************************************
+using var applicationDbContext = new ApplicationDbContext();
+
+var foundedCategory =
+	applicationDbContext.Categories
+	.Where(current => current.Id == 1)
+	.FirstOrDefault();
+
+if (foundedCategory is null)
+{
+	var errorMessage =
+		$"There is not any category with this Id (1)!";
+
+	Console.WriteLine(value: errorMessage);
+}
+else
+{
+	applicationDbContext.Categories.Remove(entity: foundedCategory);
+
+	applicationDbContext.SaveChanges();
+}
+**************************************************
+
+**************************************************
+C# Technique:
+
+... SomeFunction(...)
+{
+	...
+	int index = 1;
+	...
+}
+
+... SomeFunction(...)
+{
+	...
+	if (...)
+	{
+		...
+		int index = 1;
+		...
+	}
+	...
+}
+
+... SomeFunction(...)
+{
+	...
+	{
+		...
+		int index = 1;
+		...
+	}
+	...
+}
+**************************************************
+
+**************************************************
+States:
+
+	applicationDbContext.Entry(entity: someEntity).State:
+		
+		EntityState.Detached;
+		EntityState.Added;
+		EntityState.Unchanged;
+		EntityState.Modified;
+		EntityState.Deleted;
+**************************************************
