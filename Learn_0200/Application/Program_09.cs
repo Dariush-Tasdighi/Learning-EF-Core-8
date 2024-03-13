@@ -1,292 +1,292 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿//using System;
+//using System.Linq;
+//using Microsoft.EntityFrameworkCore;
 
-try
-{
-	{
-		using var applicationDbContext = new ApplicationDbContext();
+//try
+//{
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-		var hasAnyCategory =
-			applicationDbContext.Categories.Any();
+//		var hasAnyCategory =
+//			applicationDbContext.Categories.Any();
 
-		if (hasAnyCategory == false)
-		{
-			for (var index = 1; index <= 9; index++)
-			{
-				var category =
-					new Category
-					{
-						Name = $"Category {index}",
-						IsActive = (index % 2 == 0),
-					};
+//		if (hasAnyCategory == false)
+//		{
+//			for (var index = 1; index <= 9; index++)
+//			{
+//				var category =
+//					new Category
+//					{
+//						Name = $"Category {index}",
+//						IsActive = (index % 2 == 0),
+//					};
 
-				applicationDbContext.Add(entity: category);
+//				applicationDbContext.Add(entity: category);
 
-				applicationDbContext.SaveChanges();
-			}
-		}
-	}
+//				applicationDbContext.SaveChanges();
+//			}
+//		}
+//	}
 
-	// **************************************************
-	// Delete One Record
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// Delete One Record
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var foundedCategory =
-	//		applicationDbContext.Categories
-	//		.Where(current => current.Id == 1)
-	//		.FirstOrDefault();
+//	//	var foundedCategory =
+//	//		applicationDbContext.Categories
+//	//		.Where(current => current.Id == 1)
+//	//		.FirstOrDefault();
 
-	//	if (foundedCategory is null)
-	//	{
-	//		var errorMessage =
-	//			$"There is not any category with this Id (1)!";
+//	//	if (foundedCategory is null)
+//	//	{
+//	//		var errorMessage =
+//	//			$"There is not any category with this Id (1)!";
 
-	//		Console.WriteLine(value: errorMessage);
-	//	}
-	//	else
-	//	{
-	//		var state1 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//		Console.WriteLine(value: errorMessage);
+//	//	}
+//	//	else
+//	//	{
+//	//		var state1 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//		applicationDbContext.Remove(entity: foundedCategory);
-	//		//applicationDbContext.Categories.Remove(entity: foundedCategory);
+//	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//		//applicationDbContext.Categories.Remove(entity: foundedCategory);
 
-	//		var state2 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//		var state2 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//		var affectedRows =
-	//			applicationDbContext.SaveChanges();
+//	//		var affectedRows =
+//	//			applicationDbContext.SaveChanges();
 
-	//		var state3 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
-	//	}
-	//}
-	// **************************************************
+//	//		var state3 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//	}
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// Delete More Than One Record
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// Delete More Than One Record
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var foundedCategories =
-	//		applicationDbContext.Categories
-	//		.Where(current => current.IsActive == false)
-	//		.ToList()
-	//		;
+//	//	var foundedCategories =
+//	//		applicationDbContext.Categories
+//	//		.Where(current => current.IsActive == false)
+//	//		.ToList()
+//	//		;
 
-	//	foreach (var foundedCategory in foundedCategories)
-	//	{
-	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//	foreach (var foundedCategory in foundedCategories)
+//	//	{
+//	//		applicationDbContext.Remove(entity: foundedCategory);
 
-	//		//applicationDbContext.SaveChanges();
-	//	}
+//	//		//applicationDbContext.SaveChanges();
+//	//	}
 
-	//	var affectedRows =
-	//		applicationDbContext.SaveChanges();
-	//}
-	// **************************************************
+//	//	var affectedRows =
+//	//		applicationDbContext.SaveChanges();
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	//applicationDbContext.Remove(category1);
-	//	//applicationDbContext.Remove(category2);
-	//	//applicationDbContext.Remove(category3);
+//	//	//applicationDbContext.Remove(category1);
+//	//	//applicationDbContext.Remove(category2);
+//	//	//applicationDbContext.Remove(category3);
 
-	//	//applicationDbContext.RemoveRange(category1, category2, category3, ...);
-	//	////applicationDbContext.Categories.RemoveRange(category1, category2, category3, ...);
+//	//	//applicationDbContext.RemoveRange(category1, category2, category3, ...);
+//	//	////applicationDbContext.Categories.RemoveRange(category1, category2, category3, ...);
 
-	//	var affectedRows =
-	//		applicationDbContext.SaveChanges();
-	//}
-	// **************************************************
+//	//	var affectedRows =
+//	//		applicationDbContext.SaveChanges();
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var foundedCategories =
-	//		applicationDbContext.Categories
-	//		.Where(current => current.IsActive == false)
-	//		.ToList()
-	//		;
+//	//	var foundedCategories =
+//	//		applicationDbContext.Categories
+//	//		.Where(current => current.IsActive == false)
+//	//		.ToList()
+//	//		;
 
-	//	//	foreach (var foundedCategory in foundedCategories)
-	//	//	{
-	//	//		applicationDbContext.Remove(entity: foundedCategory);
-	//	//	}
+//	//	//	foreach (var foundedCategory in foundedCategories)
+//	//	//	{
+//	//	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//	//	}
 
-	//	applicationDbContext.RemoveRange(entities: foundedCategories);
-	//	//applicationDbContext.Categories.RemoveRange(entities: foundedCategories);
+//	//	applicationDbContext.RemoveRange(entities: foundedCategories);
+//	//	//applicationDbContext.Categories.RemoveRange(entities: foundedCategories);
 
-	//	var affectedRows =
-	//		applicationDbContext.SaveChanges();
-	//}
-	// **************************************************
+//	//	var affectedRows =
+//	//		applicationDbContext.SaveChanges();
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// روشی که لااقل برای حذف تعداد زیادی رکورد
-	// خیلی هوشمندانه‌تر می‌باشد، ولی متاسفانه خطر
-	// SQL Injection
-	// داشته و نیز باید به جای دستورات
-	// LINQ
-	// از دستورات
-	// SQL = TSQL
-	// استفاده نماییم
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// روشی که لااقل برای حذف تعداد زیادی رکورد
+//	// خیلی هوشمندانه‌تر می‌باشد، ولی متاسفانه خطر
+//	// SQL Injection
+//	// داشته و نیز باید به جای دستورات
+//	// LINQ
+//	// از دستورات
+//	// SQL = TSQL
+//	// استفاده نماییم
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var sql =
-	//		"DELETE Categories WHERE IsActive = 0";
+//	//	var sql =
+//	//		"DELETE Categories WHERE IsActive = 0";
 
-	//	var affectedRows =
-	//		applicationDbContext.Database.ExecuteSqlRaw(sql: sql);
+//	//	var affectedRows =
+//	//		applicationDbContext.Database.ExecuteSqlRaw(sql: sql);
 
-	//	Console.WriteLine(value: affectedRows);
-	//}
-	// **************************************************
+//	//	Console.WriteLine(value: affectedRows);
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// دستور هیجان‌انگیز ذیل را قبلا نداشتیم
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// دستور هیجان‌انگیز ذیل را قبلا نداشتیم
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var affectedRows =
-	//		applicationDbContext.Categories
-	//			.Where(current => current.IsActive == false)
-	//			.ExecuteDelete();
+//	//	var affectedRows =
+//	//		applicationDbContext.Categories
+//	//			.Where(current => current.IsActive == false)
+//	//			.ExecuteDelete();
 
-	//	Console.WriteLine(value: affectedRows);
-	//}
-	// **************************************************
+//	//	Console.WriteLine(value: affectedRows);
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// Delete One Record!
-	// AsNoTracking()
-	// این دستور، سرعت و کارایی را بالا می‌برد
-	// ولی تغییرات (ایجاد، ویرایش و حذف) را شناسایی نمی‌کند
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// Delete One Record!
+//	// AsNoTracking()
+//	// این دستور، سرعت و کارایی را بالا می‌برد
+//	// ولی تغییرات (ایجاد، ویرایش و حذف) را شناسایی نمی‌کند
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var foundedCategory =
-	//		applicationDbContext.Categories
-	//		.AsNoTracking()
-	//		.Where(current => current.Id == 1)
-	//		.FirstOrDefault();
+//	//	var foundedCategory =
+//	//		applicationDbContext.Categories
+//	//		.AsNoTracking()
+//	//		.Where(current => current.Id == 1)
+//	//		.FirstOrDefault();
 
-	//	if (foundedCategory is null)
-	//	{
-	//		var errorMessage =
-	//			$"There is not any category with this Id (1)!";
+//	//	if (foundedCategory is null)
+//	//	{
+//	//		var errorMessage =
+//	//			$"There is not any category with this Id (1)!";
 
-	//		Console.WriteLine(value: errorMessage);
-	//	}
-	//	else
-	//	{
-	//		// Note: Detached!!! [NOT] Unchanged!!!
-	//		var state1 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//		Console.WriteLine(value: errorMessage);
+//	//	}
+//	//	else
+//	//	{
+//	//		// Note: Detached!!! [NOT] Unchanged!!!
+//	//		var state1 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//		applicationDbContext.Remove(entity: foundedCategory);
-	//		//applicationDbContext.Categories.Remove(entity: foundedCategory);
+//	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//		//applicationDbContext.Categories.Remove(entity: foundedCategory);
 
-	//		var state2 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//		var state2 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//		// Note: در عین ناباوری کار می‌کند و رکورد از بانک اطلاعاتی حذف می‌شود
-	//		// ولی چرا؟
-	//		var affectedRows =
-	//			applicationDbContext.SaveChanges();
+//	//		// Note: در عین ناباوری کار می‌کند و رکورد از بانک اطلاعاتی حذف می‌شود
+//	//		// ولی چرا؟
+//	//		var affectedRows =
+//	//			applicationDbContext.SaveChanges();
 
-	//		var state3 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
-	//	}
-	//}
-	// **************************************************
+//	//		var state3 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//	}
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// Delete One Record
-	// بدون این‌که داده را از بانک‌اطلاعاتی به
-	// برنامه منتقل کنیم و صرفا آی‌دی آن رکورد را داریم
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// Delete One Record
+//	// بدون این‌که داده را از بانک‌اطلاعاتی به
+//	// برنامه منتقل کنیم و صرفا آی‌دی آن رکورد را داریم
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var theCategory =
-	//		new Category
-	//		{
-	//			Id = 1,
-	//			IsActive = true,
-	//			Name = "هر چی",
-	//		};
+//	//	var theCategory =
+//	//		new Category
+//	//		{
+//	//			Id = 1,
+//	//			IsActive = true,
+//	//			Name = "هر چی",
+//	//		};
 
-	//	var state1 =
-	//		applicationDbContext.Entry(entity: theCategory).State;
+//	//	var state1 =
+//	//		applicationDbContext.Entry(entity: theCategory).State;
 
-	//	applicationDbContext.Entry(entity: theCategory).State = EntityState.Deleted;
+//	//	applicationDbContext.Entry(entity: theCategory).State = EntityState.Deleted;
 
-	//	var state2 =
-	//		applicationDbContext.Entry(entity: theCategory).State;
+//	//	var state2 =
+//	//		applicationDbContext.Entry(entity: theCategory).State;
 
-	//	var affectedRows =
-	//		applicationDbContext.SaveChanges();
+//	//	var affectedRows =
+//	//		applicationDbContext.SaveChanges();
 
-	//	var state3 =
-	//		applicationDbContext.Entry(entity: theCategory).State;
-	//}
-	// **************************************************
-}
-catch (Exception ex)
-{
-	Console.WriteLine(value: ex.Message);
-}
-// **************************************************
+//	//	var state3 =
+//	//		applicationDbContext.Entry(entity: theCategory).State;
+//	//}
+//	// **************************************************
+//}
+//catch (Exception ex)
+//{
+//	Console.WriteLine(value: ex.Message);
+//}
+//// **************************************************
 
-public class Category : object
-{
-	public Category() : base()
-	{
-	}
+//public class Category : object
+//{
+//	public Category() : base()
+//	{
+//	}
 
-	public int Id { get; set; }
+//	public int Id { get; set; }
 
-	public string? Name { get; set; }
+//	public string? Name { get; set; }
 
-	public bool IsActive { get; set; }
+//	public bool IsActive { get; set; }
 
-	public override string ToString()
-	{
-		var result =
-			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
+//	public override string ToString()
+//	{
+//		var result =
+//			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
 
-		return result;
-	}
-}
+//		return result;
+//	}
+//}
 
-public class ApplicationDbContext : DbContext
-{
-	public ApplicationDbContext() : base()
-	{
-		Database.EnsureCreated();
-	}
+//public class ApplicationDbContext : DbContext
+//{
+//	public ApplicationDbContext() : base()
+//	{
+//		Database.EnsureCreated();
+//	}
 
-	public DbSet<Category> Categories { get; set; }
+//	public DbSet<Category> Categories { get; set; }
 
-	protected override void OnConfiguring
-		(DbContextOptionsBuilder optionsBuilder)
-	{
-		var connectionString =
-			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+//	protected override void OnConfiguring
+//		(DbContextOptionsBuilder optionsBuilder)
+//	{
+//		var connectionString =
+//			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-		optionsBuilder.UseSqlServer
-			(connectionString: connectionString);
-	}
-}
+//		optionsBuilder.UseSqlServer
+//			(connectionString: connectionString);
+//	}
+//}
