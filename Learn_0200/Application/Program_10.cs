@@ -1,214 +1,215 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿//using System;
+//using System.Linq;
+//using Microsoft.EntityFrameworkCore;
 
-try
-{
-	{
-		using var applicationDbContext = new ApplicationDbContext();
+//try
+//{
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-		var hasAnyCategory =
-			applicationDbContext.Categories.Any();
+//		var hasAnyCategory =
+//			applicationDbContext.Categories.Any();
 
-		if (hasAnyCategory == false)
-		{
-			for (var index = 1; index <= 9; index++)
-			{
-				var category =
-					new Category
-					{
-						Name = $"Category {index}",
-						IsActive = (index % 2 == 0),
-					};
+//		if (hasAnyCategory == false)
+//		{
+//			for (var index = 1; index <= 9; index++)
+//			{
+//				var category =
+//					new Category
+//					{
+//						Name = $"Category {index}",
+//						IsActive = (index % 2 == 0),
+//					};
 
-				applicationDbContext.Add(entity: category);
+//				applicationDbContext.Add(entity: category);
 
-				applicationDbContext.SaveChanges();
-			}
-		}
-	}
+//				applicationDbContext.SaveChanges();
+//			}
+//		}
+//	}
 
-	// **************************************************
-	// Update
-	// **************************************************
-	{
-		using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// Update
+//	// **************************************************
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-		var foundedCategory =
-			applicationDbContext.Categories
-			.Where(current => current.Id == 1)
-			.FirstOrDefault();
+//		var foundedCategory =
+//			applicationDbContext.Categories
+//			.Where(current => current.Id == 1)
+//			.FirstOrDefault();
 
-		if (foundedCategory is null)
-		{
-			var errorMessage =
-				$"There is not any category with this Id (1)!";
+//		if (foundedCategory is null)
+//		{
+//			var errorMessage =
+//				$"There is not any category with this Id (1)!";
 
-			Console.WriteLine(value: errorMessage);
-		}
-		else
-		{
-			// Unchanged
-			var state1 =
-				applicationDbContext.Entry(entity: foundedCategory).State;
+//			Console.WriteLine(value: errorMessage);
+//		}
+//		else
+//		{
+//			// Unchanged
+//			var state1 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
 
-			var originalName = foundedCategory.Name;
+//			var originalName = foundedCategory.Name;
 
-			foundedCategory.Name = originalName;
+//			foundedCategory.Name = originalName;
 
-			// Unchanged
-			var state2 =
-				applicationDbContext.Entry(entity: foundedCategory).State;
+//			// Unchanged
+//			var state2 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
 
-			foundedCategory.Name = "New Category Name";
+//			foundedCategory.Name = "New Category Name";
 
-			// Modified
-			var state3 =
-				applicationDbContext.Entry(entity: foundedCategory).State;
+//			// Modified
+//			var state3 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
 
-			foundedCategory.Name = originalName;
+//			foundedCategory.Name = originalName;
 
-			// Note: ?????
-			var state4 =
-				applicationDbContext.Entry(entity: foundedCategory).State;
+//			// Note: ?????
+//			var state4 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
 
-			var affectedRows =
-				applicationDbContext.SaveChanges();
+//			var affectedRows =
+//				applicationDbContext.SaveChanges();
 
-			// Detached
-			var state6 =
-				applicationDbContext.Entry(entity: foundedCategory).State;
-		}
-	}
-	// **************************************************
+//			// Unchanged
+//			var state6 =
+//				applicationDbContext.Entry(entity: foundedCategory).State;
+//		}
+//	}
+//	// **************************************************
 
-	// **************************************************
-	// Update and then delete
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// Update and then delete
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var foundedCategory =
-	//		applicationDbContext.Categories
-	//		.Where(current => current.Id == 1)
-	//		.FirstOrDefault();
+//	//	var foundedCategory =
+//	//		applicationDbContext.Categories
+//	//		.Where(current => current.Id == 1)
+//	//		.FirstOrDefault();
 
-	//	if (foundedCategory is null)
-	//	{
-	//		var errorMessage =
-	//			$"There is not any category with this Id (1)!";
+//	//	if (foundedCategory is null)
+//	//	{
+//	//		var errorMessage =
+//	//			$"There is not any category with this Id (1)!";
 
-	//		Console.WriteLine(value: errorMessage);
-	//	}
-	//	else
-	//	{
-	//		// Unchanged
-	//		var state1 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//		Console.WriteLine(value: errorMessage);
+//	//	}
+//	//	else
+//	//	{
+//	//		// Unchanged
+//	//		var state1 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//		foundedCategory.Name = "New Category Name";
+//	//		foundedCategory.Name = "New Category Name";
 
-	//		// اصلا هزار بار این رکورد را ویرایش کنیم
+//	//		// اصلا هزار بار، این رکورد را ویرایش می‌کنیم
 
-	//		// Modified
-	//		var state2 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//		// Modified
+//	//		var state2 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//		applicationDbContext.Remove(entity: foundedCategory);
 
-	//		// Note: ?????
-	//		var state3 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//		// Note: ?????
+//	//		var state3 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
 
-	//		var affectedRows =
-	//			applicationDbContext.SaveChanges();
+//	//		var affectedRows =
+//	//			applicationDbContext.SaveChanges();
 
-	//		// Detached
-	//		var state6 =
-	//			applicationDbContext.Entry(entity: foundedCategory).State;
-	//	}
-	//}
-	// **************************************************
+//	//		// Detached
+//	//		var state6 =
+//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//	}
+//	//}
+//	// **************************************************
 
-	// **************************************************
-	// Add (Insert)
-	// **************************************************
-	//{
-	//	using var applicationDbContext = new ApplicationDbContext();
+//	// **************************************************
+//	// Add (Insert)
+//	// **************************************************
+//	//{
+//	//	using var applicationDbContext = new ApplicationDbContext();
 
-	//	var newCategory =
-	//		new Category
-	//		{
-	//			IsActive = true,
-	//			Name = "New Category",
-	//		};
+//	//	var newCategory =
+//	//		new Category
+//	//		{
+//	//			IsActive = true,
+//	//			Name = "New Category",
+//	//		};
 
-	//	// Detached
-	//	var state1 =
-	//		applicationDbContext.Entry(entity: newCategory).State;
+//	//	// Detached
+//	//	var state1 =
+//	//		applicationDbContext.Entry(entity: newCategory).State;
 
-	//	applicationDbContext.Add(entity: newCategory);
+//	//	applicationDbContext.Add(entity: newCategory);
 
-	//	// Added
-	//	var state2 =
-	//		applicationDbContext.Entry(entity: newCategory).State;
+//	//	// Added
+//	//	var state2 =
+//	//		applicationDbContext.Entry(entity: newCategory).State;
 
-	//	applicationDbContext.Remove(entity: newCategory);
+//	//	applicationDbContext.Remove(entity: newCategory);
 
-	//	// Note: ?????
-	//	var state3 =
-	//		applicationDbContext.Entry(entity: newCategory).State;
+//	//	// Note: ?????
+//	//	var state3 =
+//	//		applicationDbContext.Entry(entity: newCategory).State;
 
-	//	var affectedRows =
-	//		applicationDbContext.SaveChanges();
+//	//	var affectedRows =
+//	//		applicationDbContext.SaveChanges();
 
-	//	var state4 =
-	//		applicationDbContext.Entry(entity: newCategory).State;
-	//}
-	// **************************************************
-}
-catch (Exception ex)
-{
-	Console.WriteLine(value: ex.Message);
-}
+//	//	// Detached
+//	//	var state4 =
+//	//		applicationDbContext.Entry(entity: newCategory).State;
+//	//}
+//	// **************************************************
+//}
+//catch (Exception ex)
+//{
+//	Console.WriteLine(value: ex.Message);
+//}
 
-public class Category : object
-{
-	public Category() : base()
-	{
-	}
+//public class Category : object
+//{
+//	public Category() : base()
+//	{
+//	}
 
-	public int Id { get; set; }
+//	public int Id { get; set; }
 
-	public string? Name { get; set; }
+//	public string? Name { get; set; }
 
-	public bool IsActive { get; set; }
+//	public bool IsActive { get; set; }
 
-	public override string ToString()
-	{
-		var result =
-			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
+//	public override string ToString()
+//	{
+//		var result =
+//			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
 
-		return result;
-	}
-}
+//		return result;
+//	}
+//}
 
-public class ApplicationDbContext : DbContext
-{
-	public ApplicationDbContext() : base()
-	{
-		Database.EnsureCreated();
-	}
+//public class ApplicationDbContext : DbContext
+//{
+//	public ApplicationDbContext() : base()
+//	{
+//		Database.EnsureCreated();
+//	}
 
-	public DbSet<Category> Categories { get; set; }
+//	public DbSet<Category> Categories { get; set; }
 
-	protected override void OnConfiguring
-		(DbContextOptionsBuilder optionsBuilder)
-	{
-		var connectionString =
-			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+//	protected override void OnConfiguring
+//		(DbContextOptionsBuilder optionsBuilder)
+//	{
+//		var connectionString =
+//			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-		optionsBuilder.UseSqlServer
-			(connectionString: connectionString);
-	}
-}
+//		optionsBuilder.UseSqlServer
+//			(connectionString: connectionString);
+//	}
+//}

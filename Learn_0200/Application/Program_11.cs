@@ -1,199 +1,221 @@
-﻿//using System;
-//using System.Linq;
-//using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
-//try
+try
+{
+	{
+		using var applicationDbContext = new ApplicationDbContext();
+
+		var hasAnyCategory =
+			// New
+			await
+			applicationDbContext.Categories.AnyAsync();
+
+		if (hasAnyCategory == false)
+		{
+			for (var index = 1; index <= 9; index++)
+			{
+				var category =
+					new Category(name: $"Category {index}")
+					{
+						IsActive = (index % 2 == 0),
+					};
+
+				// New
+				// GenerationStrategy.SequenceHiLo
+				// کندتر است Add() در صورتی که از امکان فوق نمی‌خواهیم استفاده کنیم، از
+				//await applicationDbContext.AddAsync(entity: category);
+
+				applicationDbContext.Add(entity: category);
+
+				// New
+				await applicationDbContext.SaveChangesAsync();
+			}
+		}
+	}
+
+	{
+		using var applicationDbContext = new ApplicationDbContext();
+
+		var foundedCategory =
+			// New
+			await
+			applicationDbContext.Categories
+			.Where(current => current.Name.ToLower() == "Category 1".ToLower())
+			.FirstOrDefaultAsync();
+
+		if (foundedCategory is null)
+		{
+			var errorMessage =
+				$"Category not found!";
+
+			Console.WriteLine(value: errorMessage);
+		}
+		else
+		{
+			foundedCategory.IsActive = true;
+
+			var affectedRows =
+				await
+				applicationDbContext.SaveChangesAsync();
+		}
+	}
+	// **************************************************
+}
+catch (Exception ex)
+{
+	Console.WriteLine(value: ex.Message);
+}
+
+//public class Category : object
 //{
+//	public Category() : base()
 //	{
-//		using var applicationDbContext = new ApplicationDbContext();
-
-//		var hasAnyCategory =
-//			// New
-//			await
-//			applicationDbContext.Categories.AnyAsync();
-
-//		if (hasAnyCategory == false)
-//		{
-//			for (var index = 1; index <= 9; index++)
-//			{
-//				var category =
-//					new Category(name: $"Category {index}")
-//					{
-//						IsActive = (index % 2 == 0),
-//					};
-
-//				applicationDbContext.Add(entity: category);
-
-//				// New
-//				await applicationDbContext.SaveChangesAsync();
-//			}
-//		}
 //	}
 
-//	{
-//		using var applicationDbContext = new ApplicationDbContext();
+//	public int Id { get; set; }
 
-//		var foundedCategory =
-//			// New
-//			await
-//			applicationDbContext.Categories
-//			.Where(current => current.Name.ToLower() == "Category 1".ToLower())
-//			.FirstOrDefaultAsync();
-
-//		if (foundedCategory is null)
-//		{
-//			var errorMessage =
-//				$"Category not found!";
-
-//			Console.WriteLine(value: errorMessage);
-//		}
-//		else
-//		{
-//			foundedCategory.IsActive = true;
-
-//			var affectedRows =
-//				await
-//				applicationDbContext.SaveChangesAsync();
-//		}
-//	}
-//	// **************************************************
-//}
-//catch (Exception ex)
-//{
-//	Console.WriteLine(value: ex.Message);
-//}
-
-////public abstract class Entity : object
-////{
-////	protected Entity() : base()
-////	{
-////		// غلط
-////		//Id = new Guid();
-
-////		Id = Guid.NewGuid();
-
-////		InsertDateTime = DateTime.Now;
-////	}
-
-////	public Guid Id { get; private set; }
-
-//////	public DateTime InsertDateTime { get; private set; }
-////	public DateTimeOffset InsertDateTime { get; private set; }
-////}
-
-//public abstract class Entity() : object()
-//{
-//	[System.ComponentModel.DataAnnotations.Schema
-//		.DatabaseGenerated(databaseGeneratedOption:
-//		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
-
-//	[System.ComponentModel.DataAnnotations.Schema
-//		.DatabaseGenerated(databaseGeneratedOption:
-//		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
+//	...
+//	...
+//	...
 //}
 
-//public class Category(string name) : Entity()
+//public abstract class Entity : object
 //{
-//	public bool IsActive { get; set; }
-
-//	//[System.ComponentModel.DataAnnotations.Required]
-//	[System.ComponentModel.DataAnnotations.Required
-//		(AllowEmptyStrings = false)]
-
-//	[System.ComponentModel.DataAnnotations.MaxLength
-//		(length: 100)]
-//	public string Name { get; set; } = name;
-
-//	public override string ToString()
+//	protected Entity() : base()
 //	{
-//		var result =
-//			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
+//		// غلط
+//		//Id = new Guid();
 
-//		return result;
+//		Id = Guid.NewGuid();
+
+//		InsertDateTime = DateTime.Now;
 //	}
+
+//	//public int Id { get; private set; }
+
+//	public Guid Id { get; private set; }
+
+//	//public DateTime InsertDateTime { get; private set; }
+//	public DateTimeOffset InsertDateTime { get; private set; }
 //}
 
-///// <summary>
-///// Fluent API
-///// </summary>
-//internal class CategoryConfiguration :
-//	object, IEntityTypeConfiguration<Category>
-//{
-//	public CategoryConfiguration() : base()
-//	{
-//	}
+public abstract class Entity() : object()
+{
+	[System.ComponentModel.DataAnnotations.Key]
 
-//	public void Configure(Microsoft.EntityFrameworkCore
-//		.Metadata.Builders.EntityTypeBuilder<Category> builder)
-//	{
-//		builder
-//			.HasKey(current => current.Id)
-//			// مهم
-//			// https://www.youtube.com/watch?v=n17U7ntLMt4&t=803s
-//			.IsClustered(clustered: false)
-//			;
+	[System.ComponentModel.DataAnnotations.Schema
+		.DatabaseGenerated(databaseGeneratedOption:
+		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public Guid Id { get; private set; } = Guid.NewGuid();
 
-//		builder
-//			.Property(current => current.Name)
-//			.IsUnicode(unicode: false)
-//			;
+	[System.ComponentModel.DataAnnotations.Schema
+		.DatabaseGenerated(databaseGeneratedOption:
+		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
+}
 
-//		builder
-//			.HasIndex(current => new { current.Name })
-//			.IsUnique(unique: true)
-//			;
-//	}
-//}
+public class Category(string name) : Entity()
+{
+	public bool IsActive { get; set; }
 
-//public class ApplicationDbContext : DbContext
-//{
-//	public ApplicationDbContext() : base()
-//	{
-//		Database.EnsureCreated();
-//	}
+	//[System.ComponentModel.DataAnnotations.Required]
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false)]
 
-//	public DbSet<Category> Categories { get; set; }
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: 100)]
+	public string Name { get; set; } = name;
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
-//	{
-//		var connectionString =
-//			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+	public override string ToString()
+	{
+		var result =
+			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
 
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
-//	}
+		return result;
+	}
+}
 
-//	protected override void OnModelCreating(ModelBuilder modelBuilder)
-//	{
-//		// Solution (1)
-//		//modelBuilder
-//		//	.Entity<Category>()
-//		//	.HasIndex(current => new { current.Name })
-//		//	.IsUnique(unique: true)
-//		//	;
-//		// /Solution (1)
+/// <summary>
+/// Fluent API
+/// </summary>
+internal class CategoryConfiguration :
+	object, IEntityTypeConfiguration<Category>
+{
+	public CategoryConfiguration() : base()
+	{
+	}
 
-//		// Solution (2)
-//		//modelBuilder.ApplyConfiguration
-//		//	(configuration: new CategoryConfiguration());
-//		// /Solution (2)
+	public void Configure(Microsoft.EntityFrameworkCore
+		.Metadata.Builders.EntityTypeBuilder<Category> builder)
+	{
+		builder
+			.HasKey(current => current.Id)
+			// مهم
+			// https://www.youtube.com/watch?v=n17U7ntLMt4&t=803s
+			.IsClustered(clustered: false)
+			;
 
-//		// Solution (3)
-//		//new CategoryConfiguration()
-//		//	.Configure(builder: modelBuilder.Entity<Category>());
-//		// /Solution (3)
+		builder
+			.Property(current => current.Name)
+			.IsUnicode(unicode: false)
+			;
 
-//		// Solution (4)
-//		//modelBuilder.ApplyConfigurationsFromAssembly
-//		//	(assembly: System.Reflection.Assembly.GetExecutingAssembly());
-//		// /Solution (4)
+		builder
+			.HasIndex(current => new { current.Name })
+			.IsUnique(unique: true)
+			;
+	}
+}
 
-//		// Solution (5)
-//		modelBuilder.ApplyConfigurationsFromAssembly
-//			(assembly: typeof(ApplicationDbContext).Assembly);
-//		// /Solution (5)
-//	}
-//}
+public class ApplicationDbContext : DbContext
+{
+	public ApplicationDbContext() : base()
+	{
+		Database.EnsureCreated();
+	}
+
+	public DbSet<Category> Categories { get; set; }
+
+	protected override void OnConfiguring
+		(DbContextOptionsBuilder optionsBuilder)
+	{
+		var connectionString =
+			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+
+		optionsBuilder.UseSqlServer
+			(connectionString: connectionString);
+	}
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		// Solution (1)
+		//modelBuilder
+		//	.Entity<Category>()
+		//	.HasIndex(current => new { current.Name })
+		//	.IsUnique(unique: true)
+		//	;
+		// /Solution (1)
+
+		// Solution (2)
+		//modelBuilder.ApplyConfiguration
+		//	(configuration: new CategoryConfiguration());
+		// /Solution (2)
+
+		// Solution (3)
+		//new CategoryConfiguration()
+		//	.Configure(builder: modelBuilder.Entity<Category>());
+		// /Solution (3)
+
+		// Solution (4)
+		//modelBuilder.ApplyConfigurationsFromAssembly
+		//	(assembly: System.Reflection.Assembly.GetExecutingAssembly());
+		// /Solution (4)
+
+		// Solution (5)
+		modelBuilder.ApplyConfigurationsFromAssembly
+			(assembly: typeof(ApplicationDbContext).Assembly);
+		// /Solution (5)
+	}
+}
