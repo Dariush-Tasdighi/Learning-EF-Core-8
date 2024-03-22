@@ -163,6 +163,12 @@ internal class CategoryConfiguration :
 			.IsUnicode(unicode: false)
 			;
 
+		//builder
+		//	.HasIndex(current => current.Name)
+		//	.IsUnique(unique: true)
+		//	;
+
+		// Best Practice
 		builder
 			.HasIndex(current => new { current.Name })
 			.IsUnique(unique: true)
@@ -188,6 +194,11 @@ public class ApplicationDbContext : DbContext
 		optionsBuilder.UseSqlServer
 			(connectionString: connectionString);
 	}
+
+	//protected override void OnModelCreating(ModelBuilder modelBuilder)
+	//{
+	//	base.OnModelCreating(modelBuilder);
+	//}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
