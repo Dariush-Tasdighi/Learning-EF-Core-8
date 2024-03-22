@@ -43,6 +43,7 @@ try
 			await
 			applicationDbContext.Categories
 			.Where(current => current.Name.ToLower() == "Category 1".ToLower())
+			// New
 			.FirstOrDefaultAsync();
 
 		if (foundedCategory is null)
@@ -193,8 +194,8 @@ public class ApplicationDbContext : DbContext
 		// Solution (1)
 		//modelBuilder
 		//	.Entity<Category>()
-		//	.HasIndex(current => new { current.Name })
-		//	.IsUnique(unique: true)
+		//	.Property(current => current.Name)
+		//	.IsUnicode(unicode: false)
 		//	;
 		// /Solution (1)
 
@@ -214,6 +215,9 @@ public class ApplicationDbContext : DbContext
 		// /Solution (4)
 
 		// Solution (5)
+		//modelBuilder.ApplyConfigurationsFromAssembly
+		//	(assembly: typeof(CategoryConfiguration).Assembly);
+
 		modelBuilder.ApplyConfigurationsFromAssembly
 			(assembly: typeof(ApplicationDbContext).Assembly);
 		// /Solution (5)
