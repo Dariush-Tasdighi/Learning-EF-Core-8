@@ -34,121 +34,126 @@ try
 	{
 		using var applicationDbContext = new ApplicationDbContext();
 
-		Category? foundedCategory;
-
 		// **************************************************
 		// برمی‌گرداند null ،اگر پیدا نکند
 		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
-		// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
+		// اگر بیش از یکی پیدا کند، اولین آن‌ها را برمی‌گرداند
 		// **************************************************
-		foundedCategory =
-			applicationDbContext.Categories
-			.FirstOrDefault();
-
-		// New in EF Core
-		foundedCategory =
-			await
-			applicationDbContext.Categories
-			.FirstOrDefaultAsync();
-		// **************************************************
-
-		// **************************************************
-		// اگر پیدا نکند، خطا تولید می‌کند
-		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
-		// اگر بیش از یکی پیدا کند، اولین آن‌را برمی‌گرداند
-		// **************************************************
-		foundedCategory =
-			applicationDbContext.Categories
-			.First();
-
-		// New in EF Core
-		foundedCategory =
-			await
-			applicationDbContext.Categories
-			.FirstAsync();
-		// **************************************************
-
-		// **************************************************
-		// برمی‌گرداند null ،اگر پیدا نکند
-		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
-		// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
-		// **************************************************
-		foundedCategory =
-			applicationDbContext.Categories
-			.LastOrDefault();
-
-		// New in EF Core
-		foundedCategory =
-			await
-			applicationDbContext.Categories
-			.LastOrDefaultAsync();
-		// **************************************************
-
-		// **************************************************
-		// اگر پیدا نکند، خطا تولید می‌کند
-		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
-		// اگر بیش از یکی پیدا کند، آخرین آن‌را برمی‌گرداند
-		// **************************************************
-		foundedCategory =
-			applicationDbContext.Categories
-			.Last();
-
-		// New in EF Core
-		foundedCategory =
-			await
-			applicationDbContext.Categories
-			.LastAsync();
-		// **************************************************
-
-		// **************************************************
-		// برمی‌گرداند null ،اگر پیدا نکند
-		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
-		// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
-		// **************************************************
-		foundedCategory =
-			applicationDbContext.Categories
-			.SingleOrDefault();
-
-		// New in EF Core
-		foundedCategory =
-			await
-			applicationDbContext.Categories
-			.SingleOrDefaultAsync();
-		// **************************************************
-
-		// **************************************************
-		// اگر پیدا نکند، خطا تولید می‌کند
-		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
-		// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
-		// **************************************************
-		foundedCategory =
-			applicationDbContext.Categories
-			.Single();
-
-		// New in EF Core
-		foundedCategory =
-			await
-			applicationDbContext.Categories
-			.SingleAsync();
-		// **************************************************
-
-		if (foundedCategory is null)
 		{
-			var errorMessage =
-				$"Category not found!";
-
-			Console.WriteLine(value: errorMessage);
+			var foundedCategory =
+				applicationDbContext.Categories
+				.FirstOrDefault();
 		}
-		else
-		{
-			foundedCategory.IsActive = true;
 
-			var affectedRows =
+		{
+			// New in EF Core
+			var foundedCategory =
 				await
-				applicationDbContext.SaveChangesAsync();
+				applicationDbContext.Categories
+				.FirstOrDefaultAsync();
 		}
+		// **************************************************
+
+		// **************************************************
+		// اگر پیدا نکند، خطا تولید می‌کند
+		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
+		// اگر بیش از یکی پیدا کند، اولین آن‌ها را برمی‌گرداند
+		// **************************************************
+		{
+			var foundedCategory =
+				applicationDbContext.Categories
+				.First();
+		}
+
+		{
+			// New in EF Core
+			var foundedCategory =
+				await
+				applicationDbContext.Categories
+				.FirstAsync();
+		}
+		// **************************************************
+
+		// **************************************************
+		// برمی‌گرداند null ،اگر پیدا نکند
+		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
+		// اگر بیش از یکی پیدا کند، آخرین آن‌ها را برمی‌گرداند
+		// **************************************************
+		{
+			var foundedCategory =
+				applicationDbContext.Categories
+				.LastOrDefault();
+		}
+
+		{
+			// New in EF Core
+			var foundedCategory =
+				await
+				applicationDbContext.Categories
+				.LastOrDefaultAsync();
+		}
+		// **************************************************
+
+		// **************************************************
+		// اگر پیدا نکند، خطا تولید می‌کند
+		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
+		// اگر بیش از یکی پیدا کند، آخرین آن‌ها را برمی‌گرداند
+		// **************************************************
+		{
+			var foundedCategory =
+				applicationDbContext.Categories
+				.Last();
+		}
+
+		{
+			// New in EF Core
+			var foundedCategory =
+				await
+				applicationDbContext.Categories
+				.LastAsync();
+		}
+		// **************************************************
+
+		// **************************************************
+		// برمی‌گرداند null ،اگر پیدا نکند
+		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
+		// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
+		// **************************************************
+		{
+			var foundedCategory =
+				applicationDbContext.Categories
+				.SingleOrDefault();
+		}
+
+		{
+			// New in EF Core
+			var foundedCategory =
+				await
+				applicationDbContext.Categories
+				.SingleOrDefaultAsync();
+		}
+		// **************************************************
+
+		// **************************************************
+		// اگر پیدا نکند، خطا تولید می‌کند
+		// اگر فقط یکی پیدا کند، همان یکی را برمی‌گرداند
+		// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
+		// **************************************************
+		{
+			var foundedCategory =
+				applicationDbContext.Categories
+				.Single();
+		}
+
+		{
+			// New in EF Core
+			var foundedCategory =
+				await
+				applicationDbContext.Categories
+				.SingleAsync();
+		}
+		// **************************************************
 	}
-	// **************************************************
 }
 catch (Exception ex)
 {
@@ -158,17 +163,14 @@ catch (Exception ex)
 public abstract class Entity() : object()
 {
 	[Key]
-
-	[DatabaseGenerated
-		(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
-	[DatabaseGenerated
-		(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
 }
 
-public class Category(string name) : Entity()
+public class Category(string name) : Entity
 {
 	public bool IsActive { get; set; }
 
@@ -229,6 +231,7 @@ public class ApplicationDbContext : DbContext
 		optionsBuilder.UseSqlServer
 			(connectionString: connectionString);
 	}
+
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.ApplyConfigurationsFromAssembly
