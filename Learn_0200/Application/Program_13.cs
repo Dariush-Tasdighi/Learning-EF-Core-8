@@ -25,6 +25,9 @@ public class Category01 : object
 	{
 	}
 
+	/// <summary>
+	/// Best Practice
+	/// </summary>
 	public int Id { get; set; }
 	public string? Name { get; set; }
 }
@@ -114,8 +117,10 @@ public class Category06 : object
 	/// داریم Key چون در اسکیوال کلمه
 	/// می‌شود [Key] تبدیل به
 	/// </summary>
+	//[Key]
+	//public int Key { get; set; }
 	[Key]
-	public int Key { get; set; }
+	public int Code { get; set; }
 	public string? Name { get; set; }
 }
 // **************************************************
@@ -138,7 +143,8 @@ public class Category07 : object
 	/// این ویژگی هم مربوط به برنامه
 	/// می‌شود و هم مربوط به بانک اطلاعاتی می‌شود
 	/// </summary>
-	[MaxLength(length: 100)]
+	//[MaxLength(length: 100)]
+	[MaxLength(length: Constant.MaxLength.Name)]
 	public string? Name { get; set; }
 }
 // **************************************************
@@ -379,13 +385,14 @@ public class Category16(string name) : object
 	/// این ویژگی فقط مربوط به برنامه می‌شود
 	/// </summary>
 	//[RegularExpression(pattern: "^\\d$")]
-	[RegularExpression(pattern: "^\\d{10}$")]
+	//[RegularExpression(pattern: "^\\d{10}$")]
 	//[RegularExpression(pattern: "^\\d{10,12}$")]
+	[RegularExpression(pattern: Constant.RegularExpression.PostalCode)]
 	public string? PostalCode { get; set; }
 
 	public bool ValidatePostalCode()
 	{
-		if (string.IsNullOrEmpty(value: PostalCode))
+		if (string.IsNullOrWhiteSpace(value: PostalCode))
 		{
 			return true;
 		}
@@ -1039,7 +1046,37 @@ public class ApplicationDbContext : DbContext
 		Database.EnsureCreated();
 	}
 
-	//public DbSet<Category> Categories { get; set; }
+	public DbSet<Category01> Categories_01 { get; set; }
+	public DbSet<Category02> Categories_02 { get; set; }
+	public DbSet<Category03> Categories_03 { get; set; }
+	public DbSet<Category04> Categories_04 { get; set; }
+
+	// Error!
+	//public DbSet<Category05> Categories_05 { get; set; }
+
+	public DbSet<Category06> Categories_06 { get; set; }
+	public DbSet<Category07> Categories_07 { get; set; }
+	public DbSet<Category08> Categories_08 { get; set; }
+	public DbSet<Category09> Categories_09 { get; set; }
+	public DbSet<Category10> Categories_10 { get; set; }
+	public DbSet<Category11> Categories_11 { get; set; }
+	public DbSet<Category12> Categories_12 { get; set; }
+	public DbSet<Category13> Categories_13 { get; set; }
+	public DbSet<Category14> Categories_14 { get; set; }
+	public DbSet<Category15> Categories_15 { get; set; }
+	public DbSet<Category16> Categories_16 { get; set; }
+	public DbSet<Category17> Categories_17 { get; set; }
+	public DbSet<Category18> Categories_18 { get; set; }
+	public DbSet<Category19> Categories_19 { get; set; }
+	public DbSet<Category20> Categories_20 { get; set; }
+	public DbSet<Category21> Categories_21 { get; set; }
+	public DbSet<Category22> Categories_22 { get; set; }
+	public DbSet<Category23> Categories_23 { get; set; }
+	public DbSet<Category24> Categories_24 { get; set; }
+	public DbSet<Category25> Categories_25 { get; set; }
+	public DbSet<Category26> Categories_26 { get; set; }
+	public DbSet<Category27> Categories_27 { get; set; }
+	public DbSet<Category28> Categories_28 { get; set; }
 
 	protected override void OnConfiguring
 		(DbContextOptionsBuilder optionsBuilder)
