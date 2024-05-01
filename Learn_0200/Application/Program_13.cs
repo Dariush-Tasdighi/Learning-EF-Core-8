@@ -477,6 +477,7 @@ public class Category19(string name) : object
 //[Table(Schema = "Cms")]
 //[Table(name: "", Schema = "Cms")]
 //[Table(name: null, Schema = "Cms")]
+[Table(name: nameof(ApplicationDbContext.Categories_20), Schema = "Cms")]
 public class Category20(string name) : object
 {
 	[Key]
@@ -495,11 +496,11 @@ public class Category20(string name) : object
 // **************************************************
 // Id:
 // 
-//		In C#			In SQL Server Database
+//		In C#		In SQL Server Database
 // 
-//		int				int
-//		long			bigint
-//		System.Guid		uniqueidentifier
+//		int			int
+//		long		bigint
+//		Guid		uniqueidentifier
 // **************************************************
 public class Category21(string name) : object
 {
@@ -563,13 +564,14 @@ public class Category24(string name) : object
 {
 	[Key]
 	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-	public System.Guid Id { get; private set; } = Guid.NewGuid();
+	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	/// <summary>
 	/// Note: private set;
 	/// </summary>
 	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
 	public int Code { get; private set; }
+	//public long Code { get; private set; }
 
 	[Required(AllowEmptyStrings = false)]
 	[StringLength(maximumLength: 100, MinimumLength = 3)]
@@ -644,7 +646,7 @@ public class Category26(string name) : object
 	/// Set ای که Property
 	/// نداشته باشد تبدیل به فیلد در بانک اطلاعاتی نمی‌شود
 	/// </summary>
-	public PersianDate InsertPersianDate
+	public PersianDate PersianInsertDate
 	{
 		get
 		{
@@ -655,7 +657,7 @@ public class Category26(string name) : object
 		}
 	}
 
-	public PersianDateTime InsertPersianDateTime
+	public PersianDateTime PersianInsertDateTime
 	{
 		get
 		{
@@ -713,16 +715,22 @@ public class Category27(string name) : object
 	/// </summary>
 	public int MyProperty16 { get; protected internal set; }
 
+
+
 	/// <summary>
 	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	public int MyProperty21 { get; }
+
+
 
 	/// <summary>
 	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
 	/// </summary>
 	[NotMapped]
 	public int MyProperty22 { get; set; }
+
+
 
 	/// <summary>
 	/// !تبدیل به فیلد بانک اطلاعاتی نمی‌شود
