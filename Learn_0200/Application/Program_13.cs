@@ -504,8 +504,8 @@ public class Category20(string name) : object
 public class Category21(string name) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
-	//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+	//[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
 	public int Id { get; set; }
 	//public int Id { get; private set; }
 
@@ -544,7 +544,7 @@ public class Category22(string name) : object
 public class Category23(string name) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	//public Guid Id { get; private set; } = new Guid(); // این دستور غلط است
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
@@ -562,13 +562,13 @@ public class Category23(string name) : object
 public class Category24(string name) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public System.Guid Id { get; private set; } = Guid.NewGuid();
 
 	/// <summary>
 	/// Note: private set;
 	/// </summary>
-	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
 	public int Code { get; private set; }
 
 	[Required(AllowEmptyStrings = false)]
@@ -585,10 +585,10 @@ public class Category24(string name) : object
 public class Category25(string name) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
-	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
 	public int Code1 { get; private set; }
 
 	/// <summary>
@@ -597,7 +597,7 @@ public class Category25(string name) : object
 	///
 	/// تعریف نمایید Sequence بعدا یاد خواهید گرفت که چیزی به نام
 	/// </summary>
-	//[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	//[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
 	//public int Code2 { get; private set; }
 
 	[Required(AllowEmptyStrings = false)]
@@ -614,10 +614,10 @@ public class Category25(string name) : object
 public class Category26(string name) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; }
 
-	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
 	public int Code { get; private set; }
 
 	[Required(AllowEmptyStrings = false)]
@@ -635,7 +635,7 @@ public class Category26(string name) : object
 		}
 	}
 
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	//public DateTime InsertDateTime { get; private set; }
 	//public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
 	public DateTimeOffset InsertDateTime { get; private set; } = Dtat.DateTime.Now;
@@ -676,7 +676,7 @@ public class Category26(string name) : object
 public class Category27(string name) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	[Required(AllowEmptyStrings = false)]
@@ -759,7 +759,7 @@ public class Category27(string name) : object
 public class Category28(string name) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	[StringLength(maximumLength: 100)]
@@ -796,12 +796,12 @@ public class UserInGroup01(Guid userId, Guid groupId) : object
 {
 	[Key]
 	[Column(Order = 0)]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid UserId { get; private set; } = userId;
 
 	[Key]
 	[Column(Order = 1)]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid GroupId { get; private set; } = groupId;
 }
 // **************************************************
@@ -814,7 +814,7 @@ public class UserInGroup01(Guid userId, Guid groupId) : object
 public class UserInGroup02(Guid userId, Guid groupId) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	/// <summary>
@@ -843,7 +843,7 @@ public class UserInGroup02(Guid userId, Guid groupId) : object
 public class User01(string username) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	[MaxLength(length: 20)]
@@ -862,7 +862,12 @@ public class User01(string username) : object
 // **************************************************
 /// نکته بسیار مهم
 /// 
-/// تعریف کرد Index هستند VarChar, NVarChar, Text, nText نمی‌توان برای فیلدهایی که از جنس
+/// تعریف کرد Index نمی‌توان برای فیلدهایی از جنس
+/// 
+/// Text
+/// nText
+/// VarChar(Max)
+/// nVarChar(Max)
 // **************************************************
 //[Index("Username", IsUnique = true)]
 
@@ -887,7 +892,7 @@ public class User01(string username) : object
 public class User02(string username) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	[MaxLength(length: 20)]
@@ -914,7 +919,7 @@ public class User02(string username) : object
 public class User03(string username) : object
 {
 	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	[Range(minimum: 1, maximum: 100_000)]
@@ -933,111 +938,6 @@ public class User03(string username) : object
 // **************************************************
 // **************************************************
 // **************************************************
-
-// **************************************************
-// *** User 04 **************************************
-// **************************************************
-[Index(nameof(Username), IsUnique = true)]
-[Index(nameof(FirstName), nameof(LastName), IsUnique = false)]
-public class User04(string username) : object
-{
-	[Key]
-	[DatabaseGenerated(DatabaseGeneratedOption.None)]
-	public Guid Id { get; private set; } = Guid.NewGuid();
-
-	//[Range(minimum: 1, maximum: 100_000)]
-
-	//[Range(minimum: 1, maximum: 100_000,
-	//	ErrorMessage = "The Ordering value should be between 1 and 100000!")]
-
-	[Range(minimum: 1, maximum: 100_000,
-		ErrorMessage = "The {0} value should be between {1} and {2}!")]
-	public int Ordering { get; set; } = 10_000;
-
-	[MaxLength(length: 20)]
-	[Required(AllowEmptyStrings = false)]
-	public string Username { get; set; } = username;
-
-	[MaxLength(length: 30,
-		ErrorMessage = "The {0} value must be a string with a maximum length of '{1}'!")]
-	public string? LastName { get; set; }
-
-	[Display(Name = "First Name")]
-	[MaxLength(length: 20,
-		ErrorMessage = "The {0} value must be a string with a maximum length of '{1}'!")]
-	public string? FirstName { get; set; }
-}
-// **************************************************
-// **************************************************
-// **************************************************
-
-//////// **************************************************
-//////// *** User 05 **************************************
-//////// **************************************************
-//////[Index(nameof(Username), IsUnique = true)]
-//////[Index(nameof(FirstName), nameof(LastName), IsUnique = false)]
-//////public class User05(string username) : object
-//////{
-//////	//[System.ComponentModel.DataAnnotations.Display
-//////	//	(Name = "Identity")]
-
-//////	//[System.ComponentModel.DataAnnotations.Display
-//////	//	(Name = "شناسه")]
-
-//////	//[System.ComponentModel.DataAnnotations.Display
-//////	//	(ResourceType = typeof(Resources.DataDictionary),
-//////	//	Name = "Id")]
-
-//////	// سوتی می‌دهم
-//////	//[System.ComponentModel.DataAnnotations.Display
-//////	//	(ResourceType = typeof(Resources.DataDictionary),
-//////	//	Name = "Idd")]
-
-//////	[Key]
-//////	[DatabaseGenerated(DatabaseGeneratedOption.None)]
-//////	[Display(ResourceType =
-//////		typeof(Resources.DataDictionary),
-//////		Name = nameof(Resources.DataDictionary.Id))]
-//////	public Guid Id { get; private set; } = Guid.NewGuid();
-
-//////	[Display(ResourceType =
-//////		typeof(Resources.DataDictionary),
-//////		Name = nameof(Resources.DataDictionary.Ordering))]
-//////	[Range(minimum: 1, maximum: 100_000,
-//////		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-//////		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
-//////	public int Ordering { get; set; } = 10_000;
-
-//////	[Display(ResourceType =
-//////		typeof(Resources.DataDictionary),
-//////		Name = nameof(Resources.DataDictionary.Username))]
-//////	[Required(AllowEmptyStrings = false,
-//////		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-//////		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-//////	[MaxLength(length: 20,
-//////		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-//////		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-//////	public string Username { get; set; } = username;
-
-//////	[Display(ResourceType =
-//////		typeof(Resources.DataDictionary),
-//////		Name = nameof(Resources.DataDictionary.LastName))]
-//////	[MaxLength(length: 30,
-//////		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-//////		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-//////	public string? LastName { get; set; }
-
-//////	[Display(ResourceType =
-//////		typeof(Resources.DataDictionary),
-//////		Name = nameof(Resources.DataDictionary.FirstName))]
-//////	[MaxLength(length: 20,
-//////		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-//////		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-//////	public string? FirstName { get; set; }
-//////}
-//////// **************************************************
-//////// **************************************************
-//////// **************************************************
 
 public class ApplicationDbContext : DbContext
 {
