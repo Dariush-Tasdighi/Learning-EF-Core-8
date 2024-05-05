@@ -646,7 +646,7 @@ public class Category26(string name) : object
 	/// Set ای که Property
 	/// نداشته باشد تبدیل به فیلد در بانک اطلاعاتی نمی‌شود
 	/// </summary>
-	public PersianDate PersianInsertDate
+	public PersianDate InsertPersianDate
 	{
 		get
 		{
@@ -657,7 +657,7 @@ public class Category26(string name) : object
 		}
 	}
 
-	public PersianDateTime PersianInsertDateTime
+	public PersianDateTime InsertPersianDateTime
 	{
 		get
 		{
@@ -811,6 +811,8 @@ public class UserInGroup01(Guid userId, Guid groupId) : object
 	[Column(Order = 1)]
 	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 	public Guid GroupId { get; private set; } = groupId;
+
+	public bool IsActive { get; set; }
 }
 // **************************************************
 // **************************************************
@@ -878,6 +880,7 @@ public class User01(string username) : object
 /// nVarChar(Max)
 // **************************************************
 //[Index("Username", IsUnique = true)]
+//[Index("Uesrnme", IsUnique = true)] -> اگر سوتی بدهیم
 
 // Index Name: IX_Users02_Username
 [Index(nameof(Username), IsUnique = true)]
@@ -985,6 +988,14 @@ public class ApplicationDbContext : DbContext
 	public DbSet<Category26> Categories_26 { get; set; }
 	public DbSet<Category27> Categories_27 { get; set; }
 	public DbSet<Category28> Categories_28 { get; set; }
+
+	// Error!
+	//public DbSet<UserInGroup01> UsersInGroups_01 { get; set; }
+	public DbSet<UserInGroup02> UsersInGroups_02 { get; set; }
+
+	public DbSet<User01> Users_01 { get; set; }
+	public DbSet<User02> Users_02 { get; set; }
+	public DbSet<User03> Users_03 { get; set; }
 
 	protected override void OnConfiguring
 		(DbContextOptionsBuilder optionsBuilder)
