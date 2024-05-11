@@ -1,1 +1,7 @@
-﻿Learning Validation by Resources!
+﻿Learning Custom Validation Messages and Using Resources!
+
+	For:
+
+		- Models
+		- ViewModels
+		- DTOs -> Data Transfer Object(s)
