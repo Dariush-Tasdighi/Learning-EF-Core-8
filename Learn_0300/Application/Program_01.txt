@@ -1,0 +1,40 @@
+﻿**************************************************
+- Relation
+
+	1. One To Many		بسیار پرکاربرد
+
+		1.1. More than one (One To Many)
+
+			Note: More than one (One To Many) is not Many to Many!!!
+
+	2. Many To Many		بسیار راحت و کم کاربرد
+	3. One To One		یه کم عجیب و کم کاربرد
+**************************************************
+
+**************************************************
+1. One To Many
+**************************************************
+[Role]					1...N						[User]
+
+نگاه بانک اطلاعاتی
+
+[Role]					1...N						[User]
+Guid Id												Guid Id
+													Guid RoleId
+
+EF, EF Core نگاه
+
+[Role]					1...N						[User]
+Guid Id												Guid Id
+													Guid RoleId
+IList<User> Users									Role Role
+
+EF, EF Core نگاه + Lazy Loading
+
+[Role]					1...N						[User]
+Guid Id												Guid Id
+													Guid RoleId
+virtual IList<User> Users							virtual Role Role
+**************************************************
+- Note: Users and Role are Navigation Properties
+**************************************************

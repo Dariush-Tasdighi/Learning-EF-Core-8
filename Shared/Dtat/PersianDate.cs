@@ -13,8 +13,7 @@ public class PersianDate : object
 
 	protected static PersianCalendar PersianCalendar { get; }
 
-	public PersianDate
-		(DateTimeOffset dateTime) : base()
+	public PersianDate(DateTimeOffset dateTime) : base()
 	{
 		DateTime = dateTime;
 
