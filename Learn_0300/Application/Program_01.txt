@@ -14,27 +14,32 @@
 **************************************************
 1. One To Many
 **************************************************
-[Role]					1...N						[User]
+[Role]					1...N					[User]
 
 نگاه بانک اطلاعاتی
 
-[Role]					1...N						[User]
-Guid Id												Guid Id
-													Guid RoleId
+[Role]					1...N					[User]
+Guid Id											Guid Id
+												Guid RoleId
 
 EF, EF Core نگاه
 
-[Role]					1...N						[User]
-Guid Id												Guid Id
-													Guid RoleId
-IList<User> Users									Role Role
+[Role]					1...N					[User]
+Guid Id											Guid Id
+												Guid RoleId
+IList<User> Users								Role Role
 
 EF, EF Core نگاه + Lazy Loading
 
-[Role]					1...N						[User]
-Guid Id												Guid Id
-													Guid RoleId
-virtual IList<User> Users							virtual Role Role
+[Role]					1...N					[User]
+Guid Id											Guid Id
+												Guid RoleId
+virtual IList<User> Users						virtual Role Role
 **************************************************
 - Note: Users and Role are Navigation Properties
+**************************************************
+
+**************************************************
+تفاوت نگاه در این دوره و دوره
+Domain Driven Design
 **************************************************

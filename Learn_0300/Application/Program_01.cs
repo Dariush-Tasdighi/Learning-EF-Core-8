@@ -3,24 +3,28 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 try
 {
+	var roleName =
+		$"Administrator";
+
 	{
 		using var applicationDbContext = new ApplicationDbContext();
 
-		var hasAnyCategory =
+		var hasAnyRole =
 			await
 			applicationDbContext.Roles.AnyAsync();
 
-		if (hasAnyCategory == false)
+		if (hasAnyRole == false)
 		{
-			var category =
-				new Role(name: $"Administrator");
+			var newRole =
+				new Role(name: roleName);
 
-			applicationDbContext.Add(entity: category);
+			applicationDbContext.Add(entity: newRole);
 
 			await applicationDbContext.SaveChangesAsync();
 		}
@@ -29,25 +33,79 @@ try
 	{
 		using var applicationDbContext = new ApplicationDbContext();
 
-		var foundedCategory =
+		var foundedRole =
 			await
 			applicationDbContext.Roles
-			.Where(current => current.Name.ToLower() == "Administrator".ToLower())
+			.Where(current => current.Name.ToLower() == roleName.ToLower())
 			.FirstOrDefaultAsync();
 
-		if (foundedCategory is null)
+		if (foundedRole is null)
 		{
 			var errorMessage =
-				$"Role not found!";
+				$"{roleName} role not found!";
 
 			Console.WriteLine(value: errorMessage);
 
 			return;
 		}
 
+		var hasAnyUser =
+			await
+			applicationDbContext.Users.AnyAsync();
 
+		if (hasAnyUser)
+		{
+			Console.WriteLine
+				(value: $"The users has been already created!");
+
+			return;
+		}
+
+		// **************************************************
+		// ایجاد کاربر، به سه حالت مختلف
+		// **************************************************
+		User newUser;
+		EntityEntry entityEntry;
+
+		// Solution (1)
+		newUser =
+			new User(username: "User1")
+			{
+				RoleId = foundedRole.Id,
+			};
+
+		entityEntry =
+			await
+			applicationDbContext.AddAsync(entity: newUser);
+		// /Solution (1)
+
+		// Solution (2)
+		newUser =
+			new User(username: "User2")
+			{
+				Role = foundedRole,
+			};
+
+		entityEntry =
+			await
+			applicationDbContext.AddAsync(entity: newUser);
+		// /Solution (2)
+
+		// Solution (3)
+		newUser =
+			new User(username: "User3");
+
+		foundedRole.Users.Add(item: newUser);
+		// /Solution (3)
+
+		var affectedRows =
+			await
+			applicationDbContext.SaveChangesAsync();
+
+		Console.WriteLine
+			(value: $"{nameof(affectedRows)}: {affectedRows}");
+		// **************************************************
 	}
-	// **************************************************
 }
 catch (Exception ex)
 {
@@ -61,25 +119,25 @@ public abstract class Entity() : object()
 	public Guid Id { get; private set; } = Guid.NewGuid();
 
 	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
+	public DateTimeOffset InsertDateTime { get; private set; } = DateTimeOffset.Now;
 }
 
 public class Role(string name) : Entity()
 {
-	[MaxLength(length: 100)]
+	[MaxLength(length: 50)]
 	[Required(AllowEmptyStrings = false)]
 	public string Name { get; set; } = name;
 
 	public virtual IList<User> Users { get; } = [];
 }
 
-public class User(string username, Guid roleId) : Entity()
+public class User(string username) : Entity()
 {
 	[Required]
-	public virtual Role? Role { get; set; }
+	public Guid RoleId { get; set; }
 
-	[Required]
-	public Guid RoleId { get; set; } = roleId;
+	public virtual Role? Role { get; set; }
+	//public virtual Role Role { get; set; }
 
 	[MaxLength(length: 20)]
 	[Required(AllowEmptyStrings = false)]
@@ -107,6 +165,32 @@ internal class RoleConfiguration :
 
 		builder
 			.HasIndex(current => new { current.Name })
+			.IsUnique(unique: true)
+			;
+	}
+}
+
+internal class UserConfiguration :
+	object, IEntityTypeConfiguration<User>
+{
+	public UserConfiguration() : base()
+	{
+	}
+
+	public void Configure(EntityTypeBuilder<User> builder)
+	{
+		builder
+			.HasKey(current => current.Id)
+			.IsClustered(clustered: false)
+			;
+
+		builder
+			.Property(current => current.Username)
+			.IsUnicode(unicode: false)
+			;
+
+		builder
+			.HasIndex(current => new { current.Username })
 			.IsUnique(unique: true)
 			;
 	}

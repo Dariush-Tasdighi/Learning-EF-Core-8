@@ -1,0 +1,10 @@
+﻿**************************************************
+Writing Configuration for "One To Many"!
+
+	1. Not! Cascade Delete!
+	2. Not! Full Properties (3)!
+	3. Not! Standard Name Convention for properties!
+	4. More than one "One To Many"!
+
+	نکته: هم می‌توانیم در یک بنویسیم و هم در چند
+	ولی معمولا نوشتن آن در یک خوش دست‌تر و قابل درک‌تر می‌باشد
