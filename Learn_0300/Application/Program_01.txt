@@ -16,17 +16,17 @@
 **************************************************
 [Role]					1...N					[User]
 
-نگاه بانک اطلاعاتی
+نگاه بانک اطلاعاتی = Database First
+
+[Roles]					1...N					[Users]
+[Guid] Id										Guid Id
+												[Guid] RoleId (Foriegn Key)
+
+EF, EF Core نگاه = Code First
 
 [Role]					1...N					[User]
-Guid Id											Guid Id
-												Guid RoleId
-
-EF, EF Core نگاه
-
-[Role]					1...N					[User]
-Guid Id											Guid Id
-												Guid RoleId
+[Guid] Id										Guid Id
+												[Guid] RoleId
 IList<User> Users								Role Role
 
 EF, EF Core نگاه + Lazy Loading
@@ -42,4 +42,8 @@ virtual IList<User> Users						virtual Role Role
 **************************************************
 تفاوت نگاه در این دوره و دوره
 Domain Driven Design
+**************************************************
+
+**************************************************
+LINQ!!!
 **************************************************

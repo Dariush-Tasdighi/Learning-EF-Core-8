@@ -1,9 +1,7 @@
 ﻿//using System;
-//using System.Linq;
 //using System.Collections.Generic;
 //using Microsoft.EntityFrameworkCore;
 //using System.ComponentModel.DataAnnotations;
-//using Microsoft.EntityFrameworkCore.ChangeTracking;
 //using System.ComponentModel.DataAnnotations.Schema;
 //using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -29,83 +27,6 @@
 //			await applicationDbContext.SaveChangesAsync();
 //		}
 //	}
-
-//	{
-//		using var applicationDbContext = new ApplicationDbContext();
-
-//		var foundedRole =
-//			await
-//			applicationDbContext.Roles
-//			.Where(current => current.Name.ToLower() == roleName.ToLower())
-//			.FirstOrDefaultAsync();
-
-//		if (foundedRole is null)
-//		{
-//			var errorMessage =
-//				$"{roleName} role not found!";
-
-//			Console.WriteLine(value: errorMessage);
-
-//			return;
-//		}
-
-//		var hasAnyUser =
-//			await
-//			applicationDbContext.Users.AnyAsync();
-
-//		if (hasAnyUser)
-//		{
-//			Console.WriteLine
-//				(value: $"The users has been already created!");
-
-//			return;
-//		}
-
-//		// **************************************************
-//		// ایجاد کاربر، به سه حالت مختلف
-//		// **************************************************
-//		User newUser;
-//		EntityEntry entityEntry;
-
-//		// Solution (1)
-//		newUser =
-//			new User(username: "User1")
-//			{
-//				RoleId = foundedRole.Id,
-//			};
-
-//		entityEntry =
-//			await
-//			applicationDbContext.AddAsync(entity: newUser);
-//		// /Solution (1)
-
-//		// Solution (2)
-//		newUser =
-//			new User(username: "User2")
-//			{
-//				Role = foundedRole,
-//			};
-
-//		entityEntry =
-//			await
-//			applicationDbContext.AddAsync(entity: newUser);
-//		// /Solution (2)
-
-//		// Solution (3)
-//		newUser =
-//			new User(username: "User3");
-
-//		foundedRole.Users.Add(item: newUser);
-//		// /Solution (3)
-
-//		var affectedRows =
-//			await
-//			applicationDbContext.SaveChangesAsync();
-
-//		Console.WriteLine
-//			(value: $"{nameof(affectedRows)}: {affectedRows}");
-//		// **************************************************
-//	}
 //}
 //catch (Exception ex)
 //{
@@ -129,7 +50,6 @@
 //	public string Name { get; set; } = name;
 
 //	public virtual IList<User> Users { get; } = [];
-//	//public virtual IList<User> Users { get; } = new List<User>();
 //}
 
 //public class User(string username) : Entity
@@ -138,7 +58,6 @@
 //	public Guid RoleId { get; set; }
 
 //	public virtual Role? Role { get; set; }
-//	//public virtual Role Role { get; set; }
 
 //	[MaxLength(length: 20)]
 //	[Required(AllowEmptyStrings = false)]
@@ -162,6 +81,23 @@
 //		builder
 //			.HasIndex(current => new { current.Name })
 //			.IsUnique(unique: true)
+//			;
+
+//		// New
+//		//builder
+//		//	.HasMany(role => role.Users)
+//		//	.WithOne(user => user.Role)
+//		//	.IsRequired(required: true)
+//		//	.HasForeignKey(user => user.RoleId)
+//		//	.OnDelete(deleteBehavior: DeleteBehavior.NoAction)
+//		//	;
+
+//		builder
+//			.HasMany(current => current.Users)
+//			.WithOne(other => other.Role)
+//			.IsRequired(required: true)
+//			.HasForeignKey(other => other.RoleId)
+//			.OnDelete(deleteBehavior: DeleteBehavior.NoAction)
 //			;
 //	}
 //}
