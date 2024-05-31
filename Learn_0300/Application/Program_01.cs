@@ -75,8 +75,7 @@
 //			};
 
 //		entityEntry =
-//			await
-//			applicationDbContext.AddAsync(entity: newUser);
+//			applicationDbContext.Add(entity: newUser);
 //		// /Solution (1)
 
 //		// Solution (2)
@@ -87,8 +86,7 @@
 //			};
 
 //		entityEntry =
-//			await
-//			applicationDbContext.AddAsync(entity: newUser);
+//			applicationDbContext.Add(entity: newUser);
 //		// /Solution (2)
 
 //		// Solution (3)

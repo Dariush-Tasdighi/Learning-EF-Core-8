@@ -2,8 +2,22 @@
 Writing Configuration for "One To Many"!
 
 	1. Not! Cascade Delete!
+
+		- در صورتی که منطقی ندانیم
+		- در صورتی که مجبور باشیم
+
 	2. Not! Full Properties (3)!
+
+		(1). IList<User> Users
+		(2). Guid RoleId
+		(3). Role Role
+
 	3. Not! Standard Name Convention for properties!
+
+		(1). IList<User> X
+		(2). Guid Y
+		(3). Role Z
+
 	4. More than one "One To Many"!
 
 	نکته: هم می‌توانیم در یک بنویسیم و هم در چند

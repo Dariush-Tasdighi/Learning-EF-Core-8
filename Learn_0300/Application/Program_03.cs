@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Data;
 
 try
 {
