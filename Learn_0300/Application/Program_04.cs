@@ -1,4 +1,5 @@
 ﻿//using System;
+//using System.Linq;
 //using System.Collections.Generic;
 //using Microsoft.EntityFrameworkCore;
 //using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,8 @@
 //{
 //	var username =
 //		$"DariushTasdighi";
+
+//	var groupName = "Managers";
 
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
@@ -26,6 +29,65 @@
 
 //			await applicationDbContext.SaveChangesAsync();
 //		}
+
+//		var hasAnyGroup =
+//			await
+//			applicationDbContext.Groups.AnyAsync();
+
+//		if (hasAnyGroup == false)
+//		{
+//			var newGroup =
+//				new Group(name: groupName);
+
+//			applicationDbContext.Add(entity: newGroup);
+
+//			await applicationDbContext.SaveChangesAsync();
+//		}
+//	}
+
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
+
+//		var theUser =
+//			await
+//			applicationDbContext.Users
+//			.Where(current => current.Username.ToLower() == username.ToLower())
+//			.FirstOrDefaultAsync();
+
+//		if (theUser is null)
+//		{
+//			Console.WriteLine
+//				(value: $"There is not the {username} user!");
+
+//			return;
+//		}
+
+//		var theGroup =
+//			await
+//			applicationDbContext.Groups
+//			.Where(current => current.Name.ToLower() == groupName.ToLower())
+//			.FirstOrDefaultAsync();
+
+//		if (theGroup is null)
+//		{
+//			Console.WriteLine
+//				(value: $"There is not the {groupName} group!");
+
+//			return;
+//		}
+
+//		theGroup.Users.Add(item: theUser);
+//		// [OR]
+//		theUser.Groups.Add(item: theGroup);
+
+//		// همان‌طور که خواهید دید، صرفا یک رکورد در بانک اطلاعاتی
+//		// و در جدول واسط ایجاد می‌شود! و نه دو رکورد! که البته کاملا طبیعی است
+//		var affectedRows =
+//			await
+//			applicationDbContext.SaveChangesAsync();
+
+//		Console.WriteLine
+//			(value: $"{nameof(affectedRows)}: {affectedRows}");
 //	}
 //}
 //catch (Exception ex)
@@ -49,24 +111,16 @@
 //	[Required(AllowEmptyStrings = false)]
 //	public string Username { get; set; } = username;
 
-//	public virtual IList<Post> WrittenPosts { get; } = [];
-//	public virtual IList<Post> VerifiedPosts { get; } = [];
+//	public virtual IList<Group> Groups { get; } = [];
 //}
 
-//public class Post(string title) : Entity
+//public class Group(string name) : Entity
 //{
-//	[Required]
-//	public Guid WriterUserId { get; set; }
-
-//	public virtual User? WriterUser { get; set; }
-
-//	public Guid? VerifierUserId { get; set; }
-
-//	public virtual User? VerifierUser { get; set; }
-
-//	[MaxLength(length: 20)]
+//	[MaxLength(length: 50)]
 //	[Required(AllowEmptyStrings = false)]
-//	public string Title { get; set; } = title;
+//	public string Name { get; set; } = name;
+
+//	public virtual IList<User> Users { get; } = [];
 //}
 
 //internal class UserConfiguration :
@@ -92,37 +146,26 @@
 //			.HasIndex(current => new { current.Username })
 //			.IsUnique(unique: true)
 //			;
-
-//		builder
-//			.HasMany(current => current.WrittenPosts)
-//			.WithOne(other => other.WriterUser)
-//			.IsRequired(required: true)
-//			.HasForeignKey(other => other.WriterUserId)
-//			.OnDelete(deleteBehavior: DeleteBehavior.NoAction)
-//			;
-
-//		builder
-//			.HasMany(current => current.VerifiedPosts)
-//			.WithOne(other => other.VerifierUser)
-//			.IsRequired(required: false)
-//			.HasForeignKey(other => other.VerifierUserId)
-//			.OnDelete(deleteBehavior: DeleteBehavior.NoAction)
-//			;
 //	}
 //}
 
-//internal class PostConfiguration :
-//	object, IEntityTypeConfiguration<Post>
+//internal class GroupConfiguration :
+//	object, IEntityTypeConfiguration<Group>
 //{
-//	public PostConfiguration() : base()
+//	public GroupConfiguration() : base()
 //	{
 //	}
 
-//	public void Configure(EntityTypeBuilder<Post> builder)
+//	public void Configure(EntityTypeBuilder<Group> builder)
 //	{
 //		builder
 //			.HasKey(current => current.Id)
 //			.IsClustered(clustered: false)
+//			;
+
+//		builder
+//			.HasIndex(current => new { current.Name })
+//			.IsUnique(unique: true)
 //			;
 //	}
 //}
@@ -135,7 +178,7 @@
 //	}
 
 //	public DbSet<User> Users { get; set; }
-//	public DbSet<Post> Posts { get; set; }
+//	public DbSet<Group> Groups { get; set; }
 
 //	protected override void OnConfiguring
 //		(DbContextOptionsBuilder optionsBuilder)

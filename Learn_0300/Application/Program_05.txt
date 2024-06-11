@@ -1,0 +1,33 @@
+﻿https://learn.microsoft.com/en-us/ef/core/modeling/relationships/many-to-many
+
+ایرادها
+
+ایجاد یک جدول واسط با نامی که چندان مناسب نیست
+
+GroupUser [OR] UserGroup -> UsersInGroups
+
+ایجاد فیلدهایی در جدول واسط، که چندان مناسب نیستند
+
+(EF)
+User_Id		-> UserId
+Group_Id	-> GroupId
+
+(EF Core)
+UsersId		-> UserId
+GroupsId	-> GroupId
+
+برای رگلاژ کردن این ارتباط چند به چند، فرقی نمی‌کند که در کدام‌یک نوشته شود
+
+نکته مهم:
+
+در صورتی که بخواهیم کوچکترین فیلدی به این جدول واسط اضافه کنیم
+مثلا زمان عضویت کاربر در گروه مربوطه، باید یک مدل جدید ایجاد کرده
+و دو ارتباط یک به چند به آن ایجاد نماییم
+
+نکته مهم:
+
+برای نمایش اتفاقات:
+
+optionsBuilder
+	.LogTo(action: Console.WriteLine)
+	;
