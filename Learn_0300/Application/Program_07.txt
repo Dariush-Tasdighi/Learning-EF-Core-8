@@ -1,0 +1,29 @@
+﻿در درس (پروژه) ۲۰۰ داشتیم:
+
+/// <summary>
+/// Note: Using TypeName is not recommended!
+/// </summary>
+[Column(Order = 0, TypeName = "Char")]
+public string? Description { get; set; }
+
+بهتر است جنس فیلدها را توصیف کنیم = Cross Platform
+
+Note: The row / record limit in bytes for Microsoft SQL Server is 8,060
+
+SQL Server ذخیره‌سازی رشته‌ها/متن در:
+
+- Speed Optimized!
+
+char				10		Ali.......
+nchar				10		علی.......
+
+- Space Optimized!
+
+varchar				10		Ali
+nvarchar			10		علی
+
+text	(Obsolite)	2^31 - 1 Bytes
+ntext	(Obsolite)	2^30 - 1 Bytes (برای فارسی)
+
+varchar(Max)		2^31 - 1 Bytes
+nvarchar(Max)		2^30 - 1 Bytes (برای فارسی)
