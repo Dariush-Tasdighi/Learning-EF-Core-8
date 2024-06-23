@@ -23,6 +23,13 @@ try
 		.Where(current => current.Name.ToLower() == roleName.ToLower())
 		.FirstOrDefaultAsync();
 
+	//var foundedRole =
+	//	await
+	//	applicationDbContext.Roles
+	//	.Include(current => current.Users)
+	//	.Where(current => current.Name.ToLower() == roleName.ToLower())
+	//	.FirstOrDefaultAsync();
+
 	if (foundedRole is not null)
 	{
 		var userCount =
