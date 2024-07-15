@@ -52,20 +52,22 @@ async Task CreateTheRoleAsync()
 		await
 		applicationDbContext.Roles.AnyAsync();
 
-	if (hasAnyRole == false)
+	if (hasAnyRole)
 	{
-		var newRole =
-			new Role(name: roleName);
-
-		applicationDbContext.Add(entity: newRole);
-
-		var affectedRows =
-			await
-			applicationDbContext.SaveChangesAsync();
-
-		Console.WriteLine
-			(value: $"Role - {nameof(affectedRows)}: {affectedRows}");
+		return;
 	}
+
+	var newRole =
+		new Role(name: roleName);
+
+	applicationDbContext.Add(entity: newRole);
+
+	var affectedRows =
+		await
+		applicationDbContext.SaveChangesAsync();
+
+	Console.WriteLine
+		(value: $"Role - {nameof(affectedRows)}: {affectedRows}");
 }
 
 async Task CreateTheUsersAsync()
@@ -92,41 +94,43 @@ async Task CreateTheUsersAsync()
 		await
 		applicationDbContext.Users.AnyAsync();
 
-	if (hasAnyUser == false)
+	if (hasAnyUser)
 	{
-		User newUser;
-
-		newUser =
-			new User(username: "User1")
-			{
-				RoleId = foundedRole.Id,
-			};
-
-		applicationDbContext.Add(entity: newUser);
-
-		newUser =
-			new User(username: "User2")
-			{
-				RoleId = foundedRole.Id,
-			};
-
-		applicationDbContext.Add(entity: newUser);
-
-		newUser =
-			new User(username: "User3")
-			{
-				RoleId = foundedRole.Id,
-			};
-
-		applicationDbContext.Add(entity: newUser);
-
-		var affectedRows =
-			await
-			applicationDbContext.SaveChangesAsync();
-
-		Console.WriteLine
-			(value: $"Users - {nameof(affectedRows)}: {affectedRows}");
+		return;
 	}
+
+	User newUser;
+
+	newUser =
+		new User(username: "User1")
+		{
+			RoleId = foundedRole.Id,
+		};
+
+	applicationDbContext.Add(entity: newUser);
+
+	newUser =
+		new User(username: "User2")
+		{
+			RoleId = foundedRole.Id,
+		};
+
+	applicationDbContext.Add(entity: newUser);
+
+	newUser =
+		new User(username: "User3")
+		{
+			RoleId = foundedRole.Id,
+		};
+
+	applicationDbContext.Add(entity: newUser);
+
+	var affectedRows =
+		await
+		applicationDbContext.SaveChangesAsync();
+
+	Console.WriteLine
+		(value: $"Users - {nameof(affectedRows)}: {affectedRows}");
 }
 
 public abstract class Entity : object

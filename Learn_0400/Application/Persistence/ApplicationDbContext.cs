@@ -1,0 +1,32 @@
+﻿using Domain;
+using Microsoft.EntityFrameworkCore;
+
+namespace Application.Persistence;
+
+public class ApplicationDbContext : DbContext
+{
+	public ApplicationDbContext() : base()
+	{
+		Database.EnsureCreated();
+	}
+
+	public DbSet<City> Cities { get; set; }
+	public DbSet<State> States { get; set; }
+	public DbSet<Country> Countries { get; set; }
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.ApplyConfigurationsFromAssembly
+			(assembly: typeof(ApplicationDbContext).Assembly);
+	}
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		var connectionString =
+			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+
+		optionsBuilder.UseSqlServer
+			(connectionString: connectionString)
+			;
+	}
+}
