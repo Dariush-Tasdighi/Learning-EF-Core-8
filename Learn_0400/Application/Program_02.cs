@@ -13,17 +13,6 @@ try
 	// سه دستور ذيل، کاملا با هم معادل می‌باشند
 	// **************************************************
 	{
-		// Load() -> using Microsoft.EntityFrameworkCore;
-		applicationDbContext.Countries
-			.Load();
-
-		// استفاده می کنيم Local از
-
-		var countries =
-			applicationDbContext.Countries.Local;
-	}
-
-	{
 		var countries =
 			applicationDbContext.Countries
 			.ToList()
@@ -37,6 +26,20 @@ try
 			.ToListAsync()
 			;
 	}
+
+	// Below Command: Using just in WPF / Silverlight!
+
+	{
+		// Load() -> using Microsoft.EntityFrameworkCore;
+		applicationDbContext.Countries
+			.Load();
+
+		// استفاده می کنيم Local از
+
+		// Observable Collection based on Observable Pattern (Design Patterns)
+		var countries =
+			applicationDbContext.Countries.Local;
+	}
 	// **************************************************
 	// "SELECT * FROM Countries"
 	// **************************************************
@@ -46,12 +49,12 @@ try
 		var countries =
 			await
 			applicationDbContext.Countries
-			.Where(current => current.Code <= 10)
+			.Where(current => current.Code >= 10)
 			.ToListAsync()
 			;
 	}
 	// **************************************************
-	// "SELECT * FROM Countries WHERE Code <= 10"
+	// "SELECT * FROM Countries WHERE Code >= 10"
 	// **************************************************
 
 	// **************************************************
@@ -121,7 +124,25 @@ try
 		var countries =
 			await
 			applicationDbContext.Countries
+			.Where(current => current.Name.ToLower() == "iran")
+			.ToListAsync()
+			;
+	}
+
+	{
+		var countries =
+			await
+			applicationDbContext.Countries
 			.Where(current => current.Name.ToUpper() == "Iran".ToUpper())
+			.ToListAsync()
+			;
+	}
+
+	{
+		var countries =
+			await
+			applicationDbContext.Countries
+			.Where(current => current.Name.ToUpper() == "IRAN")
 			.ToListAsync()
 			;
 	}
@@ -174,11 +195,24 @@ try
 	{
 		var search = "علی علوی";
 
+		// "SELECT * FROM Countries WHERE Name LIKE '%علی علوی%'"
+
 		search =
-			search.Replace(" ", "%"); // "علی%علوی"
+			search.Replace
+			(oldValue: " ", newValue: "%"); // "علی%علوی"
 
 		// "SELECT * FROM Countries WHERE Name LIKE '%علی%علوی%'"
 	}
+	// **************************************************
+
+	// **************************************************
+	// چرا کار نمی‌کند؟
+	//
+	// یکی دیگر از شاهکارها و زیبایی‌های
+	// EF / EF Core
+	// آن است که
+	// SQL Injection Free!
+	// می‌باشد
 	// **************************************************
 
 	// **************************************************
@@ -196,18 +230,18 @@ try
 	}
 
 	{
-		var search = "علی علوی";
-
-		var keywords =
-			search.Split(separator: ' ');
-
 		//var countries =
 		//	await
-		//	databaseContext.Countries
+		//	applicationDbContext.Countries
 		//	.Where(current => current.Name.ToLower().Contains("علی".ToLower()))
 		//	.Where(current => current.Name.ToLower().Contains("علوی".ToLower()))
 		//	.ToListAsync()
 		//	;
+
+		var search = "علی علوی";
+
+		var keywords =
+			search.Split(separator: ' ');
 
 		var countries =
 			await
@@ -234,8 +268,6 @@ try
 			.ToListAsync()
 			;
 	}
-	// **************************************************
-	// EF & EF Core -> SQL Injection Free
 	// **************************************************
 
 	// **************************************************
@@ -267,13 +299,14 @@ try
 
 	// **************************************************
 	// Note: Bad Practice
+	// کار نمی‌کرد EF (OLD) فکر می‌کنم که دستور ذیل، در نسخه قدیم
 	// **************************************************
 	{
 		var countries =
 			await
 			applicationDbContext.Countries
 			.OrderBy(current => current.Name)
-			.Where(current => current.Code <= 10)
+			.Where(current => current.Code >= 10)
 			.ToListAsync()
 			;
 	}
@@ -286,7 +319,7 @@ try
 		var countries =
 			await
 			applicationDbContext.Countries
-			.Where(current => current.Code <= 10)
+			.Where(current => current.Code >= 10)
 			.OrderBy(current => current.Name)
 			.ToListAsync()
 			;
@@ -312,7 +345,9 @@ try
 		var countries =
 			await
 			applicationDbContext.Countries
+			// فقط اولی
 			.OrderBy(current => current.Code)
+			// دومی به بعد
 			.ThenBy(current => current.Name)
 			.ToListAsync()
 			;
@@ -322,7 +357,9 @@ try
 		var countries =
 			await
 			applicationDbContext.Countries
+			// فقط اولی
 			.OrderBy(current => current.Code)
+			// دومی به بعد
 			.ThenByDescending(current => current.Name)
 			.ToListAsync()
 			;
@@ -332,7 +369,9 @@ try
 		var countries =
 			await
 			applicationDbContext.Countries
+			// فقط اولی
 			.OrderByDescending(current => current.Code)
+			// دومی به بعد
 			.ThenBy(current => current.Name)
 			.ToListAsync()
 			;
@@ -342,11 +381,17 @@ try
 		var countries =
 			await
 			applicationDbContext.Countries
+			// فقط اولی
 			.OrderByDescending(current => current.Code)
+			// دومی به بعد
 			.ThenByDescending(current => current.Name)
 			.ToListAsync()
 			;
 	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
 	// **************************************************
 
 	// **************************************************
