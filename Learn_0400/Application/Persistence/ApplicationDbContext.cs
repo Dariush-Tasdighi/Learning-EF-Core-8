@@ -23,10 +23,11 @@ public class ApplicationDbContext : DbContext
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
 		var connectionString =
-			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0400;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-		optionsBuilder.UseSqlServer
-			(connectionString: connectionString)
+		optionsBuilder
+			.UseLazyLoadingProxies()
+			.UseSqlServer(connectionString: connectionString)
 			;
 	}
 }

@@ -11,12 +11,6 @@
 **************************************************
 
 **************************************************
-تفاوت این دوره با دوره قبل؟
-
-دوره قبل، خیلی هم قدیمی نیست و ۲۲ قسمت ضبط و منتشر شده است
-**************************************************
-
-**************************************************
 در این دوره، کلی نکات شیء‌گرایی و سی‌شارپ نیز یاد خواهیم گرفت
 خصوصا نکات هیجان‌انگیزی که در دات‌نت ۸ اضافه شده است
 **************************************************
@@ -30,9 +24,9 @@ LINQ to Entity Framework Core Code First with .NET 8.x
 
 در واقع این دوره، دو دوره است:
 
-LINQ
+LINQ with .NET 8.x
 &
-Entity Framework Core Code First
+Entity Framework Core Code First with .NET 8.x
 **************************************************
 
 **************************************************
@@ -44,7 +38,7 @@ DAO: Data Access Object							(Database First)
 RDO: Remote Data Object							(Database First)
 ADO: ActiveX Data Object						(Database First)
 
-[C#, VB.NET, ...]
+[.NET: C#, VB.NET, ...]
 
 ADO.NET: ActiveX Data Object in .NET Framework	(Database First)
 

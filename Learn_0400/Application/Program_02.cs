@@ -391,10 +391,6 @@ try
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
-	// **************************************************
-
-	// **************************************************
 	{
 		var country =
 			await
@@ -406,7 +402,7 @@ try
 		{
 			// In Lazy Mode:
 			// If the states property with the virtual keyword:
-			// States will be created and will be loaded automatically.
+			// States will be loaded automatically.
 
 			// In Normal Mode:
 			// stateCount is always zero!
