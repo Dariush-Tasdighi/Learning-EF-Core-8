@@ -398,6 +398,10 @@ try
 	// a) Not Loading!
 	// b) Lazy Loading!
 	// c) Eager Loading!
+	//
+	// User
+	//		(0..1) Company
+	//		(0..N) Children
 	// **************************************************
 	{
 		var country =
@@ -427,14 +431,12 @@ try
 		var states =
 			await
 			applicationDbContext.States
-			.Where(current => current.CountryId == 1)
-			.ToListAsync();
-		;
+			.Where(current => current.Country!.Code == 1)
+			.ToListAsync()
+			;
 
 		var stateCountOfSomeCountry = states.Count;
 	}
-	// **************************************************
-	// "SELECT * FROM States WHERE CountryId = 1"
 	// **************************************************
 
 	// **************************************************
@@ -442,11 +444,11 @@ try
 		var stateCountOfSomeCountry =
 			await
 			applicationDbContext.States
-			.Where(current => current.CountryId == 1)
+			.Where(current => current.Country!.Code == 1)
 			.CountAsync();
 	}
 	// **************************************************
-	// "SELECT COUNT(*) FROM States WHERE CountryId = 1"
+	// "SELECT COUNT(*) FROM States ...                 "
 	// **************************************************
 
 	// **************************************************
@@ -497,22 +499,13 @@ try
 
 	// **************************************************
 	{
-		var country =
+		var states =
 			await
-			applicationDbContext.Countries
-			.Where(current => current.Code == 1)
-			.FirstOrDefaultAsync();
-
-		if (country is not null)
-		{
-			var states =
-				await
-				applicationDbContext.States
-				.Where(current => current.Code <= 10)
-				.Where(current => current.CountryId == country.Id)
-				.ToListAsync()
-				;
-		}
+			applicationDbContext.States
+			.Where(current => current.Code <= 10)
+			.Where(current => current.Country!.Code == 1)
+			.ToListAsync()
+			;
 	}
 	// **************************************************
 
@@ -545,7 +538,7 @@ try
 		var country =
 			await
 			applicationDbContext.Countries
-			.Where(current => current.Code == 10)
+			.Where(current => current.Code == 1)
 			.FirstOrDefaultAsync()
 			;
 
@@ -566,7 +559,7 @@ try
 			await
 			applicationDbContext.Countries
 			.Include("States")
-			.Where(current => current.Code == 10)
+			.Where(current => current.Code == 1)
 			.FirstOrDefaultAsync();
 
 		// در این حالت امکان بی‌دقتی وجود دارد
@@ -575,7 +568,7 @@ try
 		//	await
 		//	applicationDbContext.Countries
 		//	.Include("Stats")
-		//	.Where(current => current.Code >= 10)
+		//	.Where(current => current.Code >= 1)
 		//	.FirstOrDefaultAsync();
 
 		if (country is not null)
@@ -587,15 +580,24 @@ try
 	// **************************************************
 
 	// **************************************************
-	// Note: Strongly Typed
+	// Note: Include -> Strongly Typed
+	//
+	// در این حالت امکان بی‌دقتی وجود ندارد
 	// **************************************************
 	{
 		var country =
 			await
 			applicationDbContext.Countries
 			.Include(current => current.States)
-			.Where(current => current.Code == 10)
+			.Where(current => current.Code == 1)
 			.FirstOrDefaultAsync();
+
+		//var country =
+		//	await
+		//	applicationDbContext.Countries
+		//	.Include(current => current.Stats)
+		//	.Where(current => current.Code == 1)
+		//	.FirstOrDefaultAsync();
 
 		if (country is not null)
 		{
@@ -603,8 +605,6 @@ try
 				country.States.Count;
 		}
 	}
-	// **************************************************
-	// در این حالت امکان بی‌دقتی وجود ندارد
 	// **************************************************
 
 	// **************************************************
@@ -614,7 +614,7 @@ try
 			applicationDbContext.Countries
 			.Include("States")
 			.Include("States.Cities")
-			.Where(current => current.Code == 10)
+			.Where(current => current.Code == 1)
 			.FirstOrDefaultAsync();
 
 		// در این حالت نیز امکان بی‌دقتی وجود دارد
@@ -642,9 +642,9 @@ try
 
 			// In EF Core
 			.Include(current => current.States)
-				.ThenInclude(current => current.Cities)
+				.ThenInclude(state => state.Cities)
 
-			.Where(current => current.Code == 10)
+			.Where(current => current.Code == 1)
 			.FirstOrDefaultAsync();
 
 		if (country is not null)
@@ -653,8 +653,6 @@ try
 				country.States.Count;
 		}
 	}
-	// **************************************************
-	// در این حالت امکان بی‌دقتی وجود ندارد
 	// **************************************************
 
 	// **************************************************
@@ -670,10 +668,10 @@ try
 
 			// In EF Core
 			.Include(current => current.States)
-				.ThenInclude(current => current.Cities)
-					.ThenInclude(current => current.Sections)
+				.ThenInclude(state => state.Cities)
+					.ThenInclude(city => city.Sections)
 
-			.Where(current => current.Code == 10)
+			.Where(current => current.Code == 1)
 			.FirstOrDefaultAsync();
 
 		if (country is not null)
@@ -692,12 +690,12 @@ try
 	//	applicationDbContext.Users
 
 	//	.Include(current => current.Companies)
-	//		.ThenInclude(current => current.Applications)
-	//			.ThenInclude(current => current.UserValidIPs)
+	//		.ThenInclude(company => company.Applications)
+	//			.ThenInclude(application => application.UserValidIPs)
 
 	//	.Include(current => current.Companies)
-	//		.ThenInclude(current => current.Applications)
-	//			.ThenInclude(current => current.ApplicationValidIPs)
+	//		.ThenInclude(company => company.Applications)
+	//			.ThenInclude(application => application.ApplicationValidIPs)
 
 	//	.Where(current => current.Username == username)
 	//	.FirstOrDefaultAsync();
@@ -761,7 +759,7 @@ try
 	// **************************************************
 
 	// **************************************************
-	// Note: Strongly Typed
+	// Note: Include -> Strongly Typed
 	// **************************************************
 	{
 		var city =
@@ -794,7 +792,7 @@ try
 
 			// In EF Core
 			.Include(current => current.State)
-				.ThenInclude(current => current!.Country)
+				.ThenInclude(state => state!.Country)
 
 			.Where(current => current.Code == 10)
 			.FirstOrDefaultAsync();
@@ -822,8 +820,8 @@ try
 
 			// Just In EF Core not in EF
 			.Include(current => current.States.Where(state => state.IsActive))
-				.ThenInclude(current => current.Cities.Where(city => city.IsActive))
-					.ThenInclude(current => current.Sections.Where(section => section.IsActive))
+				.ThenInclude(state => state.Cities.Where(city => city.IsActive))
+					.ThenInclude(city => city.Sections.Where(section => section.IsActive))
 
 			.Where(current => current.Code == 10)
 			.FirstOrDefaultAsync();
