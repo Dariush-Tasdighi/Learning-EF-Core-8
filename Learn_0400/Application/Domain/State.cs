@@ -13,6 +13,8 @@ public class State(string name) : Entity
 
 	public int Code { get; set; }
 
+	public bool IsActive { get; set; }
+
 	[MaxLength(length: 20)]
 	[Required(AllowEmptyStrings = false)]
 	public string Name { get; set; } = name;

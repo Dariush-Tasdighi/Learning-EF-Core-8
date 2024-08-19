@@ -391,6 +391,14 @@ try
 	// **************************************************
 
 	// **************************************************
+	// Optimization!
+	//
+	// Loading Related Data:
+	//
+	// a) Not Loading!
+	// b) Lazy Loading!
+	// c) Eager Loading!
+	// **************************************************
 	{
 		var country =
 			await
@@ -401,11 +409,13 @@ try
 		if (country is not null)
 		{
 			// In Lazy Mode:
-			// If the states property with the virtual keyword:
-			// States will be loaded automatically.
+			// If we use
+			// 1. virtual keyword for the states property
+			// 2. UseLazyLoadingProxies() method in ApplicationDbContext
+			// The states will be loaded in lazy mode.
 
 			// In Normal Mode:
-			// stateCount is always zero!
+			// stateCount is zero!
 			var stateCount =
 				country.States.Count;
 		}
@@ -442,27 +452,30 @@ try
 	// **************************************************
 	// Undocumented!
 	// **************************************************
-	//{
-	//	var country =
-	//		await
-	//		applicationDbContext.Countries
-	//		.Where(current => current.Code == 1)
-	//		.FirstOrDefaultAsync();
+	{
+		var country =
+			await
+			applicationDbContext.Countries
+			.Where(current => current.Code == 1)
+			.FirstOrDefaultAsync();
 
-	//	if (country is not null)
-	//	{
-	//		var stateCountOfSomeCountry =
-	//			await
-	//			applicationDbContext.Entry(country)
-	//				.Collection(current => current.States)
-	//				.Query()
-	//				.CountAsync();
-	//	}
-	//}
+		if (country is not null)
+		{
+			var stateCountOfSomeCountry =
+				await
+				applicationDbContext.Entry(country)
+					.Collection(current => current.States)
+					.Query()
+					.CountAsync();
+		}
+	}
 	// **************************************************
 
 	// **************************************************
 	// فاجعه
+	//
+	// فرض کنید که هر کشور
+	// به طور متوسط یک میلیون استان دارد
 	// **************************************************
 	{
 		var country =
@@ -544,6 +557,8 @@ try
 	}
 
 	{
+		// Learning Eager Loading!
+
 		// اگر بخواهیم، زمانی که کشوری از بانک اطلاعاتی دریافت
 		// کردیم، همه استان‌های آن نیز، در همان درخواست، منتقل شود
 		// از دستور ذیل استفاده می‌کنیم
@@ -602,7 +617,7 @@ try
 			.Where(current => current.Code == 10)
 			.FirstOrDefaultAsync();
 
-		// در این حالت امکان بی‌دقتی وجود دارد
+		// در این حالت نیز امکان بی‌دقتی وجود دارد
 
 		if (country is not null)
 		{
@@ -620,8 +635,15 @@ try
 		var country =
 			await
 			applicationDbContext.Countries
+
+			// In EF and EF Core
+			//.Include(current => current.States)
+			//.Include(current => current.States.Select(state => state.Cities))
+
+			// In EF Core
 			.Include(current => current.States)
-			.Include(current => current.States.Select(state => state.Cities))
+				.ThenInclude(current => current.Cities)
+
 			.Where(current => current.Code == 10)
 			.FirstOrDefaultAsync();
 
@@ -636,22 +658,49 @@ try
 	// **************************************************
 
 	// **************************************************
-	//{
-	//	var country =
-	//		await
-	//		applicationDbContext.Countries
-	//		.Include(current => current.States)
-	//		.Include(current => current.States.Select(state => state.Cities))
-	//		.Include(current => current.States.Select(state => state.Cities.Select(city => city.Sections))
-	//		.Where(current => current.Code == 10)
-	//		.FirstOrDefaultAsync();
+	{
+		var country =
+			await
+			applicationDbContext.Countries
 
-	//	if (country is not null)
-	//	{
-	//		var stateCount =
-	//			country.States.Count;
-	//	}
-	//}
+			// In EF and EF Core
+			//.Include(current => current.States)
+			//.Include(current => current.States.Select(state => state.Cities))
+			//.Include(current => current.States.Select(state => state.Cities.Select(city => city.Sections))
+
+			// In EF Core
+			.Include(current => current.States)
+				.ThenInclude(current => current.Cities)
+					.ThenInclude(current => current.Sections)
+
+			.Where(current => current.Code == 10)
+			.FirstOrDefaultAsync();
+
+		if (country is not null)
+		{
+			var stateCount =
+				country.States.Count;
+		}
+	}
+	// **************************************************
+
+	// **************************************************
+	// Workshop Project
+	// **************************************************
+	//var theUser =
+	//	await
+	//	applicationDbContext.Users
+
+	//	.Include(current => current.Companies)
+	//		.ThenInclude(current => current.Applications)
+	//			.ThenInclude(current => current.UserValidIPs)
+
+	//	.Include(current => current.Companies)
+	//		.ThenInclude(current => current.Applications)
+	//			.ThenInclude(current => current.ApplicationValidIPs)
+
+	//	.Where(current => current.Username == username)
+	//	.FirstOrDefaultAsync();
 	// **************************************************
 
 	// **************************************************
@@ -675,7 +724,7 @@ try
 		var city =
 			await
 			applicationDbContext.Cities
-			.Include(navigationPropertyPath: "State")
+			.Include("State")
 			.Where(current => current.Code == 10)
 			.FirstOrDefaultAsync();
 
@@ -695,8 +744,8 @@ try
 		var city =
 			await
 			applicationDbContext.Cities
-			.Include(navigationPropertyPath: "State")
-			.Include(navigationPropertyPath: "State.Country")
+			.Include("State")
+			.Include("State.Country")
 			.Where(current => current.Code == 10)
 			.FirstOrDefaultAsync();
 
@@ -738,8 +787,15 @@ try
 		var city =
 			await
 			applicationDbContext.Cities
+
+			// In EF or EF Core
+			//.Include(current => current.State)
+			//.Include(current => current.State!.Country)
+
+			// In EF Core
 			.Include(current => current.State)
-			.Include(current => current.State.Country)
+				.ThenInclude(current => current!.Country)
+
 			.Where(current => current.Code == 10)
 			.FirstOrDefaultAsync();
 
@@ -752,6 +808,36 @@ try
 				city.State?.Country?.Name;
 		}
 	}
+	// **************************************************
+
+	// **************************************************
+	// Partial Eater Loading!
+	//
+	// EF Core یک شاهکار دیگر در
+	// **************************************************
+	{
+		var country =
+			await
+			applicationDbContext.Countries
+
+			// Just In EF Core not in EF
+			.Include(current => current.States.Where(state => state.IsActive))
+				.ThenInclude(current => current.Cities.Where(city => city.IsActive))
+					.ThenInclude(current => current.Sections.Where(section => section.IsActive))
+
+			.Where(current => current.Code == 10)
+			.FirstOrDefaultAsync();
+
+		if (country is not null)
+		{
+			var stateCount =
+				country.States.Count;
+		}
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
 	// **************************************************
 
 	// **************************************************

@@ -1,15 +1,14 @@
 ﻿using Domain.Seedwork;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain;
 
-public class City(string name) : Entity
+public class Section(string name) : Entity
 {
 	[Required]
-	public int StateId { get; set; }
+	public int CityId { get; set; }
 
-	public virtual State? State { get; set; }
+	public virtual City? City { get; set; }
 
 	public int Code { get; set; }
 
@@ -18,6 +17,4 @@ public class City(string name) : Entity
 	[MaxLength(length: 50)]
 	[Required(AllowEmptyStrings = false)]
 	public string Name { get; set; } = name;
-
-	public virtual IList<Section> Sections { get; } = [];
 }
