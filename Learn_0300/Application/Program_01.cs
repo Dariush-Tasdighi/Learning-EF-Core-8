@@ -33,13 +33,13 @@
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
 
-//		var foundedRole =
+//		var foundRole =
 //			await
 //			applicationDbContext.Roles
 //			.Where(current => current.Name.ToLower() == roleName.ToLower())
 //			.FirstOrDefaultAsync();
 
-//		if (foundedRole is null)
+//		if (foundRole is null)
 //		{
 //			var errorMessage =
 //				$"{roleName} role not found!";
@@ -71,7 +71,7 @@
 //		newUser =
 //			new User(username: "User1")
 //			{
-//				RoleId = foundedRole.Id,
+//				RoleId = foundRole.Id,
 //			};
 
 //		entityEntry =
@@ -82,7 +82,7 @@
 //		newUser =
 //			new User(username: "User2")
 //			{
-//				Role = foundedRole,
+//				Role = foundRole,
 //			};
 
 //		entityEntry =
@@ -93,7 +93,7 @@
 //		newUser =
 //			new User(username: "User3");
 
-//		foundedRole.Users.Add(item: newUser);
+//		foundRole.Users.Add(item: newUser);
 //		// /Solution (3)
 
 //		var affectedRows =

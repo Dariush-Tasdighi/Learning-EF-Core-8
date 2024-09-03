@@ -19,5 +19,15 @@ internal sealed class SectionConfiguration : object, IEntityTypeConfiguration<Se
 			.IsUnique(unique: true)
 			;
 		// **************************************************
+
+		// **************************************************
+		builder
+			.HasMany(current => current.Hotels)
+			.WithOne(other => other.Section)
+			.IsRequired(required: true)
+			.HasForeignKey(other => other.SectionId)
+			.OnDelete(deleteBehavior: DeleteBehavior.NoAction)
+			;
+		// **************************************************
 	}
 }

@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
 	}
 
 	public DbSet<City> Cities { get; set; }
+	public DbSet<Hotel> Hotels { get; set; }
 	public DbSet<State> States { get; set; }
 	public DbSet<Section> Sections { get; set; }
 	public DbSet<Country> Countries { get; set; }

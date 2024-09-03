@@ -835,7 +835,7 @@ try
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
+	// *** LINQ - Session 4 *****************************
 	// **************************************************
 
 	// **************************************************
@@ -873,6 +873,29 @@ try
 	// **************************************************
 
 	// **************************************************
+	// غلط است Solution (2) چرا
+	// **************************************************
+	// C1		A1
+	// C1		B1
+	// C2		A2
+	// C2		B2
+	//
+	// Result:
+	// C1, C2 => OK
+	//
+	// BUT
+	// C1		A1
+	// C1		B1
+	// C1		B2
+	// C2		A2
+	// C2		B3
+	// C2		B4
+	//
+	// Result:
+	// C1, C1, C2, C2 => NOT OK!
+	// **************************************************
+
+	// **************************************************
 	// صورت مساله
 	// من همه کشورهايی را می‌خواهم که
 	// در لااقل نام يکی از شهرهای آن، حرف {بی} وجود داشته باشد
@@ -893,6 +916,10 @@ try
 	// **************************************************
 
 	// **************************************************
+	// صورت مساله
+	// من همه شهرهایی را می‌خواهم که
+	// جمعیت کشورشان بیش از ده میلیون نفر باشد
+	// **************************************************
 	{
 		var cities =
 			await
@@ -902,60 +929,73 @@ try
 			// نيست
 			//.Include(current => current.State)
 			//.Include(current => current.State.Country)
-			.Where(current => current.State.Country.Population >= 10_000_000)
+			//.Where(current => current.State.Country.Population >= 10_000_000)
+			.Where(current => current.State!.Country!.Population >= 10_000_000)
 			.ToListAsync()
 			;
 	}
 	// **************************************************
 
 	// **************************************************
-	// Country -> State -> City -> Region -> Hotel
+	// Country -> State -> City -> Section -> Hotel
 	// **************************************************
-	//var hotels =
-	//	await
-	//	applicationDbContext.Hotels
-	//	.ToListAsync()
-	//	;
+	{
+		var hotels =
+			await
+			applicationDbContext.Hotels
+			.ToListAsync()
+			;
+	}
 
-	//var hotels =
-	//	await
-	//	applicationDbContext.Hotels
-	//	.Where(current => current.RegionId == someRegionId)
-	//	.ToListAsync()
-	//	;
+	{
+		var hotels =
+			await
+			applicationDbContext.Hotels
+			.Where(current => current.SectionId == 100)
+			.ToListAsync()
+			;
+	}
 
-	//var hotels =
-	//	await
-	//	applicationDbContext.Hotels
-	//	.Where(current => current.Region.CityId == someCityId)
-	//	.ToListAsync()
-	//	;
+	{
+		var hotels =
+			await
+			applicationDbContext.Hotels
+			.Where(current => current.Section!.CityId == 101)
+			.ToListAsync()
+			;
+	}
 
-	//var hotels =
-	//	await
-	//	applicationDbContext.Hotels
-	//	.Where(current => current.Region.City.StateId == someStateId)
-	//	.ToListAsync()
-	//	;
+	{
+		var hotels =
+			await
+			applicationDbContext.Hotels
+			.Where(current => current.Section!.City!.StateId == 102)
+			.ToListAsync()
+			;
+	}
 
-	//var hotels =
-	//	await
-	//	applicationDbContext.Hotels
-	//	.Where(current => current.Region.City.State.CountryId == someCountryId)
-	//	.ToListAsync()
-	//	;
+	{
+		var hotels =
+			await
+			applicationDbContext.Hotels
+			.Where(current => current.Section!.City!.State!.CountryId == 103)
+			.ToListAsync()
+			;
+	}
 	// **************************************************
 
 	// **************************************************
-	// خاطره
+	// خاطره‌ای از یک نابغه
 	// **************************************************
-	//var countries =
-	//	await
-	//	applicationDbContext.Countries
-	//	.Where(current => current.Code => 5)
-	//	.Where(current => current.Code =< 45)
-	//	.ToListAsync()
-	//	;
+	{
+		//var countries =
+		//	await
+		//	applicationDbContext.Countries
+		//	.Where(current => current.Code => 5)
+		//	.Where(current => current.Code =< 45)
+		//	.ToListAsync()
+		//	;
+	}
 	// **************************************************
 
 	// **************************************************
@@ -999,9 +1039,11 @@ try
 		string? countryCodeTo = "10";
 		string? countryCodeFrom = null;
 		// OR
-		// Up to 8 States!
+		// ...    3
+		// Up to 2  = 8 States!
 		// **************************************************
 
+		// **************************************************
 		// ما با دستور ذیل مشکل داریم
 		//var data =
 		//	applicationDbContext.Countries
@@ -1009,13 +1051,13 @@ try
 
 		//var data =
 		//	applicationDbContext.Countries
-		//		.Where(current => current.IsActive)
-		//		;
+		//	.Where(current => current.IsActive)
+		//	;
 
 		//var data =
 		//	applicationDbContext.Countries
-		//		.Where(current => 1 == 1)
-		//		;
+		//	.Where(current => 1 == 1)
+		//	;
 
 		var data =
 			applicationDbContext.Countries
@@ -1024,27 +1066,18 @@ try
 
 		if (string.IsNullOrWhiteSpace(value: countryName) == false)
 		{
-			data =
-				data
-				.Where(current =>
-					current.Name.ToLower()
-					.Contains(countryName.ToLower()));
+			data = data.Where(current => current.Name.ToLower().Contains(countryName.ToLower()));
 		}
 
 		if (string.IsNullOrWhiteSpace(value: countryCodeFrom) == false)
 		{
 			// Note: Wrong Usage!
-			//data =
-			//	data
-			//	.Where(current => current.Code >=
-			//		Convert.ToInt32(countryCodeFrom));
+			//data = data.Where(current => current.Code >=Convert.ToInt32(countryCodeFrom));
 
 			var countryCodeFromInt =
 				Convert.ToInt32(value: countryCodeFrom);
 
-			data =
-				data
-				.Where(current => current.Code >= countryCodeFromInt);
+			data = data.Where(current => current.Code >= countryCodeFromInt);
 		}
 
 		if (string.IsNullOrWhiteSpace(value: countryCodeTo) == false)
@@ -1052,26 +1085,19 @@ try
 			var countryCodeToInt =
 				Convert.ToInt32(value: countryCodeTo);
 
-			data =
-				data
-				.Where(current => current.Code <= countryCodeToInt);
+			data = data.Where(current => current.Code <= countryCodeToInt);
 		}
 
-		data =
-			data
-			.OrderBy(current => current.Id);
+		data = data.OrderBy(current => current.Id);
 
-		//data
-		//	.Load();
+		//data.Load();
 
 		// يا
 
 		// Note: Wrong Usage!
-		//data =
-		//	data.ToList();
+		//data = data.ToList();
 
-		var result =
-			data.ToList();
+		var result = data.ToList();
 	}
 	// **************************************************
 
@@ -1097,19 +1123,12 @@ try
 
 		foreach (var keyword in keywords)
 		{
-			data =
-				data
-				.Where(current => current.Name
-					.ToLower().Contains(keyword.ToLower()));
+			data = data.Where(current => current.Name.ToLower().Contains(keyword.ToLower()));
 		}
 
-		data =
-			data
-			.OrderBy(current => current.Code)
-			;
+		data = data.OrderBy(current => current.Code);
 
-		var result =
-			data.ToList();
+		var result =data.ToList();
 	}
 	// **************************************************
 
@@ -1119,8 +1138,7 @@ try
 			"   Ali       Reza  Iran Carpet   Ali         ";
 
 		//search = "Ali       Reza  Iran Carpet   Ali";
-		search =
-			search.Trim();
+		search = search.Trim();
 
 		//search = "Ali Reza Iran Carpet Ali";
 		while (search.Contains(value: "  "))
@@ -1143,19 +1161,12 @@ try
 
 		foreach (var keyword in keywords)
 		{
-			data =
-				data
-				.Where(current => current.Name
-					.ToLower().Contains(keyword.ToLower()));
+			data = data.Where(current => current.Name.ToLower().Contains(keyword.ToLower()));
 		}
 
-		data =
-			data
-			.OrderBy(current => current.Code)
-			;
+		data = data.OrderBy(current => current.Code);
 
-		var result =
-			data.ToList();
+		var result = data.ToList();
 	}
 	// **************************************************
 
@@ -1164,17 +1175,14 @@ try
 		var search =
 			"   Ali       Reza  Iran Carpet   Ali         ";
 
-		search =
-			search.Trim();
+		search = search.Trim();
 
 		while (search.Contains(value: "  "))
 		{
-			search = search.Replace
-				(oldValue: "  ", newValue: " ");
+			search = search.Replace(oldValue: "  ", newValue: " ");
 		}
 
-		var keywords =
-			search.Split(separator: ' ').Distinct();
+		var keywords = search.Split(separator: ' ').Distinct();
 
 		var data =
 			applicationDbContext.Countries
@@ -1182,18 +1190,16 @@ try
 
 		// Mr. Farshad Rabiei
 		// دستور ذیل باید چک شود
-		data =
-			data.Where(current =>
-				keywords.Contains(current.Name));
+		data = data.Where(current => keywords.Contains(current.Name));
 
-		data =
-			data
-			.OrderBy(current => current.Code)
-			;
+		data = data.OrderBy(current => current.Code);
 
-		var result =
-			data.ToList();
+		var result = data.ToList();
 	}
+	// **************************************************
+
+	// **************************************************
+	// *** LINQ - Session 5 *****************************
 	// **************************************************
 
 	// **************************************************
@@ -1625,34 +1631,35 @@ try
 	// تعداد استان‌ها، برای یک کشور صفر باشد، خطا ایجاد می‌شود
 	// **************************************************
 	{
-		var data =
-			applicationDbContext.Countries
-			.Select(current => new
-			{
-				current.Id,
-				current.Name,
-				StateCount = current.States.Count,
-				CityCount = current.States.Sum(state => state.Cities.Count),
-			})
-			.ToList()
-			;
+		//var data =
+		//	applicationDbContext.Countries
+		//	.Select(current => new
+		//	{
+		//		current.Id,
+		//		current.Name,
+		//		StateCount = current.States.Count,
+		//		CityCount = current.States.Sum(state => state.Cities.Count),
+		//	})
+		//	.ToList()
+		//	;
 	}
 
 	{
-		var data =
-			applicationDbContext.Countries
-			.Select(current => new
-			{
-				current.Id,
-				current.Name,
-				StateCount = current.States.Count,
-				CityCount = current.States.Select(state => state.Cities.Count).Sum(),
-			})
-			.ToList()
-			;
+		//var data =
+		//	applicationDbContext.Countries
+		//	.Select(current => new
+		//	{
+		//		current.Id,
+		//		current.Name,
+		//		StateCount = current.States.Count,
+		//		CityCount = current.States.Select(state => state.Cities.Count).Sum(),
+		//	})
+		//	.ToList()
+		//	;
 	}
 
 	{
+		// Inline Condition یادآوری
 		var number1 = 10;
 		var number2 = 20;
 		var max = (number1 > number2) ? number1 : number2;
@@ -1667,14 +1674,17 @@ try
 
 				StateCount = current.States.Count,
 
-				CityCount = current.States.Count == 0 ? 0 :
-					current.States.Select(state => new { XCount = state.Cities.Count }).Sum(x => x.XCount)
+				//CityCount = current.States.Count == 0 ? 0 :
+				//	current.States.Select(state => new { XCount = state.Cities.Count }).Sum(x => x.XCount)
 
 				//CityCount = current.States.Count == 0 ? 0 :
 				//	current.States.Select(state => state.Cities.Count).Sum()
 
 				//CityCount = current.States == null || current.States.Count == 0 ? 0 :
 				//	current.States.Select(state => new { XCount = state.Cities == null ? 0 : state.Cities.Count }).Sum(x => x.XCount)
+
+				CityCount = current.States == null || current.States.Count == 0 ? 0 :
+					current.States.Select(state => new { XCount = state.Cities == null || state.Cities.Count == 0 ? 0 : state.Cities.Count }).Sum(x => x.XCount)
 			})
 			.ToList()
 			;
@@ -1682,21 +1692,21 @@ try
 
 	{
 		// مهدی اکبری
-		var data =
-			applicationDbContext.Countries
-			.Select(current => new
-			{
-				current.Id,
-				current.Name,
+		//var data =
+		//	applicationDbContext.Countries
+		//	.Select(current => new
+		//	{
+		//		current.Id,
+		//		current.Name,
 
-				StateCount =
-					current.States.Count,
+		//		StateCount =
+		//			current.States.Count,
 
-				CityCount = current.States.Select
-					(state => state.Cities.Count).DefaultIfEmpty(0).Sum(),
-			})
-			.ToList()
-			;
+		//		CityCount = current.States.Select
+		//			(state => state.Cities.Count).DefaultIfEmpty(0).Sum(),
+		//	})
+		//	.ToList()
+		//	;
 	}
 	// **************************************************
 	// **************************************************

@@ -1,15 +1,14 @@
 ﻿using Domain.Seedwork;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain;
 
-public class Section(string name) : Entity
+public class Hotel(string name) : Entity
 {
 	[Required]
-	public int CityId { get; set; }
+	public int SectionId { get; set; }
 
-	public virtual City? City { get; set; }
+	public virtual Section? Section { get; set; }
 
 	public int Code { get; set; }
 
@@ -18,6 +17,4 @@ public class Section(string name) : Entity
 	[MaxLength(length: 50)]
 	[Required(AllowEmptyStrings = false)]
 	public string Name { get; set; } = name;
-
-	public virtual IList<Hotel> Hotels { get; } = [];
 }

@@ -1,7 +1,6 @@
 ﻿//using Microsoft.EntityFrameworkCore;
 
-//var applicationDbContext =
-//	new ApplicationDbContext();
+//var applicationDbContext = new ApplicationDbContext();
 
 //// **************************************************
 //var category =
@@ -66,8 +65,7 @@
 //	public string? Name { get; set; }
 //}
 
-//public class ApplicationDbContext :
-//	Microsoft.EntityFrameworkCore.DbContext
+//public class ApplicationDbContext : DbContext
 //{
 //	/// <summary>
 //	/// New
@@ -80,10 +78,9 @@
 //		Database.EnsureCreated();
 //	}
 
-//	public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }
+//	public DbSet<Category> Categories { get; set; }
 
-//	//protected override void OnConfiguring
-//	//	(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder optionsBuilder)
+//	//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	//{
 //	//	base.OnConfiguring(optionsBuilder);
 //	//}
@@ -91,8 +88,7 @@
 //	/// <summary>
 //	/// New
 //	/// </summary>
-//	protected override void OnConfiguring
-//		(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		// ******************************************************************
 //		// https://www.connectionstrings.com/sql-server/
@@ -128,7 +124,8 @@
 //		// ******************************************************************
 
 //		// UseSqlServer -> using Microsoft.EntityFrameworkCore;
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
+//		optionsBuilder
+//			.UseSqlServer(connectionString: connectionString)
+//			;
 //	}
 //}

@@ -38,7 +38,7 @@
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
 
-//		var foundedCategory =
+//		var foundCategory =
 //			// New
 //			await
 //			applicationDbContext.Categories
@@ -46,7 +46,7 @@
 //			// New
 //			.FirstOrDefaultAsync();
 
-//		if (foundedCategory is null)
+//		if (foundCategory is null)
 //		{
 //			var errorMessage =
 //				$"Category not found!";
@@ -55,7 +55,7 @@
 //		}
 //		else
 //		{
-//			foundedCategory.IsActive = true;
+//			foundCategory.IsActive = true;
 
 //			var affectedRows =
 //				await

@@ -17,23 +17,23 @@ try
 
 	using var applicationDbContext = new ApplicationDbContext();
 
-	var foundedRole =
+	var foundRole =
 		await
 		applicationDbContext.Roles
 		.Where(current => current.Name.ToLower() == roleName.ToLower())
 		.FirstOrDefaultAsync();
 
-	//var foundedRole =
+	//var foundRole =
 	//	await
 	//	applicationDbContext.Roles
 	//	.Include(current => current.Users)
 	//	.Where(current => current.Name.ToLower() == roleName.ToLower())
 	//	.FirstOrDefaultAsync();
 
-	if (foundedRole is not null)
+	if (foundRole is not null)
 	{
 		var userCount =
-			foundedRole.Users.Count();
+			foundRole.Users.Count();
 
 		Console.WriteLine
 			(value: $"User Count: {userCount}");
@@ -74,13 +74,13 @@ async Task CreateTheUsersAsync()
 {
 	using var applicationDbContext = new ApplicationDbContext();
 
-	var foundedRole =
+	var foundRole =
 		await
 		applicationDbContext.Roles
 		.Where(current => current.Name.ToLower() == roleName.ToLower())
 		.FirstOrDefaultAsync();
 
-	if (foundedRole is null)
+	if (foundRole is null)
 	{
 		var errorMessage =
 			$"{roleName} role not found!";
@@ -104,7 +104,7 @@ async Task CreateTheUsersAsync()
 	newUser =
 		new User(username: "User1")
 		{
-			RoleId = foundedRole.Id,
+			RoleId = foundRole.Id,
 		};
 
 	applicationDbContext.Add(entity: newUser);
@@ -112,7 +112,7 @@ async Task CreateTheUsersAsync()
 	newUser =
 		new User(username: "User2")
 		{
-			RoleId = foundedRole.Id,
+			RoleId = foundRole.Id,
 		};
 
 	applicationDbContext.Add(entity: newUser);
@@ -120,7 +120,7 @@ async Task CreateTheUsersAsync()
 	newUser =
 		new User(username: "User3")
 		{
-			RoleId = foundedRole.Id,
+			RoleId = foundRole.Id,
 		};
 
 	applicationDbContext.Add(entity: newUser);

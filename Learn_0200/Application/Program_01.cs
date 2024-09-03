@@ -1,5 +1,6 @@
-﻿//var applicationDbContext =
-//	new ApplicationDbContext();
+﻿//using Microsoft.EntityFrameworkCore;
+
+//var applicationDbContext = new ApplicationDbContext();
 
 //var category =
 //	new Category
@@ -33,8 +34,7 @@
 /////
 ///// DatabaseContext -> استاندارد قبلی من
 ///// </summary>
-//public class ApplicationDbContext :
-//	Microsoft.EntityFrameworkCore.DbContext
+//public class ApplicationDbContext : DbContext
 //{
 //	public ApplicationDbContext() : base()
 //	{
@@ -43,5 +43,5 @@
 //	/// <summary>
 //	/// Table Name -> Categories
 //	/// </summary>
-//	public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }
+//	public DbSet<Category> Categories { get; set; }
 //}

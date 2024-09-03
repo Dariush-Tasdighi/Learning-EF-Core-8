@@ -34,12 +34,12 @@
 //	//{
 //	//	using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var foundedCategory =
+//	//	var foundCategory =
 //	//		applicationDbContext.Categories
 //	//		.Where(current => current.Id == 1)
 //	//		.FirstOrDefault();
 
-//	//	if (foundedCategory is null)
+//	//	if (foundCategory is null)
 //	//	{
 //	//		var errorMessage =
 //	//			$"There is not any category with this Id (1)!";
@@ -49,19 +49,19 @@
 //	//	else
 //	//	{
 //	//		var state1 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		applicationDbContext.Remove(entity: foundedCategory);
-//	//		//applicationDbContext.Categories.Remove(entity: foundedCategory);
+//	//		applicationDbContext.Remove(entity: foundCategory);
+//	//		//applicationDbContext.Categories.Remove(entity: foundCategory);
 
 //	//		var state2 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 
 //	//		var affectedRows =
 //	//			applicationDbContext.SaveChanges();
 
 //	//		var state3 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 //	//	}
 //	//}
 //	// **************************************************
@@ -72,15 +72,15 @@
 //	//{
 //	//	using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var foundedCategories =
+//	//	var foundCategories =
 //	//		applicationDbContext.Categories
 //	//		.Where(current => current.IsActive == false)
 //	//		.ToList()
 //	//		;
 
-//	//	foreach (var foundedCategory in foundedCategories)
+//	//	foreach (var foundCategory in foundCategories)
 //	//	{
-//	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//		applicationDbContext.Remove(entity: foundCategory);
 
 //	//		//applicationDbContext.SaveChanges();
 //	//	}
@@ -110,19 +110,19 @@
 //	//{
 //	//	using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var foundedCategories =
+//	//	var foundCategories =
 //	//		applicationDbContext.Categories
 //	//		.Where(current => current.IsActive == false)
 //	//		.ToList()
 //	//		;
 
-//	//	//	foreach (var foundedCategory in foundedCategories)
+//	//	//	foreach (var foundCategory in foundCategories)
 //	//	//	{
-//	//	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//	//		applicationDbContext.Remove(entity: foundCategory);
 //	//	//	}
 
-//	//	applicationDbContext.RemoveRange(entities: foundedCategories);
-//	//	//applicationDbContext.Categories.RemoveRange(entities: foundedCategories);
+//	//	applicationDbContext.RemoveRange(entities: foundCategories);
+//	//	//applicationDbContext.Categories.RemoveRange(entities: foundCategories);
 
 //	//	var affectedRows =
 //	//		applicationDbContext.SaveChanges();
@@ -176,13 +176,13 @@
 //	//{
 //	//	using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var foundedCategory =
+//	//	var foundCategory =
 //	//		applicationDbContext.Categories
 //	//		.AsNoTracking()
 //	//		.Where(current => current.Id == 1)
 //	//		.FirstOrDefault();
 
-//	//	if (foundedCategory is null)
+//	//	if (foundCategory is null)
 //	//	{
 //	//		var errorMessage =
 //	//			$"There is not any category with this Id (1)!";
@@ -193,13 +193,13 @@
 //	//	{
 //	//		// Note: Detached!!! [NOT] Unchanged!!!
 //	//		var state1 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		applicationDbContext.Remove(entity: foundedCategory);
-//	//		//applicationDbContext.Categories.Remove(entity: foundedCategory);
+//	//		applicationDbContext.Remove(entity: foundCategory);
+//	//		//applicationDbContext.Categories.Remove(entity: foundCategory);
 
 //	//		var state2 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 
 //	//		// Note: در عین ناباوری کار می‌کند و رکورد از بانک اطلاعاتی حذف می‌شود
 //	//		// ولی چرا؟
@@ -207,7 +207,7 @@
 //	//			applicationDbContext.SaveChanges();
 
 //	//		var state3 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 //	//	}
 //	//}
 //	// **************************************************

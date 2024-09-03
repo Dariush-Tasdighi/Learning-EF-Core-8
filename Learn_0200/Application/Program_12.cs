@@ -40,14 +40,14 @@
 //		// اگر بیش از یکی پیدا کند، اولین آن‌ها را برمی‌گرداند
 //		// **************************************************
 //		{
-//			var foundedCategory =
+//			var foundCategory =
 //				applicationDbContext.Categories
 //				.FirstOrDefault();
 //		}
 
 //		{
 //			// New in EF Core
-//			var foundedCategory =
+//			var foundCategory =
 //				await
 //				applicationDbContext.Categories
 //				.FirstOrDefaultAsync();
@@ -60,14 +60,14 @@
 //		// اگر بیش از یکی پیدا کند، اولین آن‌ها را برمی‌گرداند
 //		// **************************************************
 //		{
-//			var foundedCategory =
+//			var foundCategory =
 //				applicationDbContext.Categories
 //				.First();
 //		}
 
 //		{
 //			// New in EF Core
-//			var foundedCategory =
+//			var foundCategory =
 //				await
 //				applicationDbContext.Categories
 //				.FirstAsync();
@@ -80,14 +80,14 @@
 //		// اگر بیش از یکی پیدا کند، آخرین آن‌ها را برمی‌گرداند
 //		// **************************************************
 //		{
-//			var foundedCategory =
+//			var foundCategory =
 //				applicationDbContext.Categories
 //				.LastOrDefault();
 //		}
 
 //		{
 //			// New in EF Core
-//			var foundedCategory =
+//			var foundCategory =
 //				await
 //				applicationDbContext.Categories
 //				.LastOrDefaultAsync();
@@ -100,14 +100,14 @@
 //		// اگر بیش از یکی پیدا کند، آخرین آن‌ها را برمی‌گرداند
 //		// **************************************************
 //		{
-//			var foundedCategory =
+//			var foundCategory =
 //				applicationDbContext.Categories
 //				.Last();
 //		}
 
 //		{
 //			// New in EF Core
-//			var foundedCategory =
+//			var foundCategory =
 //				await
 //				applicationDbContext.Categories
 //				.LastAsync();
@@ -120,14 +120,14 @@
 //		// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
 //		// **************************************************
 //		{
-//			var foundedCategory =
+//			var foundCategory =
 //				applicationDbContext.Categories
 //				.SingleOrDefault();
 //		}
 
 //		{
 //			// New in EF Core
-//			var foundedCategory =
+//			var foundCategory =
 //				await
 //				applicationDbContext.Categories
 //				.SingleOrDefaultAsync();
@@ -140,14 +140,14 @@
 //		// اگر بیش از یکی پیدا کند، خطا تولید می‌کند
 //		// **************************************************
 //		{
-//			var foundedCategory =
+//			var foundCategory =
 //				applicationDbContext.Categories
 //				.Single();
 //		}
 
 //		{
 //			// New in EF Core
-//			var foundedCategory =
+//			var foundCategory =
 //				await
 //				applicationDbContext.Categories
 //				.SingleAsync();

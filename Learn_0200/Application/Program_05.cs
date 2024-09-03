@@ -36,9 +36,9 @@
 ////	// دستور ذیل را خیلی پیشنهاد نمی‌کنم
 ////	// توصیه می‌کنم که به جای دستور ذیل
 ////	// استفاده گردد FirstOrDefault از دستور
-////	var category =
-////		applicationDbContext.Categories
-////		.Find(keyValues: 1);
+////	//var category =
+////	//	applicationDbContext.Categories
+////	//	.Find(keyValues: 1);
 
 ////	// دستور ذیل را خیلی پیشنهاد نمی‌کنم
 ////	//var category =
@@ -55,10 +55,10 @@
 ////	//	.Where(predicate: cagetory => cagetory.Id == 1)
 ////	//	.FirstOrDefault();
 
-////	//var category =
-////	//	applicationDbContext.Categories
-////	//	.Where(current => current.Id == 1)
-////	//	.FirstOrDefault();
+////	var category =
+////		applicationDbContext.Categories
+////		.Where(current => current.Id == 1)
+////		.FirstOrDefault();
 
 ////	if (category is null)
 ////	{
@@ -189,13 +189,13 @@
 
 //	public DbSet<Category> Categories { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
+//		optionsBuilder
+//			.UseSqlServer(connectionString: connectionString)
+//			;
 //	}
 //}

@@ -11,12 +11,12 @@ Delete One Record
 **************************************************
 using var applicationDbContext = new ApplicationDbContext();
 
-var foundedCategory =
+var foundCategory =
 	applicationDbContext.Categories
 	.Where(current => current.Id == 1)
 	.FirstOrDefault();
 
-if (foundedCategory is null)
+if (foundCategory is null)
 {
 	var errorMessage =
 		$"There is not any category with this Id (1)!";
@@ -25,7 +25,7 @@ if (foundedCategory is null)
 }
 else
 {
-	applicationDbContext.Categories.Remove(entity: foundedCategory);
+	applicationDbContext.Categories.Remove(entity: foundCategory);
 
 	applicationDbContext.SaveChanges();
 }

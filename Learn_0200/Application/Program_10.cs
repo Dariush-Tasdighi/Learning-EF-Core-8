@@ -34,12 +34,12 @@
 //	{
 //		using var applicationDbContext = new ApplicationDbContext();
 
-//		var foundedCategory =
+//		var foundCategory =
 //			applicationDbContext.Categories
 //			.Where(current => current.Id == 1)
 //			.FirstOrDefault();
 
-//		if (foundedCategory is null)
+//		if (foundCategory is null)
 //		{
 //			var errorMessage =
 //				$"There is not any category with this Id (1)!";
@@ -50,34 +50,34 @@
 //		{
 //			// Unchanged
 //			var state1 =
-//				applicationDbContext.Entry(entity: foundedCategory).State;
+//				applicationDbContext.Entry(entity: foundCategory).State;
 
-//			var originalName = foundedCategory.Name;
+//			var originalName = foundCategory.Name;
 
-//			foundedCategory.Name = originalName;
+//			foundCategory.Name = originalName;
 
 //			// Unchanged
 //			var state2 =
-//				applicationDbContext.Entry(entity: foundedCategory).State;
+//				applicationDbContext.Entry(entity: foundCategory).State;
 
-//			foundedCategory.Name = "New Category Name";
+//			foundCategory.Name = "New Category Name";
 
 //			// Modified
 //			var state3 =
-//				applicationDbContext.Entry(entity: foundedCategory).State;
+//				applicationDbContext.Entry(entity: foundCategory).State;
 
-//			foundedCategory.Name = originalName;
+//			foundCategory.Name = originalName;
 
 //			// Note: ?????
 //			var state4 =
-//				applicationDbContext.Entry(entity: foundedCategory).State;
+//				applicationDbContext.Entry(entity: foundCategory).State;
 
 //			var affectedRows =
 //				applicationDbContext.SaveChanges();
 
 //			// Unchanged
 //			var state6 =
-//				applicationDbContext.Entry(entity: foundedCategory).State;
+//				applicationDbContext.Entry(entity: foundCategory).State;
 //		}
 //	}
 //	// **************************************************
@@ -88,12 +88,12 @@
 //	//{
 //	//	using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var foundedCategory =
+//	//	var foundCategory =
 //	//		applicationDbContext.Categories
 //	//		.Where(current => current.Id == 1)
 //	//		.FirstOrDefault();
 
-//	//	if (foundedCategory is null)
+//	//	if (foundCategory is null)
 //	//	{
 //	//		var errorMessage =
 //	//			$"There is not any category with this Id (1)!";
@@ -104,28 +104,28 @@
 //	//	{
 //	//		// Unchanged
 //	//		var state1 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		foundedCategory.Name = "New Category Name";
+//	//		foundCategory.Name = "New Category Name";
 
 //	//		// اصلا هزار بار، این رکورد را ویرایش می‌کنیم
 
 //	//		// Modified
 //	//		var state2 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		applicationDbContext.Remove(entity: foundedCategory);
+//	//		applicationDbContext.Remove(entity: foundCategory);
 
 //	//		// Note: ?????
 //	//		var state3 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 
 //	//		var affectedRows =
 //	//			applicationDbContext.SaveChanges();
 
 //	//		// Detached
 //	//		var state6 =
-//	//			applicationDbContext.Entry(entity: foundedCategory).State;
+//	//			applicationDbContext.Entry(entity: foundCategory).State;
 //	//	}
 //	//}
 //	// **************************************************
