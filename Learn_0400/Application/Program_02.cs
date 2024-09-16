@@ -4,6 +4,7 @@ using ViewModels;
 using System.Linq;
 using Application.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 try
 {
@@ -835,10 +836,6 @@ try
 	// **************************************************
 
 	// **************************************************
-	// *** LINQ - Session 4 *****************************
-	// **************************************************
-
-	// **************************************************
 	// صورت مساله
 	// من همه کشورهايی را می‌خواهم که
 	// لااقل در نام يکی از استان‌های آن، حرف {بی} وجود داشته باشد
@@ -853,8 +850,7 @@ try
 			// Include
 			// نيست
 			//.Include(current => current.States)
-			.Where(current => current.States.Any
-				(state => state.Name.ToLower().Contains("B".ToLower())))
+			.Where(current => current.States.Any(state => state.Name.ToLower().Contains("B".ToLower())))
 			.ToListAsync()
 			;
 	}
@@ -909,7 +905,7 @@ try
 			// نيست
 			//.Include(current => current.States)
 			//.Include(current => current.States.Select(state => state.Cities))
-			.Where(current => current.States.Any(state => state.Cities.Any(city => city.Name.Contains("B"))))
+			.Where(current => current.States.Any(state => state.Cities.Any(city => city.Name.ToLower().Contains("B".ToLower()))))
 			.ToListAsync()
 			;
 	}
@@ -1072,7 +1068,7 @@ try
 		if (string.IsNullOrWhiteSpace(value: countryCodeFrom) == false)
 		{
 			// Note: Wrong Usage!
-			//data = data.Where(current => current.Code >=Convert.ToInt32(countryCodeFrom));
+			//data = data.Where(current => current.Code >= Convert.ToInt32(countryCodeFrom));
 
 			var countryCodeFromInt =
 				Convert.ToInt32(value: countryCodeFrom);
@@ -1097,7 +1093,12 @@ try
 		// Note: Wrong Usage!
 		//data = data.ToList();
 
-		var result = data.ToList();
+		//var result = data.ToList();
+
+		var result =
+			await
+			data.ToListAsync()
+			;
 	}
 	// **************************************************
 
@@ -1128,7 +1129,10 @@ try
 
 		data = data.OrderBy(current => current.Code);
 
-		var result =data.ToList();
+		var result =
+			await
+			data.ToListAsync()
+			;
 	}
 	// **************************************************
 
@@ -1137,23 +1141,23 @@ try
 		var search =
 			"   Ali       Reza  Iran Carpet   Ali         ";
 
-		//search = "Ali       Reza  Iran Carpet   Ali";
 		search = search.Trim();
+		//search = "Ali       Reza  Iran Carpet   Ali";
 
-		//search = "Ali Reza Iran Carpet Ali";
 		while (search.Contains(value: "  "))
 		{
 			search = search.Replace
 				(oldValue: "  ", newValue: " ");
 		}
+		//search = "Ali Reza Iran Carpet Ali";
 
-		// keywords: ["Ali", "Reza", "Iran", "Carpet", "Ali"]
 		//var keywords =
 		//	search.Split(separator: ' ');
+		// keywords: {"Ali", "Reza", "Iran", "Carpet", "Ali"}
 
-		// keywords: ["Ali", "Reza", "Iran", "Carpet"]
 		var keywords =
 			search.Split(separator: ' ').Distinct();
+		// keywords: {"Ali", "Reza", "Iran", "Carpet"}
 
 		var data =
 			applicationDbContext.Countries
@@ -1166,7 +1170,10 @@ try
 
 		data = data.OrderBy(current => current.Code);
 
-		var result = data.ToList();
+		var result =
+			await
+			data.ToListAsync()
+			;
 	}
 	// **************************************************
 
@@ -1194,7 +1201,10 @@ try
 
 		data = data.OrderBy(current => current.Code);
 
-		var result = data.ToList();
+		var result =
+			await
+			data.ToListAsync()
+			;
 	}
 	// **************************************************
 
@@ -1223,6 +1233,14 @@ try
 
 	{
 		var data =
+			await
+			applicationDbContext.Countries
+			.ToListAsync()
+			;
+	}
+
+	{
+		var data =
 			from Country in applicationDbContext.Countries
 			select Country
 			;
@@ -1232,15 +1250,7 @@ try
 	// **************************************************
 
 	// **************************************************
-	// ها Country آرایه‌ای از
 	// **************************************************
-	{
-		var data =
-			from Country in applicationDbContext.Countries
-			where Country.Name.ToLower().Contains("Iran".ToLower())
-			select Country
-			;
-	}
 	// **************************************************
 
 	// **************************************************
@@ -1264,7 +1274,24 @@ try
 	// **************************************************
 
 	// **************************************************
-	// (A)
+	// مدرن
+	// **************************************************
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.Where(current => current.Name.ToLower().Contains("Iran".ToLower()))
+			.OrderBy(current => current.Name)
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
+	// **************************************************
 	// ها string آرایه‌ای از
 	// Select Name From Countries WHERE ... ORDER BY ...
 	// **************************************************
@@ -1285,18 +1312,45 @@ try
 	// **************************************************
 
 	// **************************************************
-	// Note: See Learning Anonymous Object File!
-	// **************************************************
-
-	// **************************************************
-	// (B)
-	// ها object آرایه‌ای از
+	// مدرن
 	// **************************************************
 	{
 		var data =
+			await
+			applicationDbContext.Countries
+			.Where(current => current.Name.ToLower().Contains("Iran".ToLower()))
+			.OrderBy(current => current.Name)
+			.Select(current => current.Name)
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
+	// **************************************************
+	// Note: See Learning Anonymous Object File!
+	// 
+	// See: LearningAnonymousObject.cs
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
+	// **************************************************
+	{
+		//var data =
+		//	from Country in applicationDbContext.Countries
+		//	select Country.Name
+		//	;
+
+		// دو دستور فوق و ذیل، بی‌نهایت با هم تفاوت دارند
+
+		var data =
 			from Country in applicationDbContext.Countries
-			where Country.Name.ToLower().Contains("Iran".ToLower())
-			orderby Country.Name
 			select new { Name = Country.Name }
 			;
 
@@ -1312,28 +1366,45 @@ try
 	{
 		var data =
 			from Country in applicationDbContext.Countries
-			where Country.Name.ToLower().Contains("Iran".ToLower())
-			orderby Country.Name
 			select new { Country.Name }
-			//select new { Name = Country.Name }
 			;
-
-		foreach (var currentPartialCountry in data)
-		{
-			Console.WriteLine
-				(value: currentPartialCountry.Name);
-		}
 	}
 	// **************************************************
 
 	// **************************************************
-	// (C)
+	// مدرن
+	// **************************************************
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.Select(current => new { Name = current.Name })
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// مدرن
+	// **************************************************
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.Select(current => new { current.Name })
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
 	// **************************************************
 	{
 		var data =
 			from Country in applicationDbContext.Countries
-			where Country.Name.Contains("Iran")
-			orderby Country.Name
 			select new { Googooli = Country.Name }
 			;
 
@@ -1346,11 +1417,26 @@ try
 	// **************************************************
 
 	// **************************************************
+	// مدرن
+	// **************************************************
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.Select(current => new { Googooli = current.Name })
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
+	// **************************************************
 	{
 		var data =
 			from Country in applicationDbContext.Countries
-			where Country.Name.Contains("Iran")
-			orderby Country.Name
 			select new { Size = Country.Population, Country.Name }
 			;
 
@@ -1363,13 +1449,26 @@ try
 	// **************************************************
 
 	// **************************************************
-	// (D1)
+	// مدرن
+	// **************************************************
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.Select(current => new { Size = current.Population, current.Name })
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
 	// **************************************************
 	{
 		var data =
 			from Country in applicationDbContext.Countries
-			where Country.Name.Contains("Iran")
-			orderby Country.Name
 			select (new CountryViewModel1() { NewName = Country.Name })
 			;
 
@@ -1384,13 +1483,26 @@ try
 	// **************************************************
 
 	// **************************************************
-	// (D2)
+	// مدرن
+	// **************************************************
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.Select(current => new CountryViewModel1() { NewName = current.Name })
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
 	// **************************************************
 	{
 		var data =
 			from Country in applicationDbContext.Countries
-			where Country.Name.Contains("Iran")
-			orderby Country.Name
 			select (new CountryViewModel2() { Name = Country.Name })
 			;
 
@@ -1405,14 +1517,24 @@ try
 	// **************************************************
 
 	// **************************************************
-	// (D3)
+	// مدرن
+	// **************************************************
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.Select(current => (new CountryViewModel2() { Name = current.Name }))
+			.ToListAsync()
+			;
+	}
+	// **************************************************
+
+	// **************************************************
 	// Note: Wrong Usage!
 	// **************************************************
 	//{
 	//	var data =
 	//		from Country in applicationDbContext.Countries
-	//		where Country.Name.Contains("Iran")
-	//		orderby Country.Name
 	//		select (new CountryViewModel2() { Country.Name })
 	//		;
 
@@ -1427,7 +1549,20 @@ try
 	// **************************************************
 
 	// **************************************************
-	// (E)
+	// مدرن
+	// Note: Wrong Usage!
+	// **************************************************
+	//{
+	//	var data =
+	//		await
+	//		applicationDbContext.Countries
+	//		.Select(current => (new CountryViewModel2() { current.Name }))
+	//		.ToListAsync()
+	//		;
+	//}
+	// **************************************************
+
+	// **************************************************
 	// Note: متاسفانه دستور ذیل کار نمی کند
 	// **************************************************
 	{
@@ -1436,7 +1571,6 @@ try
 			where Country.Name.Contains("Iran")
 			orderby Country.Name
 			select new Country(Country.Name)
-			//select new Domain.Features.Identity.Country() { Name = Country.Name }
 			;
 
 		foreach (var currentCountry in data)
@@ -1448,111 +1582,42 @@ try
 	// **************************************************
 
 	// **************************************************
-	// "SELECT * FROM Countries"
+	// مدرن
+	// Note: Wrong Usage!
 	// **************************************************
 	{
 		var data =
+			await
 			applicationDbContext.Countries
-			.ToList()
+			.Select(current => (new Country(current.Name)))
+			.ToListAsync()
 			;
 	}
 	// **************************************************
 
 	// **************************************************
-	// (A)
-	// "SELECT Name FROM Countries"
+	// مدرن
 	// **************************************************
 	{
-		var data =
-			applicationDbContext.Countries
-			.Select(current => current.Name)
-			.ToList()
-			;
-	}
-	// **************************************************
-
-	// **************************************************
-	// (B)
-	// "SELECT Name FROM Countries"
-	// **************************************************
-	{
-		var data =
-			applicationDbContext.Countries
-			.Select(current => new { Name = current.Name })
-			.ToList()
-			;
-	}
-	// **************************************************
-
-	// **************************************************
-	// (B)
-	// "SELECT Name FROM Countries"
-	// **************************************************
-	{
-		var data =
+		var data1 =
 			applicationDbContext.Countries
 			.Select(current => new { current.Name })
 			.ToList()
-			;
-	}
-	// **************************************************
-
-	// **************************************************
-	// (C)
-	// "SELECT Name FROM Countries"
-	// **************************************************
-	{
-		var data =
-			applicationDbContext.Countries
-			.Select(current => new { Googooli = current.Name })
+			.Select(current => new Country(current.Name))
 			.ToList()
 			;
-	}
-	// **************************************************
 
-	// **************************************************
-	// (D)
-	// **************************************************
-	{
-		var data =
+		// OR
+
+		var data2 =
+			await
 			applicationDbContext.Countries
-			.Select(current => new CountryViewModel1() { NewName = current.Name })
-			.ToList()
+			.Select(current => new { current.Name })
+			.ToListAsync()
 			;
-	}
-	// **************************************************
 
-	// **************************************************
-	// (D)
-	// **************************************************
-	{
-		var data =
-			applicationDbContext.Countries
-			.Select(current => new CountryViewModel2() { Name = current.Name })
-			.ToList()
-			;
-	}
-	// **************************************************
-
-	// **************************************************
-	// (D)
-	// **************************************************
-	//{
-	//	var data =
-	//		applicationDbContext.Countries
-	//		.Select(current => new CountryViewModel2() { current.Name })
-	//		.ToList()
-	//		;
-	//}
-	// **************************************************
-
-	// **************************************************
-	// (E)
-	// Note: متاسفانه کار نمی کند
-	// **************************************************
-	{
-		var data =
-			applicationDbContext.Countries
+		var data3 =
+			data2
 			.Select(current => new Country(current.Name))
 			.ToList()
 			;
@@ -1560,24 +1625,10 @@ try
 	// **************************************************
 
 	// **************************************************
-	// "SELECT Name FROM Countries"
+	// مدرن
 	// **************************************************
 	{
-		var data =
-			applicationDbContext.Countries
-			.Select(current => new { current.Name })
-			.ToList()
-			.Select(current => new Country(current.Name))
-			.ToList()
-			;
-	}
-	// **************************************************
-
-	// **************************************************
-	// "SELECT Id, Name FROM Countries"
-	// **************************************************
-	{
-		var data =
+		var data1 =
 			applicationDbContext.Countries
 			.Select(current => new { current.Id, current.Name })
 			.ToList()
@@ -1587,9 +1638,25 @@ try
 			})
 			.ToList()
 			;
+
+		// OR
+
+		var data2 =
+			await
+			applicationDbContext.Countries
+			.Select(current => new { current.Id, current.Name })
+			.ToListAsync()
+			;
+
+		var data3 =
+			data2
+			.Select(current => new Country(name: current.Name)
+			{
+				Id = current.Id,
+			})
+			.ToList()
+			;
 	}
-	// **************************************************
-	// **************************************************
 	// **************************************************
 
 	// **************************************************
@@ -1632,6 +1699,7 @@ try
 	// **************************************************
 	{
 		//var data =
+		//	await
 		//	applicationDbContext.Countries
 		//	.Select(current => new
 		//	{
@@ -1640,12 +1708,13 @@ try
 		//		StateCount = current.States.Count,
 		//		CityCount = current.States.Sum(state => state.Cities.Count),
 		//	})
-		//	.ToList()
+		//	.ToListAsync()
 		//	;
 	}
 
 	{
 		//var data =
+		//	await
 		//	applicationDbContext.Countries
 		//	.Select(current => new
 		//	{
@@ -1654,7 +1723,7 @@ try
 		//		StateCount = current.States.Count,
 		//		CityCount = current.States.Select(state => state.Cities.Count).Sum(),
 		//	})
-		//	.ToList()
+		//	.ToListAsync()
 		//	;
 	}
 
@@ -1666,6 +1735,7 @@ try
 		var min = (number1 < number2) ? number1 : number2;
 
 		var data =
+			await
 			applicationDbContext.Countries
 			.Select(current => new
 			{
@@ -1683,16 +1753,20 @@ try
 				//CityCount = current.States == null || current.States.Count == 0 ? 0 :
 				//	current.States.Select(state => new { XCount = state.Cities == null ? 0 : state.Cities.Count }).Sum(x => x.XCount)
 
-				CityCount = current.States == null || current.States.Count == 0 ? 0 :
-					current.States.Select(state => new { XCount = state.Cities == null || state.Cities.Count == 0 ? 0 : state.Cities.Count }).Sum(x => x.XCount)
+				//CityCount = current.States == null || current.States.Count == 0 ? 0 :
+				//	current.States.Select(state => new { XCount = state.Cities == null || state.Cities.Count == 0 ? 0 : state.Cities.Count }).Sum(x => x.XCount)
+
+				//CityCount = current.States == null || current.States.Count == 0 ? 0 :
+				//	current.States.Select(state => new { cityCount = state.Cities == null ? 0 : state.Cities.Count }).Sum(x => x.cityCount)
 			})
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	{
-		// مهدی اکبری
+		//// مهدی اکبری
 		//var data =
+		//	await
 		//	applicationDbContext.Countries
 		//	.Select(current => new
 		//	{
@@ -1705,11 +1779,42 @@ try
 		//		CityCount = current.States.Select
 		//			(state => state.Cities.Count).DefaultIfEmpty(0).Sum(),
 		//	})
-		//	.ToList()
+		//	.ToListAsync()
 		//	;
+	}
+
+	{
+		// **************************************************
+		// AI Prompt:
+		// Suppose that in EF Core, we have three entities.
+		// Countries and States and Cities and the relationship
+		// between them are one to many. I want a linq query that
+		// get all countries and for each country get country name
+		// and state count and city count
+		// **************************************************
+		var data =
+			await
+			applicationDbContext.Countries
+			.Select(current => new
+			{
+				current.Id,
+				current.Name,
+
+				StateCount =
+					current.States.Count,
+
+				CityCount =
+					current.States.SelectMany(state => state.Cities).Count()
+			})
+			.ToListAsync()
+			;
 	}
 	// **************************************************
 	// **************************************************
+	// **************************************************
+
+	// **************************************************
+	// *** LINQ - Session 6 *****************************
 	// **************************************************
 
 	// **************************************************
@@ -1717,6 +1822,7 @@ try
 	// **************************************************
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
 			.Select(current => new
@@ -1725,12 +1831,13 @@ try
 
 				Count = current.Count(),
 			})
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.Where(current => current.Population >= 120_000_000)
 			.GroupBy(current => current.Population)
@@ -1740,12 +1847,13 @@ try
 
 				Count = current.Count(),
 			})
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	//{
 	//	var data =
+	//		await
 	//		applicationDbContext.Countries
 	//		.GroupBy(current => current.Population)
 	//		.Where(current => current.Population >= 120_000_000) // Error!
@@ -1755,12 +1863,13 @@ try
 
 	//			Count = current.Count(),
 	//		})
-	//		.ToList()
+	//		.ToListAsync()
 	//		;
 	//}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
 			.Select(current => new
@@ -1770,12 +1879,13 @@ try
 				Count = current.Count(),
 			})
 			.Where(other => other.Population >= 120_000_000)
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.Where(current => current.Name.Contains('I'))
 			.GroupBy(current => current.Population)
@@ -1785,13 +1895,14 @@ try
 
 				Count = current.Count(),
 			})
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	//{
 	//	// Note: Wrong Usage!
 	//	var data =
+	//		await
 	//		applicationDbContext.Countries
 	//		.GroupBy(current => current.Population)
 	//		.Select(current => new
@@ -1801,12 +1912,13 @@ try
 	//			Count = current.Count(),
 	//		})
 	//		.Where(other => other.Name.Contains('ا'))
-	//		.ToList()
+	//		.ToListAsync()
 	//		;
 	//}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
 			.Select(current => new
@@ -1816,12 +1928,13 @@ try
 				Count = current.Count(),
 			})
 			.Where(other => other.Count >= 5)
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.Where(current => current.Name.Contains('I'))
 			.GroupBy(current => current.Population)
@@ -1832,12 +1945,13 @@ try
 				Count = current.Count(),
 			})
 			.Where(other => other.Count >= 5)
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.GroupBy(current => new { current.Population, current.HealthyRate })
 			.Select(current => new
@@ -1847,12 +1961,13 @@ try
 
 				Count = current.Count(),
 			})
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.GroupBy(current => new { current.Population, current.HealthyRate })
 			.Select(current => new
@@ -1862,12 +1977,13 @@ try
 
 				Count = current.Count(),
 			})
-			.ToList()
+			.ToListAsync()
 			;
 	}
 
 	{
 		var data =
+			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
 			.Select(current => new
@@ -1881,7 +1997,7 @@ try
 				Sum = current.Sum(x => x.HealthyRate),
 				Average = current.Average(x => x.HealthyRate),
 			})
-			.ToList()
+			.ToListAsync()
 			;
 	}
 	// **************************************************
