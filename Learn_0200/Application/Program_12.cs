@@ -160,7 +160,7 @@
 //	Console.WriteLine(value: ex.Message);
 //}
 
-//public abstract class Entity() : object()
+//public abstract class Entity : object
 //{
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
@@ -222,14 +222,14 @@
 
 //	public DbSet<Category> Categories { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
+//		optionsBuilder
+//			.UseSqlServer(connectionString: connectionString)
+//			;
 //	}
 
 //	protected override void OnModelCreating(ModelBuilder modelBuilder)

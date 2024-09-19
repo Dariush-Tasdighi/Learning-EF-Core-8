@@ -81,6 +81,7 @@
 //	//	foreach (var foundCategory in foundCategories)
 //	//	{
 //	//		applicationDbContext.Remove(entity: foundCategory);
+//	//		//applicationDbContext.Categories.Remove(entity: foundCategory);
 
 //	//		//applicationDbContext.SaveChanges();
 //	//	}
@@ -94,12 +95,16 @@
 //	//{
 //	//	using var applicationDbContext = new ApplicationDbContext();
 
-//	//	//applicationDbContext.Remove(category1);
-//	//	//applicationDbContext.Remove(category2);
-//	//	//applicationDbContext.Remove(category3);
+//	//	//applicationDbContext.Remove(entity: category1);
+//	//	//applicationDbContext.Remove(entity: category2);
+//	//	//applicationDbContext.Remove(entity: category3);
+
+//	//	//applicationDbContext.Categories.Remove(entity: category1);
+//	//	//applicationDbContext.Categories.Remove(entity: category2);
+//	//	//applicationDbContext.Categories.Remove(entity: category3);
 
 //	//	//applicationDbContext.RemoveRange(category1, category2, category3, ...);
-//	//	////applicationDbContext.Categories.RemoveRange(category1, category2, category3, ...);
+//	//	//applicationDbContext.Categories.RemoveRange(category1, category2, category3, ...);
 
 //	//	var affectedRows =
 //	//		applicationDbContext.SaveChanges();
@@ -116,10 +121,10 @@
 //	//		.ToList()
 //	//		;
 
-//	//	//	foreach (var foundCategory in foundCategories)
-//	//	//	{
-//	//	//		applicationDbContext.Remove(entity: foundCategory);
-//	//	//	}
+//	//	//foreach (var foundCategory in foundCategories)
+//	//	//{
+//	//	//	applicationDbContext.Remove(entity: foundCategory);
+//	//	//}
 
 //	//	applicationDbContext.RemoveRange(entities: foundCategories);
 //	//	//applicationDbContext.Categories.RemoveRange(entities: foundCategories);
@@ -160,8 +165,8 @@
 
 //	//	var affectedRows =
 //	//		applicationDbContext.Categories
-//	//			.Where(current => current.IsActive == false)
-//	//			.ExecuteDelete();
+//	//		.Where(current => current.IsActive == false)
+//	//		.ExecuteDelete();
 
 //	//	Console.WriteLine(value: affectedRows);
 //	//}
@@ -171,7 +176,7 @@
 //	// Delete One Record!
 //	// AsNoTracking()
 //	// این دستور، سرعت و کارایی را بالا می‌برد
-//	// ولی تغییرات (ایجاد، ویرایش و حذف) را شناسایی نمی‌کند
+//	// ولی تغییرات (ایجاد، ویرایش) را شناسایی نمی‌کند
 //	// **************************************************
 //	//{
 //	//	using var applicationDbContext = new ApplicationDbContext();
@@ -224,8 +229,7 @@
 //	//		new Category
 //	//		{
 //	//			Id = 1,
-//	//			IsActive = true,
-//	//			Name = "هر چی",
+//	//			Name = "هر چی", // Required!
 //	//		};
 
 //	//	var state1 =
@@ -286,7 +290,8 @@
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
+//		optionsBuilder
+//			.UseSqlServer(connectionString: connectionString)
+//			;
 //	}
 //}

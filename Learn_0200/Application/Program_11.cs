@@ -1,6 +1,10 @@
 ﻿//using System;
 //using System.Linq;
+//using System.Reflection;
 //using Microsoft.EntityFrameworkCore;
+//using System.ComponentModel.DataAnnotations;
+//using System.ComponentModel.DataAnnotations.Schema;
+//using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 //try
 //{
@@ -94,39 +98,57 @@
 ////		InsertDateTime = DateTime.Now;
 ////	}
 
+////	public Guid Id { get; private set; }
+
 ////	//public int Id { get; private set; }
 
-////	public Guid Id { get; private set; }
+////	//public long Id { get; private set; }
 
 ////	//public DateTime InsertDateTime { get; private set; }
 ////	public DateTimeOffset InsertDateTime { get; private set; }
 ////}
 
-//public abstract class Entity() : object()
+//public abstract class Entity : object
+////public abstract class Entity() : object()
 //{
-//	[System.ComponentModel.DataAnnotations.Key]
-
-//	[System.ComponentModel.DataAnnotations.Schema
-//		.DatabaseGenerated(databaseGeneratedOption:
-//		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+//	[Key]
+//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 //	public Guid Id { get; private set; } = Guid.NewGuid();
 
-//	[System.ComponentModel.DataAnnotations.Schema
-//		.DatabaseGenerated(databaseGeneratedOption:
-//		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
 //	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
 //}
 
-//public class Category(string name) : Entity()
+////public class Category : Entity
+////{
+////	public Category(string name)
+////	{
+////		Name = name;
+////	}
+
+////	public bool IsActive { get; set; }
+
+////	//[Required]
+////	[Required(AllowEmptyStrings = false)]
+////	[MaxLength(length: 100)]
+////	public string Name { get; set; }
+
+////	public override string ToString()
+////	{
+////		var result =
+////			$"{nameof(Id)}: {Id} - {nameof(Name)}: {Name} - {nameof(IsActive)}: {IsActive}";
+
+////		return result;
+////	}
+////}
+
+//public class Category(string name) : Entity
 //{
 //	public bool IsActive { get; set; }
 
-//	//[System.ComponentModel.DataAnnotations.Required]
-//	[System.ComponentModel.DataAnnotations.Required
-//		(AllowEmptyStrings = false)]
-
-//	[System.ComponentModel.DataAnnotations.MaxLength
-//		(length: 100)]
+//	//[Required]
+//	[Required(AllowEmptyStrings = false)]
+//	[MaxLength(length: 100)]
 //	public string Name { get; set; } = name;
 
 //	public override string ToString()
@@ -148,8 +170,7 @@
 //	{
 //	}
 
-//	public void Configure(Microsoft.EntityFrameworkCore
-//		.Metadata.Builders.EntityTypeBuilder<Category> builder)
+//	public void Configure(EntityTypeBuilder<Category> builder)
 //	{
 //		builder
 //			.HasKey(current => current.Id)
@@ -185,14 +206,14 @@
 
 //	public DbSet<Category> Categories { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
+//		optionsBuilder
+//			.UseSqlServer(connectionString: connectionString)
+//			;
 //	}
 
 //	//protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -222,15 +243,17 @@
 
 //		// Solution (4)
 //		//modelBuilder.ApplyConfigurationsFromAssembly
-//		//	(assembly: System.Reflection.Assembly.GetExecutingAssembly());
+//		//	(assembly: Assembly.GetExecutingAssembly());
 //		// /Solution (4)
 
 //		// Solution (5)
 //		//modelBuilder.ApplyConfigurationsFromAssembly
 //		//	(assembly: typeof(CategoryConfiguration).Assembly);
+//		// /Solution (5)
 
+//		// Solution (6)
 //		modelBuilder.ApplyConfigurationsFromAssembly
 //			(assembly: typeof(ApplicationDbContext).Assembly);
-//		// /Solution (5)
+//		// /Solution (6)
 //	}
 //}
