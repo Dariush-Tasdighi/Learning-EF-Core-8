@@ -1209,10 +1209,6 @@ try
 	// **************************************************
 
 	// **************************************************
-	// *** LINQ - Session 5 *****************************
-	// **************************************************
-
-	// **************************************************
 	// Learning Traditional LINQ
 	// **************************************************
 	// دستورات ذيل کاملا با هم معادل هستند
@@ -1814,11 +1810,53 @@ try
 	// **************************************************
 
 	// **************************************************
-	// *** LINQ - Session 6 *****************************
+	// Learning Group By:
+	//
+	//	Id		Country		StateCount
+	//
+	//	1		Country 1	10
+	//	2		Country 2	12
+	//	3		Country 3	27
+	//	4		Country 4	36
+	//	...
+	// بی‌معنی است Group By در مثال فوق
+	//
+	//	Id		Course		FullName		Grade
+	//
+	//	1		Math.		Full Name 1		15
+	//	2		Math.		Full Name 2		16
+	//	3		Phys.		Full Name 3		19
+	//	4		Math.		Full Name 4		17
+	//	5		Phys.		Full Name 5		11
+	//	...
+	//	تعداد نمرات ریاضی چند است؟
+	//	بالاترین نمره ریاضی چند است؟
+	//	کمترین نمره فیزیک چند است؟
+	//	میانگین نمرات ریاضی چند است؟
+	//
+	//	Id		Year		Course		FullName		Grade
+	//
+	//	1		1402		Math.		Full Name 1		15
+	//	2		1402		Math.		Full Name 2		16
+	//	3		1402		Phys.		Full Name 3		19
+	//	4		1402		Math.		Full Name 4		17
+	//	5		1402		Phys.		Full Name 5		11
+	//	6		1403		Math.		Full Name 1		13
+	//	7		1403		Math.		Full Name 2		14
+	//	8		1403		Phys.		Full Name 3		12
+	//	9		1403		Math.		Full Name 4		19
+	//	10		1403		Phys.		Full Name 5		16
+	//	...
+	//	تعداد نمرات ریاضی در سال ۱۴۰۳ چند است؟
+	//	بالاترین نمره ریاضی در سال ۱۴۰۲ چند است؟
+	//	کمترین نمره فیزیک در سال ۱۴۰۳ چند است؟
+	//	میانگین نمرات ریاضی در سال ۱۴۰۳ چند است؟
 	// **************************************************
 
 	// **************************************************
-	// Group By
+	// در مثال ذیل، فرض بر آن است که عدد جمعیت، یک عدد
+	// دقیق نبوده و به صورت حدودی تعریف شده است، مثلا
+	// حدود ۱۰ میلیون، حدود ۲۰ میلیون و غیره
 	// **************************************************
 	{
 		var data =
@@ -1839,7 +1877,7 @@ try
 		var data =
 			await
 			applicationDbContext.Countries
-			.Where(current => current.Population >= 120_000_000)
+			.Where(current => current.Population >= 120_000_000) // Best Practice!
 			.GroupBy(current => current.Population)
 			.Select(current => new
 			{
@@ -1851,21 +1889,23 @@ try
 			;
 	}
 
-	//{
-	//	var data =
-	//		await
-	//		applicationDbContext.Countries
-	//		.GroupBy(current => current.Population)
-	//		.Where(current => current.Population >= 120_000_000) // Error!
-	//		.Select(current => new
-	//		{
-	//			Population = current.Key,
+	// نکته: بهتر است که ابتدا محدود کنیم و بعد گروه بندی کنیم
 
-	//			Count = current.Count(),
-	//		})
-	//		.ToListAsync()
-	//		;
-	//}
+	{
+		var data =
+			await
+			applicationDbContext.Countries
+			.GroupBy(current => current.Population)
+			.Where(current => current.Key >= 120_000_000) // Bad Practice!
+			.Select(current => new
+			{
+				Population = current.Key,
+
+				Count = current.Count(),
+			})
+			.ToListAsync()
+			;
+	}
 
 	{
 		var data =
@@ -1878,7 +1918,7 @@ try
 
 				Count = current.Count(),
 			})
-			.Where(other => other.Population >= 120_000_000)
+			.Where(other => other.Population >= 120_000_000) // Bad Practice!
 			.ToListAsync()
 			;
 	}
@@ -1911,7 +1951,7 @@ try
 
 	//			Count = current.Count(),
 	//		})
-	//		.Where(other => other.Name.Contains('ا'))
+	//		.Where(other => other.Name.Contains('ا')) // Error!
 	//		.ToListAsync()
 	//		;
 	//}
