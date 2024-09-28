@@ -1812,7 +1812,7 @@ try
 	// **************************************************
 	// Learning Group By:
 	//
-	//	Id		Country		StateCount
+	//	Id		Name		StateCount
 	//
 	//	1		Country 1	10
 	//	2		Country 2	12
@@ -1863,11 +1863,11 @@ try
 			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
 			.ToListAsync()
 			;
@@ -1879,17 +1879,17 @@ try
 			applicationDbContext.Countries
 			.Where(current => current.Population >= 120_000_000) // Best Practice!
 			.GroupBy(current => current.Population)
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
 			.ToListAsync()
 			;
 	}
 
-	// نکته: بهتر است که ابتدا محدود کنیم و بعد گروه بندی کنیم
+	// نکته: بهتر است که ابتدا محدود کنیم و بعد گروه‌بندی کنیم
 
 	{
 		var data =
@@ -1897,11 +1897,11 @@ try
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
 			.Where(current => current.Key >= 120_000_000) // Bad Practice!
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
 			.ToListAsync()
 			;
@@ -1912,11 +1912,11 @@ try
 			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
 			.Where(other => other.Population >= 120_000_000) // Bad Practice!
 			.ToListAsync()
@@ -1929,11 +1929,11 @@ try
 			applicationDbContext.Countries
 			.Where(current => current.Name.Contains('I'))
 			.GroupBy(current => current.Population)
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
 			.ToListAsync()
 			;
@@ -1945,11 +1945,12 @@ try
 	//		await
 	//		applicationDbContext.Countries
 	//		.GroupBy(current => current.Population)
-	//		.Select(current => new
+	//		.Where(current => current.Name.Contains('ا')) // Error!
+	//		.Select(other => new
 	//		{
-	//			Population = current.Key,
+	//			Population = other.Key,
 
-	//			Count = current.Count(),
+	//			Count = other.Count(),
 	//		})
 	//		.Where(other => other.Name.Contains('ا')) // Error!
 	//		.ToListAsync()
@@ -1961,13 +1962,13 @@ try
 			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
-			.Where(other => other.Count >= 5)
+			.Where(other => other.Count >= 5) // Best Practice!
 			.ToListAsync()
 			;
 	}
@@ -1977,14 +1978,15 @@ try
 			await
 			applicationDbContext.Countries
 			.Where(current => current.Name.Contains('I'))
-			.GroupBy(current => current.Population)
-			.Select(current => new
+			.Where(current => current.Population >= 120_000_000) // Best Practice!
+			.GroupBy(current => new { current.Population }) // Best Practice!
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
-			.Where(other => other.Count >= 5)
+			.Where(other => other.Count >= 5) // Best Practice!
 			.ToListAsync()
 			;
 	}
@@ -1994,12 +1996,12 @@ try
 			await
 			applicationDbContext.Countries
 			.GroupBy(current => new { current.Population, current.HealthyRate })
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key.Population,
-				HealthyRate = current.Key.HealthyRate,
+				Population = other.Key.Population,
+				HealthyRate = other.Key.HealthyRate,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
 			.ToListAsync()
 			;
@@ -2010,12 +2012,12 @@ try
 			await
 			applicationDbContext.Countries
 			.GroupBy(current => new { current.Population, current.HealthyRate })
-			.Select(current => new
+			.Select(other => new
 			{
-				current.Key.Population,
-				current.Key.HealthyRate,
+				other.Key.Population,
+				other.Key.HealthyRate,
 
-				Count = current.Count(),
+				Count = other.Count(),
 			})
 			.ToListAsync()
 			;
@@ -2026,20 +2028,24 @@ try
 			await
 			applicationDbContext.Countries
 			.GroupBy(current => current.Population)
-			.Select(current => new
+			.Select(other => new
 			{
-				Population = current.Key,
+				Population = other.Key,
 
-				Count = current.Count(),
+				Count = other.Count(),
 
-				Max = current.Max(x => x.HealthyRate),
-				Min = current.Min(x => x.HealthyRate),
-				Sum = current.Sum(x => x.HealthyRate),
-				Average = current.Average(x => x.HealthyRate),
+				Max = other.Max(current => current.HealthyRate),
+				Min = other.Min(current => current.HealthyRate),
+				Sum = other.Sum(current => current.HealthyRate),
+				Average = other.Average(current => current.HealthyRate),
 			})
 			.ToListAsync()
 			;
 	}
+	// **************************************************
+
+	// **************************************************
+	// Migration فلسفه
 	// **************************************************
 }
 catch (Exception ex)
