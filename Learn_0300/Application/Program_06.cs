@@ -37,6 +37,8 @@
 //		// **************************************************
 
 //		// **************************************************
+//		// In DDD: Bad Practice!
+//		// **************************************************
 //		newUser =
 //			new User(username: username2);
 
@@ -48,8 +50,13 @@
 
 //		applicationDbContext.Add(entity: newUser);
 //		applicationDbContext.Add(entity: newUserProfile);
+
+//		// ?????
+//		//applicationDbContext.AddRange(newUser, newUserProfile);
 //		// **************************************************
 
+//		// **************************************************
+//		// In DDD: Bad Practice!
 //		// **************************************************
 //		newUser =
 //			new User(username: username3);
@@ -126,8 +133,7 @@
 //	public string FullName { get; set; } = fullName;
 //}
 
-//internal class UserConfiguration :
-//	object, IEntityTypeConfiguration<User>
+//internal class UserConfiguration : object, IEntityTypeConfiguration<User>
 //{
 //	public UserConfiguration() : base()
 //	{
@@ -159,8 +165,7 @@
 //	}
 //}
 
-//internal class UserProfileConfiguration :
-//	object, IEntityTypeConfiguration<UserProfile>
+//internal class UserProfileConfiguration : object, IEntityTypeConfiguration<UserProfile>
 //{
 //	public UserProfileConfiguration() : base()
 //	{
@@ -188,10 +193,13 @@
 //	}
 
 //	public DbSet<User> Users { get; set; }
-//	public DbSet<UserProfile> UserProfiles { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	/// <summary>
+//	/// عرف نیست
+//	/// </summary>
+//	//public DbSet<UserProfile> UserProfiles { get; set; }
+
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";

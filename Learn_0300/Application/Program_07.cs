@@ -65,8 +65,7 @@
 //	public string? String6 { get; set; }
 //}
 
-//internal class UserConfiguration :
-//	object, IEntityTypeConfiguration<User>
+//internal class UserConfiguration : object, IEntityTypeConfiguration<User>
 //{
 //	public UserConfiguration() : base()
 //	{
@@ -148,8 +147,7 @@
 
 //	public DbSet<User> Users { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";

@@ -122,8 +122,7 @@
 //	public virtual IList<User> Users { get; } = [];
 //}
 
-//internal class UserConfiguration :
-//	object, IEntityTypeConfiguration<User>
+//internal class UserConfiguration : object, IEntityTypeConfiguration<User>
 //{
 //	public UserConfiguration() : base()
 //	{
@@ -144,7 +143,7 @@
 //		builder
 //			.HasIndex(current => new { current.Username })
 //			.IsUnique(unique: true)
-//		;
+//			;
 
 //		builder
 //			.HasMany(current => current.Groups)
@@ -176,8 +175,7 @@
 //	}
 //}
 
-//internal class GroupConfiguration :
-//	object, IEntityTypeConfiguration<Group>
+//internal class GroupConfiguration : object, IEntityTypeConfiguration<Group>
 //{
 //	public GroupConfiguration() : base()
 //	{
@@ -207,8 +205,7 @@
 //	public DbSet<User> Users { get; set; }
 //	public DbSet<Group> Groups { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
@@ -228,11 +225,17 @@
 //		// [OR]
 
 //		// New!
+//		//optionsBuilder
+//		//	.LogTo(action: Console.WriteLine)
+//		//	;
+
+//		//optionsBuilder
+//		//	.UseSqlServer(connectionString: connectionString)
+//		//	;
+
+//		// [OR]
 //		optionsBuilder
 //			.LogTo(action: Console.WriteLine)
-//			;
-
-//		optionsBuilder
 //			.UseSqlServer(connectionString: connectionString)
 //			;
 //	}

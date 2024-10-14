@@ -64,8 +64,7 @@
 //	public string Username { get; set; } = username;
 //}
 
-//internal class RoleConfiguration :
-//	object, IEntityTypeConfiguration<Role>
+//internal class RoleConfiguration : object, IEntityTypeConfiguration<Role>
 //{
 //	public RoleConfiguration() : base()
 //	{
@@ -102,8 +101,7 @@
 //	}
 //}
 
-//internal class UserConfiguration :
-//	object, IEntityTypeConfiguration<User>
+//internal class UserConfiguration : object, IEntityTypeConfiguration<User>
 //{
 //	public UserConfiguration() : base()
 //	{
@@ -138,14 +136,14 @@
 //	public DbSet<Role> Roles { get; set; }
 //	public DbSet<User> Users { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0300;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-//		optionsBuilder.UseSqlServer
-//			(connectionString: connectionString);
+//		optionsBuilder
+//			.UseSqlServer(connectionString: connectionString)
+//			;
 //	}
 
 //	protected override void OnModelCreating(ModelBuilder modelBuilder)
