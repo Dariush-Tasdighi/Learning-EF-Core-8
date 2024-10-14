@@ -25,6 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Learn 400 - LINQ", "Learn 4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Learn_0400\Application\Application.csproj", "{8F2D6CEB-16BC-452C-9D3D-8F1C1BE487DE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{074A97C1-416A-4B37-9E31-0AFE8474E243}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Learning_Migrations.docx = docs\Learning_Migrations.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
