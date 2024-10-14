@@ -30,6 +30,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{074A97C1-4
 		docs\Learning_Migrations.docx = docs\Learning_Migrations.docx
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Learn 500 - Pagination", "Learn 500 - Pagination", "{85269A6F-DB0D-4487-98B4-60EBB8DD02CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApplication", "Learn_0500\MyApplication\MyApplication.csproj", "{868C0ED2-85F8-42A2-950E-0D9483F2E00C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +64,10 @@ Global
 		{8F2D6CEB-16BC-452C-9D3D-8F1C1BE487DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F2D6CEB-16BC-452C-9D3D-8F1C1BE487DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2D6CEB-16BC-452C-9D3D-8F1C1BE487DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868C0ED2-85F8-42A2-950E-0D9483F2E00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{868C0ED2-85F8-42A2-950E-0D9483F2E00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868C0ED2-85F8-42A2-950E-0D9483F2E00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{868C0ED2-85F8-42A2-950E-0D9483F2E00C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,7 @@ Global
 		{2F3065FF-1173-4FF0-A389-8530BBD24E31} = {5C1A5DA6-9E59-4704-AF3A-726B4A4F1F93}
 		{D9D02872-BE7F-4DEB-9098-CC54114FAF77} = {D10BD233-6B67-46D4-92B2-D336719E8B23}
 		{8F2D6CEB-16BC-452C-9D3D-8F1C1BE487DE} = {28033094-0BA3-45CF-9F3E-D6439D22D54D}
+		{868C0ED2-85F8-42A2-950E-0D9483F2E00C} = {85269A6F-DB0D-4487-98B4-60EBB8DD02CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B86F9743-EC22-4C94-A3BE-8BFA09344278}
