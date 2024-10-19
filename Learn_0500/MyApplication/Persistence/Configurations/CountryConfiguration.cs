@@ -19,5 +19,19 @@ internal sealed class CountryConfiguration : object, IEntityTypeConfiguration<Co
 			.IsUnique(unique: true)
 			;
 		// **************************************************
+
+		// **************************************************
+		for (var index = 1; index <= 1000; index++)
+		{
+			var data =
+				new Country(name: $"Country {index}")
+				{
+					Id = index,
+					Code = index,
+				};
+
+			builder.HasData(data: data);
+		}
+		// **************************************************
 	}
 }

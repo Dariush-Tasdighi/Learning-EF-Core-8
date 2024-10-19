@@ -23,22 +23,26 @@ partial class MainForm
 	private void InitializeComponent()
 	{
 		searchPanel = new Panel();
+		codeToLabel = new Label();
+		searchButton = new Button();
+		codeToTextBox = new TextBox();
+		codeFromTextBox = new TextBox();
+		nameTextBox = new TextBox();
+		codeFromLabel = new Label();
+		nameLabel = new Label();
 		paginationPanel = new Panel();
+		ofLabel = new Label();
+		pageCountLabel = new Label();
+		pageIndexLabel = new Label();
+		recordCountLabel = new Label();
+		goToLastPageButton = new Button();
+		goToNextPageButton = new Button();
+		goToPreviousPageButton = new Button();
+		goToFirstPageButton = new Button();
+		pageSizeLabel = new Label();
+		pageSizeComboBox = new ComboBox();
 		dataPanel = new Panel();
 		myDataGridView = new DataGridView();
-		nameLabel = new Label();
-		codeFromLabel = new Label();
-		nameTextBox = new TextBox();
-		codeFromTextBox = new TextBox();
-		codeToTextBox = new TextBox();
-		searchButton = new Button();
-		codeToLabel = new Label();
-		pageSizeComboBox = new ComboBox();
-		pageSizeLabel = new Label();
-		button1 = new Button();
-		button2 = new Button();
-		button3 = new Button();
-		button4 = new Button();
 		searchPanel.SuspendLayout();
 		paginationPanel.SuspendLayout();
 		dataPanel.SuspendLayout();
@@ -57,89 +61,8 @@ partial class MainForm
 		searchPanel.Dock = DockStyle.Top;
 		searchPanel.Location = new Point(0, 0);
 		searchPanel.Name = "searchPanel";
-		searchPanel.Size = new Size(800, 114);
+		searchPanel.Size = new Size(884, 114);
 		searchPanel.TabIndex = 0;
-		// 
-		// paginationPanel
-		// 
-		paginationPanel.Controls.Add(button4);
-		paginationPanel.Controls.Add(button3);
-		paginationPanel.Controls.Add(button2);
-		paginationPanel.Controls.Add(button1);
-		paginationPanel.Controls.Add(pageSizeLabel);
-		paginationPanel.Controls.Add(pageSizeComboBox);
-		paginationPanel.Dock = DockStyle.Bottom;
-		paginationPanel.Location = new Point(0, 408);
-		paginationPanel.Name = "paginationPanel";
-		paginationPanel.Size = new Size(800, 42);
-		paginationPanel.TabIndex = 1;
-		// 
-		// dataPanel
-		// 
-		dataPanel.Controls.Add(myDataGridView);
-		dataPanel.Dock = DockStyle.Fill;
-		dataPanel.Location = new Point(0, 114);
-		dataPanel.Name = "dataPanel";
-		dataPanel.Size = new Size(800, 294);
-		dataPanel.TabIndex = 2;
-		// 
-		// myDataGridView
-		// 
-		myDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-		myDataGridView.Dock = DockStyle.Fill;
-		myDataGridView.Location = new Point(0, 0);
-		myDataGridView.Name = "myDataGridView";
-		myDataGridView.RowHeadersWidth = 51;
-		myDataGridView.Size = new Size(800, 294);
-		myDataGridView.TabIndex = 0;
-		// 
-		// nameLabel
-		// 
-		nameLabel.AutoSize = true;
-		nameLabel.Location = new Point(12, 15);
-		nameLabel.Name = "nameLabel";
-		nameLabel.Size = new Size(49, 20);
-		nameLabel.TabIndex = 0;
-		nameLabel.Text = "&Name";
-		// 
-		// codeFromLabel
-		// 
-		codeFromLabel.AutoSize = true;
-		codeFromLabel.Location = new Point(12, 48);
-		codeFromLabel.Name = "codeFromLabel";
-		codeFromLabel.Size = new Size(82, 20);
-		codeFromLabel.TabIndex = 2;
-		codeFromLabel.Text = "&Code From";
-		// 
-		// nameTextBox
-		// 
-		nameTextBox.Location = new Point(100, 12);
-		nameTextBox.Name = "nameTextBox";
-		nameTextBox.Size = new Size(165, 27);
-		nameTextBox.TabIndex = 1;
-		// 
-		// codeFromTextBox
-		// 
-		codeFromTextBox.Location = new Point(100, 45);
-		codeFromTextBox.Name = "codeFromTextBox";
-		codeFromTextBox.Size = new Size(165, 27);
-		codeFromTextBox.TabIndex = 3;
-		// 
-		// codeToTextBox
-		// 
-		codeToTextBox.Location = new Point(302, 45);
-		codeToTextBox.Name = "codeToTextBox";
-		codeToTextBox.Size = new Size(165, 27);
-		codeToTextBox.TabIndex = 5;
-		// 
-		// searchButton
-		// 
-		searchButton.Location = new Point(100, 78);
-		searchButton.Name = "searchButton";
-		searchButton.Size = new Size(94, 29);
-		searchButton.TabIndex = 6;
-		searchButton.Text = "&Search";
-		searchButton.UseVisualStyleBackColor = true;
 		// 
 		// codeToLabel
 		// 
@@ -150,14 +73,152 @@ partial class MainForm
 		codeToLabel.TabIndex = 4;
 		codeToLabel.Text = "&To";
 		// 
-		// pageSizeComboBox
+		// searchButton
 		// 
-		pageSizeComboBox.FormattingEnabled = true;
-		pageSizeComboBox.Items.AddRange(new object[] { "10", "20", "50", "100" });
-		pageSizeComboBox.Location = new Point(90, 7);
-		pageSizeComboBox.Name = "pageSizeComboBox";
-		pageSizeComboBox.Size = new Size(151, 28);
-		pageSizeComboBox.TabIndex = 1;
+		searchButton.Location = new Point(100, 78);
+		searchButton.Name = "searchButton";
+		searchButton.Size = new Size(94, 29);
+		searchButton.TabIndex = 6;
+		searchButton.Text = "&Search";
+		searchButton.UseVisualStyleBackColor = true;
+		searchButton.Click += SearchButton_Click;
+		// 
+		// codeToTextBox
+		// 
+		codeToTextBox.Location = new Point(302, 45);
+		codeToTextBox.Name = "codeToTextBox";
+		codeToTextBox.Size = new Size(165, 27);
+		codeToTextBox.TabIndex = 5;
+		// 
+		// codeFromTextBox
+		// 
+		codeFromTextBox.Location = new Point(100, 45);
+		codeFromTextBox.Name = "codeFromTextBox";
+		codeFromTextBox.Size = new Size(165, 27);
+		codeFromTextBox.TabIndex = 3;
+		// 
+		// nameTextBox
+		// 
+		nameTextBox.Location = new Point(100, 12);
+		nameTextBox.Name = "nameTextBox";
+		nameTextBox.Size = new Size(165, 27);
+		nameTextBox.TabIndex = 1;
+		// 
+		// codeFromLabel
+		// 
+		codeFromLabel.AutoSize = true;
+		codeFromLabel.Location = new Point(12, 48);
+		codeFromLabel.Name = "codeFromLabel";
+		codeFromLabel.Size = new Size(82, 20);
+		codeFromLabel.TabIndex = 2;
+		codeFromLabel.Text = "&Code From";
+		// 
+		// nameLabel
+		// 
+		nameLabel.AutoSize = true;
+		nameLabel.Location = new Point(12, 15);
+		nameLabel.Name = "nameLabel";
+		nameLabel.Size = new Size(49, 20);
+		nameLabel.TabIndex = 0;
+		nameLabel.Text = "&Name";
+		// 
+		// paginationPanel
+		// 
+		paginationPanel.Controls.Add(ofLabel);
+		paginationPanel.Controls.Add(pageCountLabel);
+		paginationPanel.Controls.Add(pageIndexLabel);
+		paginationPanel.Controls.Add(recordCountLabel);
+		paginationPanel.Controls.Add(goToLastPageButton);
+		paginationPanel.Controls.Add(goToNextPageButton);
+		paginationPanel.Controls.Add(goToPreviousPageButton);
+		paginationPanel.Controls.Add(goToFirstPageButton);
+		paginationPanel.Controls.Add(pageSizeLabel);
+		paginationPanel.Controls.Add(pageSizeComboBox);
+		paginationPanel.Dock = DockStyle.Bottom;
+		paginationPanel.Location = new Point(0, 460);
+		paginationPanel.Name = "paginationPanel";
+		paginationPanel.Size = new Size(884, 42);
+		paginationPanel.TabIndex = 1;
+		// 
+		// ofLabel
+		// 
+		ofLabel.AutoSize = true;
+		ofLabel.Location = new Point(355, 10);
+		ofLabel.Name = "ofLabel";
+		ofLabel.Size = new Size(12, 20);
+		ofLabel.TabIndex = 4;
+		ofLabel.Text = ":";
+		// 
+		// pageCountLabel
+		// 
+		pageCountLabel.AutoSize = true;
+		pageCountLabel.Location = new Point(373, 10);
+		pageCountLabel.Name = "pageCountLabel";
+		pageCountLabel.Size = new Size(48, 20);
+		pageCountLabel.TabIndex = 5;
+		pageCountLabel.Text = "#,###";
+		// 
+		// pageIndexLabel
+		// 
+		pageIndexLabel.AutoSize = true;
+		pageIndexLabel.Location = new Point(301, 10);
+		pageIndexLabel.Name = "pageIndexLabel";
+		pageIndexLabel.Size = new Size(48, 20);
+		pageIndexLabel.TabIndex = 3;
+		pageIndexLabel.Text = "#,###";
+		// 
+		// recordCountLabel
+		// 
+		recordCountLabel.AutoSize = true;
+		recordCountLabel.Location = new Point(247, 10);
+		recordCountLabel.Name = "recordCountLabel";
+		recordCountLabel.Size = new Size(48, 20);
+		recordCountLabel.TabIndex = 2;
+		recordCountLabel.Text = "#,###";
+		// 
+		// goToLastPageButton
+		// 
+		goToLastPageButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+		goToLastPageButton.Location = new Point(778, 6);
+		goToLastPageButton.Name = "goToLastPageButton";
+		goToLastPageButton.Size = new Size(94, 29);
+		goToLastPageButton.TabIndex = 9;
+		goToLastPageButton.Text = "&Last";
+		goToLastPageButton.UseVisualStyleBackColor = true;
+		goToLastPageButton.Click += GoToLastPageButton_Click;
+		// 
+		// goToNextPageButton
+		// 
+		goToNextPageButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+		goToNextPageButton.Location = new Point(678, 6);
+		goToNextPageButton.Name = "goToNextPageButton";
+		goToNextPageButton.Size = new Size(94, 29);
+		goToNextPageButton.TabIndex = 8;
+		goToNextPageButton.Text = "&Next";
+		goToNextPageButton.UseVisualStyleBackColor = true;
+		goToNextPageButton.Click += GoToNextPageButton_Click;
+		// 
+		// goToPreviousPageButton
+		// 
+		goToPreviousPageButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+		goToPreviousPageButton.Location = new Point(578, 6);
+		goToPreviousPageButton.Name = "goToPreviousPageButton";
+		goToPreviousPageButton.Size = new Size(94, 29);
+		goToPreviousPageButton.TabIndex = 7;
+		goToPreviousPageButton.Text = "&Previous";
+		goToPreviousPageButton.UseVisualStyleBackColor = true;
+		goToPreviousPageButton.Click += GoToPreviousPageButton_Click;
+		// 
+		// goToFirstPageButton
+		// 
+		goToFirstPageButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+		goToFirstPageButton.Location = new Point(478, 6);
+		goToFirstPageButton.Name = "goToFirstPageButton";
+		goToFirstPageButton.Size = new Size(94, 29);
+		goToFirstPageButton.TabIndex = 6;
+		goToFirstPageButton.Text = "&First";
+		goToFirstPageButton.UseVisualStyleBackColor = true;
+		goToFirstPageButton.Click += GoToFirstPageButton_Click;
 		// 
 		// pageSizeLabel
 		// 
@@ -168,54 +229,48 @@ partial class MainForm
 		pageSizeLabel.TabIndex = 0;
 		pageSizeLabel.Text = "&Page Size";
 		// 
-		// button1
+		// pageSizeComboBox
 		// 
-		button1.Location = new Point(247, 6);
-		button1.Name = "button1";
-		button1.Size = new Size(94, 29);
-		button1.TabIndex = 2;
-		button1.Text = "&First";
-		button1.UseVisualStyleBackColor = true;
+		pageSizeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+		pageSizeComboBox.FormattingEnabled = true;
+		pageSizeComboBox.Items.AddRange(new object[] { "10", "20", "50", "100" });
+		pageSizeComboBox.Location = new Point(90, 7);
+		pageSizeComboBox.Name = "pageSizeComboBox";
+		pageSizeComboBox.Size = new Size(151, 28);
+		pageSizeComboBox.TabIndex = 1;
+		pageSizeComboBox.SelectedIndexChanged += PageSizeComboBox_SelectedIndexChanged;
 		// 
-		// button2
+		// dataPanel
 		// 
-		button2.Location = new Point(347, 6);
-		button2.Name = "button2";
-		button2.Size = new Size(94, 29);
-		button2.TabIndex = 3;
-		button2.Text = "&Previous";
-		button2.UseVisualStyleBackColor = true;
+		dataPanel.Controls.Add(myDataGridView);
+		dataPanel.Dock = DockStyle.Fill;
+		dataPanel.Location = new Point(0, 114);
+		dataPanel.Name = "dataPanel";
+		dataPanel.Size = new Size(884, 346);
+		dataPanel.TabIndex = 2;
 		// 
-		// button3
+		// myDataGridView
 		// 
-		button3.Location = new Point(447, 6);
-		button3.Name = "button3";
-		button3.Size = new Size(94, 29);
-		button3.TabIndex = 4;
-		button3.Text = "&Next";
-		button3.UseVisualStyleBackColor = true;
-		// 
-		// button4
-		// 
-		button4.Location = new Point(547, 6);
-		button4.Name = "button4";
-		button4.Size = new Size(94, 29);
-		button4.TabIndex = 5;
-		button4.Text = "&Last";
-		button4.UseVisualStyleBackColor = true;
+		myDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+		myDataGridView.Dock = DockStyle.Fill;
+		myDataGridView.Location = new Point(0, 0);
+		myDataGridView.Name = "myDataGridView";
+		myDataGridView.RowHeadersWidth = 51;
+		myDataGridView.Size = new Size(884, 346);
+		myDataGridView.TabIndex = 0;
 		// 
 		// MainForm
 		// 
 		AutoScaleDimensions = new SizeF(8F, 20F);
 		AutoScaleMode = AutoScaleMode.Font;
-		ClientSize = new Size(800, 450);
+		ClientSize = new Size(884, 502);
 		Controls.Add(dataPanel);
 		Controls.Add(paginationPanel);
 		Controls.Add(searchPanel);
 		Name = "MainForm";
 		StartPosition = FormStartPosition.CenterScreen;
 		Text = "Search";
-		Load += Form1_Load;
+		Load += MainForm_Load;
 		searchPanel.ResumeLayout(false);
 		searchPanel.PerformLayout();
 		paginationPanel.ResumeLayout(false);
@@ -238,10 +293,14 @@ partial class MainForm
 	private TextBox nameTextBox;
 	private Label codeFromLabel;
 	private Label nameLabel;
-	private Button button4;
-	private Button button3;
-	private Button button2;
-	private Button button1;
+	private Button goToLastPageButton;
+	private Button goToNextPageButton;
+	private Button goToPreviousPageButton;
+	private Button goToFirstPageButton;
 	private Label pageSizeLabel;
 	private ComboBox pageSizeComboBox;
+	private Label recordCountLabel;
+	private Label ofLabel;
+	private Label pageCountLabel;
+	private Label pageIndexLabel;
 }
