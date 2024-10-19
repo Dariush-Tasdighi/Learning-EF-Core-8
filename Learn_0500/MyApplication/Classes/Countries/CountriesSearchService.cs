@@ -21,7 +21,8 @@ public class CountriesSearchService : BaseSearchService
 
 		if (string.IsNullOrWhiteSpace(value: request.Name) == false)
 		{
-			query = query.Where(current => current.Name.ToLower().Contains(request.Name.ToLower()));
+			query = query.Where(current =>
+				current.Name.ToLower().Contains(request.Name.ToLower()));
 		}
 
 		if (string.IsNullOrWhiteSpace(value: request.CodeFrom) == false)
