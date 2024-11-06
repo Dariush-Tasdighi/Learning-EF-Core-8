@@ -4,7 +4,6 @@ using Application.Persistence;
 try
 {
 	using var applicationDbContext = new ApplicationDbContext();
-
 }
 catch (Exception ex)
 {

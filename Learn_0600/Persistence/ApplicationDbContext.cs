@@ -7,8 +7,8 @@ public class ApplicationDbContext : DbContext
 {
 	public ApplicationDbContext() : base()
 	{
-		//Database.Migrate();
-		Database.EnsureCreated();
+		Database.Migrate();
+		//Database.EnsureCreated();
 	}
 
 	public DbSet<Country> Countries { get; set; }
@@ -19,17 +19,17 @@ public class ApplicationDbContext : DbContext
 			(assembly: typeof(ApplicationDbContext).Assembly);
 	}
 
-protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-{
-	if (optionsBuilder.IsConfigured == false)
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		var connectionString =
-			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0600;MultipleActiveResultSets=true;TrustServerCertificate=True;";
+		if (optionsBuilder.IsConfigured == false)
+		{
+			var connectionString =
+				"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0600;MultipleActiveResultSets=true;TrustServerCertificate=True;";
 
-		optionsBuilder
-			.UseLazyLoadingProxies()
-			.UseSqlServer(connectionString: connectionString)
-			;
+			optionsBuilder
+				.UseLazyLoadingProxies()
+				.UseSqlServer(connectionString: connectionString)
+				;
+		}
 	}
-}
 }

@@ -10,7 +10,7 @@ internal sealed class CountryConfiguration : object, IEntityTypeConfiguration<Co
 	{
 		// **************************************************
 		builder
-			.HasIndex(current => new { current.Name })
+			.HasIndex(current => new { current.NewName })
 			.IsUnique(unique: true)
 			;
 		// **************************************************
@@ -19,7 +19,7 @@ internal sealed class CountryConfiguration : object, IEntityTypeConfiguration<Co
 		for (var index = 1; index <= 5; index++)
 		{
 			var data =
-				new Country(name: $"Country {index}")
+				new Country(newName: $"Country {index}")
 				{
 					Id = index,
 					Code = index,
