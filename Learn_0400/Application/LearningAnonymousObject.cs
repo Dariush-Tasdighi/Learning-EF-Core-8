@@ -27,6 +27,10 @@ public class SomeClass : object
 					Age = 20,
 					FullName = "Ali Reza Alavi",
 				};
+		}
+
+		{
+			var person = new Person();
 
 			person.Age = 30;
 			person.FullName = "Sara Ahmadi";

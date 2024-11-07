@@ -714,6 +714,13 @@ try
 		{
 			var stateName =
 				city.State?.Name;
+
+			// کد قدیمی
+			//string? stateName = null;
+			//if (city.State is not null)
+			//{
+			//	stateName = city.State.Name;
+			//}
 		}
 	}
 	// **************************************************
@@ -948,6 +955,7 @@ try
 			await
 			applicationDbContext.Hotels
 			.Where(current => current.SectionId == 100)
+			//.Where(current => current.Section!.Id == 100)
 			.ToListAsync()
 			;
 	}
@@ -957,6 +965,7 @@ try
 			await
 			applicationDbContext.Hotels
 			.Where(current => current.Section!.CityId == 101)
+			//.Where(current => current.Section!.City!.Id == 101)
 			.ToListAsync()
 			;
 	}
@@ -966,6 +975,7 @@ try
 			await
 			applicationDbContext.Hotels
 			.Where(current => current.Section!.City!.StateId == 102)
+			//.Where(current => current.Section!.City!.State!.Id == 102)
 			.ToListAsync()
 			;
 	}
@@ -975,6 +985,7 @@ try
 			await
 			applicationDbContext.Hotels
 			.Where(current => current.Section!.City!.State!.CountryId == 103)
+			//.Where(current => current.Section!.City!.State!.Country!.Id == 103)
 			.ToListAsync()
 			;
 	}
@@ -1284,10 +1295,6 @@ try
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
-	// **************************************************
-
-	// **************************************************
 	// ها string آرایه‌ای از
 	// Select Name From Countries WHERE ... ORDER BY ...
 	// **************************************************
@@ -1323,17 +1330,9 @@ try
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
-	// **************************************************
-
-	// **************************************************
 	// Note: See Learning Anonymous Object File!
 	// 
 	// See: LearningAnonymousObject.cs
-	// **************************************************
-
-	// **************************************************
-	// **************************************************
 	// **************************************************
 
 	// **************************************************
