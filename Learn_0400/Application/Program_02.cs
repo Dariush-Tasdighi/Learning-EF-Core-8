@@ -2057,7 +2057,7 @@ try
 		var username = "dariush";
 		var password = " 1 = 1 ; ";
 
-		var query = $"SELECT * FROM Users WHERE Username = dariush && 1 = 1; Password = {password}";
+		var query = $"SELECT * FROM Users WHERE Username = {username} && 1 = 1; Password = {password}";
 	}
 	// **************************************************
 
