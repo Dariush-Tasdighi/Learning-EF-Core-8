@@ -3,8 +3,10 @@ using System;
 using ViewModels;
 using System.Linq;
 using Application.Persistence;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
+using System.Data;
+using Application;
 
 try
 {
@@ -1257,10 +1259,6 @@ try
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
-	// **************************************************
-
-	// **************************************************
 	// ها Country آرایه‌ای از
 	// Select * From Countries WHERE ... ORDER BY ...
 	// **************************************************
@@ -1393,10 +1391,6 @@ try
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
-	// **************************************************
-
-	// **************************************************
 	{
 		var data =
 			from Country in applicationDbContext.Countries
@@ -1422,10 +1416,6 @@ try
 			.ToListAsync()
 			;
 	}
-	// **************************************************
-
-	// **************************************************
-	// **************************************************
 	// **************************************************
 
 	// **************************************************
@@ -1457,14 +1447,15 @@ try
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
-	// **************************************************
-
-	// **************************************************
 	{
+		//var data =
+		//	from Country in applicationDbContext.Countries
+		//	select (new CountryViewModel1() { NewName = Country.Name })
+		//	;
+
 		var data =
 			from Country in applicationDbContext.Countries
-			select (new CountryViewModel1() { NewName = Country.Name })
+			select (new CountryViewModel1 { NewName = Country.Name })
 			;
 
 		foreach (var currentCountryViewModel in data)
@@ -1481,24 +1472,27 @@ try
 	// مدرن
 	// **************************************************
 	{
+		//var data =
+		//	await
+		//	applicationDbContext.Countries
+		//	.Select(current => new CountryViewModel1() { NewName = current.Name })
+		//	.ToListAsync()
+		//	;
+
 		var data =
 			await
 			applicationDbContext.Countries
-			.Select(current => new CountryViewModel1() { NewName = current.Name })
+			.Select(current => new CountryViewModel1 { NewName = current.Name })
 			.ToListAsync()
 			;
 	}
 	// **************************************************
 
 	// **************************************************
-	// **************************************************
-	// **************************************************
-
-	// **************************************************
 	{
 		var data =
 			from Country in applicationDbContext.Countries
-			select (new CountryViewModel2() { Name = Country.Name })
+			select (new CountryViewModel2 { Name = Country.Name })
 			;
 
 		foreach (var currentCountryViewModel in data)
@@ -1518,7 +1512,7 @@ try
 		var data =
 			await
 			applicationDbContext.Countries
-			.Select(current => (new CountryViewModel2() { Name = current.Name }))
+			.Select(current => (new CountryViewModel2 { Name = current.Name }))
 			.ToListAsync()
 			;
 	}
@@ -1530,7 +1524,7 @@ try
 	//{
 	//	var data =
 	//		from Country in applicationDbContext.Countries
-	//		select (new CountryViewModel2() { Country.Name })
+	//		select (new CountryViewModel2 { Country.Name })
 	//		;
 
 	//	foreach (var currentCountryViewModel in data)
@@ -1551,7 +1545,7 @@ try
 	//	var data =
 	//		await
 	//		applicationDbContext.Countries
-	//		.Select(current => (new CountryViewModel2() { current.Name }))
+	//		.Select(current => (new CountryViewModel2 { current.Name }))
 	//		.ToListAsync()
 	//		;
 	//}
@@ -1654,8 +1648,6 @@ try
 	}
 	// **************************************************
 
-	// **************************************************
-	// **************************************************
 	// **************************************************
 	{
 		var data =
@@ -1804,8 +1796,6 @@ try
 			.ToListAsync()
 			;
 	}
-	// **************************************************
-	// **************************************************
 	// **************************************************
 
 	// **************************************************
@@ -1967,7 +1957,7 @@ try
 
 				Count = other.Count(),
 			})
-			.Where(other => other.Count >= 5) // Best Practice!
+			.Where(other => other.Count >= 5)
 			.ToListAsync()
 			;
 	}
@@ -2040,6 +2030,156 @@ try
 			})
 			.ToListAsync()
 			;
+	}
+	// **************************************************
+
+	// **************************************************
+	// **************************************************
+	// **************************************************
+	// Not LINQ!
+	// **************************************************
+	// **************************************************
+	// **************************************************
+
+	// **************************************************
+	// SQL Injection!
+	// **************************************************
+	{
+		// Login
+		var username = "dariush";
+		var password = "1234512345";
+
+		var query = $"SELECT * FROM Users WHERE Username = {username} && Password = {password}";
+	}
+
+	{
+		// Hacker -> Login
+		var username = "dariush";
+		var password = " 1 = 1 ; ";
+
+		var query = $"SELECT * FROM Users WHERE Username = dariush && 1 = 1; Password = {password}";
+	}
+	// **************************************************
+
+	// **************************************************
+	// روش خطرناک
+	// **************************************************
+	{
+		var countryName = "";
+
+		var query =
+			"DELETE FROM Countries WHERE CountryName = '" + countryName + "'";
+	}
+
+	{
+		var countryName = "';DROP DATABASE;SELECT * FROM COUNTRIES WHERE NAME ='";
+
+		var query =
+			"DELETE FROM Countries WHERE CountryName = '" + countryName + "'";
+
+		//"DELETE FROM Countries WHERE CountryName = '';DROP DATABASE;SELECT * FROM COUNTRIES WHERE NAME =''";
+	}
+	// **************************************************
+
+	// **************************************************
+	{
+		var query = $"";
+
+		int affectedRows =
+			applicationDbContext.Database
+			.ExecuteSqlRaw(sql: query);
+	}
+
+	{
+		var query = $"";
+
+		var affectedRows =
+			await
+			applicationDbContext.Database
+			.ExecuteSqlRawAsync(sql: query);
+	}
+	// **************************************************
+
+	// **************************************************
+	{
+		var countryName = "";
+
+		//Note: Sql Injection Free!
+		var query =
+			"DELETE FROM Countries WHERE CountryName = @CName";
+
+		var sqlParameter =
+			new SqlParameter(parameterName: "CName", value: countryName);
+
+		var affectedRows =
+			applicationDbContext.Database
+			.ExecuteSqlRaw(sql: query, sqlParameter);
+	}
+	// **************************************************
+
+	// **************************************************
+	{
+		var countryName = "";
+		var toCountryCode = "";
+		var fromCountryCode = "";
+
+		var query =
+			"DELETE FROM Countries WHERE Id >= @FromCode AND Id <= @ToCode AND CountryName LIKE '%@CName%'";
+
+		var sqlParameter1 =
+			new SqlParameter(parameterName: "CName", value: countryName);
+
+		var sqlParameter2 =
+			new SqlParameter(parameterName: "FromCode", value: fromCountryCode);
+
+		var sqlParameter3 =
+			new SqlParameter(parameterName: "ToCode", value: toCountryCode);
+
+		var sqlParameter4 =
+			new SqlParameter
+			{
+				ParameterName = "Output1",
+				Direction = ParameterDirection.Output,
+			};
+
+		var sqlParameter5 =
+			new SqlParameter
+			{
+				Value = "Some Value!",
+				ParameterName = "InputOutput1",
+				Direction = ParameterDirection.InputOutput,
+			};
+
+		// در دستور ذیل، ترتیب نوشتن پارامترها اهمیتی ندارد
+		var affectedRows =
+			await
+			applicationDbContext.Database
+			.ExecuteSqlRawAsync(query, sqlParameter3, sqlParameter1, sqlParameter2, sqlParameter4, sqlParameter5);
+	}
+	// **************************************************
+
+	// **************************************************
+	{
+		var countryName = "";
+		var toCountryCode = "";
+		var fromCountryCode = "";
+
+		var query =
+			"DELETE FROM Countries WHERE Id >= @FromCode AND Id <= @ToCode AND CountryName LIKE '%@CName%'";
+
+		var dataParameter1 =
+			ProviderFactory.GetDataParameter(parameterName: "CName", value: countryName);
+
+		var dataParameter2 =
+			ProviderFactory.GetDataParameter(parameterName: "FromCode", value: fromCountryCode);
+
+		var dataParameter3 =
+			ProviderFactory.GetDataParameter(parameterName: "ToCode", value: toCountryCode);
+
+		var affectedRows =
+			await
+			applicationDbContext.Database
+			.ExecuteSqlRawAsync(query, dataParameter1, dataParameter2, dataParameter3);
 	}
 	// **************************************************
 

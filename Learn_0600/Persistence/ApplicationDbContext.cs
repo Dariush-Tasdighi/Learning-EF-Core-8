@@ -11,6 +11,12 @@ public class ApplicationDbContext : DbContext
 		//Database.EnsureCreated();
 	}
 
+	public ApplicationDbContext(DbContextOptions options) : base(options: options)
+	{
+		Database.Migrate();
+		//Database.EnsureCreated();
+	}
+
 	public DbSet<Country> Countries { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106100621_Version_002")]
-    partial class Version_002
+    [Migration("20241121105013_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,17 +38,14 @@ namespace Persistence.Migrations
                     b.Property<int>("Code")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NewName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NewName")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Countries");
@@ -58,31 +55,31 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             Code = 1,
-                            NewName = "Country 1"
+                            Name = "Country 1"
                         },
                         new
                         {
                             Id = 2,
                             Code = 2,
-                            NewName = "Country 2"
+                            Name = "Country 2"
                         },
                         new
                         {
                             Id = 3,
                             Code = 3,
-                            NewName = "Country 3"
+                            Name = "Country 3"
                         },
                         new
                         {
                             Id = 4,
                             Code = 4,
-                            NewName = "Country 4"
+                            Name = "Country 4"
                         },
                         new
                         {
                             Id = 5,
                             Code = 5,
-                            NewName = "Country 5"
+                            Name = "Country 5"
                         });
                 });
 #pragma warning restore 612, 618
