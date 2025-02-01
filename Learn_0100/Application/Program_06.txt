@@ -1,16 +1,8 @@
 ﻿**************************************************
-**************************************************
-**************************************************
-*** Session 7 ************************************
-**************************************************
-**************************************************
-**************************************************
-
-**************************************************
 کم کم می‌خواهیم وارد دوره اصلی شویم
 
-EF Core 8
-LINQ to Entity Framework Core Code First 8:
+EF Core 9
+LINQ to Entity Framework Core Code First 9:
 
 1. Code First
 2. Entity Framework (EF) / Entity Framework Core (EF Core)
@@ -26,15 +18,15 @@ Standards & DataAnnotations:
 Standards without any DataAnnotations!
 **************************************************
 // Best Practice
-public int Id { get; set; }
+public int/long/Guid Id { get; set; }
 
-public int ID { get; set; }
+public int/long/Guid ID { get; set; }
 
-public int ProductId { get; set; }
-public int [ClassName]Id { get; set; }
+public int/long/Guid ProductId { get; set; }
+public int/long/Guid [ClassName]Id { get; set; }
 
-public int ProductID { get; set; }
-public int [ClassName]ID { get; set; }
+public int/long/Guid ProductID { get; set; }
+public int/long/Guid [ClassName]ID { get; set; }
 **************************************************
 
 **************************************************
@@ -100,7 +92,7 @@ foreach (var file in files)
 using System.Linq;
 
 var users =
-	databaseContext.Users
+	applicationDbContext.Users
 	.Where(current => current.Age > 20)
 	.ToList()
 	;
@@ -152,7 +144,7 @@ Primary Constructor in .NET 8.x
 **************************************************
 namespace Models;
 
-public class Category(string name) : object()
+public class Category(string name) : object
 {
 	/// <summary>
 	/// Primary Key -> Unique (منحصر به فرد)
@@ -168,7 +160,7 @@ POCO -> Plain Old CLR Objects
 **************************************************
 namespace Models;
 
-public class Category(string name) : Base.Entity()
+public class Category(string name) : Base.Entity
 {
 	public string Name { get; set; } = name;
 }

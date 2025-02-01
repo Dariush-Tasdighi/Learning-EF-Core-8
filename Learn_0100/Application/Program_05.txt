@@ -1,17 +1,19 @@
 ﻿**************************************************
 (Solution Folder)
+[Physical Folder]
 [[Class Library / Project]]
-[Folder Name]
 **************************************************
 
 **************************************************
 Sample:
 
-	(src)
+	- Create a Blank Solution!
 
-		[[Application]]
+		(src) <-> [src]
 
-			[Models]
+			[[MyApplication]]
+
+				[Models]
 **************************************************
 
 **************************************************
@@ -21,7 +23,7 @@ Table (1..N)				Database (1..1)
 
 DataTable (1..N)			DataSet (1..1)
 
-Model / Entity (1..N)		DatabaseContext (1..1)
+Model / Entity (1..N)		ApplicationDbContext (1..1)
 **************************************************
 
 **************************************************
@@ -36,18 +38,18 @@ Model / Entity (1..N)		DatabaseContext (1..1)
 		User.cs
 		Product.cs
 
-		DatabaseContext.cs
+		ApplicationDbContext.cs
 **************************************************
 
 **************************************************
 [[EShop]]
 
-[[Models]]
+[[Models]] -> Class Library
 
 	User.cs
 	Product.cs
 
-	DatabaseContext.cs
+	ApplicationDbContext.cs
 **************************************************
 
 **************************************************
@@ -55,7 +57,9 @@ Model / Entity (1..N)		DatabaseContext (1..1)
 **************************************************
 System.IO
 System.Guid
+System.Web.Mvc
 
+DT   -> DT
 DAL  -> Dal
 DTX  -> Dtx
 DTAT -> Dtat
@@ -71,7 +75,7 @@ DTAT -> Dtat
 
 [[Dal, DataAccess, DataAccessLayer, Data]]
 
-	DatabaseContext.cs
+	ApplicationDbContext.cs
 **************************************************
 
 **************************************************
@@ -86,7 +90,7 @@ DTAT -> Dtat
 
 	[Persistance]
 
-		DatabaseContext.cs
+		ApplicationDbContext.cs
 **************************************************
 
 **************************************************
@@ -99,5 +103,5 @@ DTAT -> Dtat
 
 [[Persistance]]
 
-	DatabaseContext.cs
+	ApplicationDbContext.cs
 **************************************************

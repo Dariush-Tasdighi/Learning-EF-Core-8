@@ -33,6 +33,7 @@ public class Category : object
 /// In Separate File and Folder!
 ///
 /// DatabaseContext -> استاندارد قبلی من
+/// ApplicationDbContext -> استاندارد جدید من
 /// </summary>
 public class ApplicationDbContext : DbContext
 {
