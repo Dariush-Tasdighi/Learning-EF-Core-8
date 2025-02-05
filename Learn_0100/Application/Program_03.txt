@@ -34,21 +34,6 @@ Update:
 **************************************************
 
 **************************************************
-[[[using System;]]]
-
-namespace Application
-{
-	internal class Program
-	{
-		static void Main(string[] args)
-		{
-			Console.WriteLine("Hello, World!");
-		}
-	}
-}
-**************************************************
-
-**************************************************
 namespace Application
 {
 	internal class Program
@@ -62,13 +47,30 @@ namespace Application
 **************************************************
 
 **************************************************
+[[[using System;]]]
+
+namespace Application
+{
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
+			Console.WriteLine([[[value: ]]]"Hello, World!");
+		}
+	}
+}
+**************************************************
+
+**************************************************
+using System;
+
 [[[namespace Application;]]]
 
 internal class Program
 {
 	static void Main([[[string[] args]]])
 	{
-		System.Console.WriteLine(value: "Hello, World!");
+		Console.WriteLine(value: "Hello, World!");
 	}
 }
 **************************************************
@@ -80,6 +82,8 @@ internal class Program
 **************************************************
 
 **************************************************
+using System;
+
 namespace Application;
 
 internal class Program [[[: object]]]
@@ -90,12 +94,14 @@ internal class Program [[[: object]]]
 
 	[[[private]]] static void Main()
 	{
-		System.Console.WriteLine(value: "Hello, World!");
+		Console.WriteLine(value: "Hello, World!");
 	}
 }
 **************************************************
 
 **************************************************
+using System;
+
 namespace Application;
 
 internal [[[static]]] class Program : object
@@ -106,12 +112,14 @@ internal [[[static]]] class Program : object
 
 	private static void Main()
 	{
-		System.Console.WriteLine(value: "Hello, World!");
+		Console.WriteLine(value: "Hello, World!");
 	}
 }
 **************************************************
 
 **************************************************
+using System;
+
 namespace Application;
 
 internal static class Program : object
@@ -122,13 +130,15 @@ internal static class Program : object
 
 	private static void Main()
 	{
-		System.Console.WriteLine(value: $"Max Value of 'int': {int.MaxValue}");
-		System.Console.WriteLine(value: $"Max Value of 'long': {long.MaxValue}");
+		Console.WriteLine(value: $"Max Value of 'int': {int.MaxValue}");
+		Console.WriteLine(value: $"Max Value of 'long': {long.MaxValue}");
 	}
 }
 **************************************************
 
 **************************************************
+using System;
+
 namespace Application;
 
 internal static class Program : object
@@ -139,16 +149,18 @@ internal static class Program : object
 
 	private static void Main()
 	{
-		System.Console.WriteLine
+		Console.WriteLine
 			(value: $"Max Value of 'int': {int.MaxValue}");
 
-		System.Console.WriteLine
+		Console.WriteLine
 			(value: $"Max Value of 'long': {long.MaxValue}");
 	}
 }
 **************************************************
 
 **************************************************
+using System;
+
 namespace Application;
 
 internal static class Program : object
@@ -159,16 +171,18 @@ internal static class Program : object
 
 	private static void Main()
 	{
-		System.Console.WriteLine
+		Console.WriteLine
 			(value: $"Max Value of 'int': {int.MaxValue.ToString(format: "#,##0")}");
 
-		System.Console.WriteLine
+		Console.WriteLine
 			(value: $"Max Value of 'long': {long.MaxValue.ToString(format: "#,##0")}");
 	}
 }
 **************************************************
 
 **************************************************
+using System;
+
 namespace Application;
 
 internal static class Program : object
@@ -179,11 +193,29 @@ internal static class Program : object
 
 	private static void Main()
 	{
-		System.Console.WriteLine
+		Console.WriteLine
 			(value: $"Max Value of 'int': {int.MaxValue:#,##0}");
 
-		System.Console.WriteLine
+		Console.WriteLine
 			(value: $"Max Value of 'long': {long.MaxValue:#,##0}");
 	}
 }
+**************************************************
+
+**************************************************
+نداشته باشد؟ Primary Key آیا یک جدول می‌تواند
+
+بلی، ولی نه برای جداول عملیاتی
+
+	- Bulk Insert
+
+داشته باشیم؟ Primary Key آیا می‌توانیم چند
+
+خیر
+
+می‌تواند شامل یک فیلد و یا چند فیلد باشد Primary Key ولی
+
+Best Practice:
+
+آن فقط شامل یک فیلد باشد Primary Key جداول را به گونه‌ای طراحی می‌کنیم که
 **************************************************

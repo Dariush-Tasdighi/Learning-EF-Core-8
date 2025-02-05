@@ -2,7 +2,8 @@
 کم کم می‌خواهیم وارد دوره اصلی شویم
 
 EF Core 9
-LINQ to Entity Framework Core Code First 9:
+
+LINQ to Entity Framework Core Code First:
 
 1. Code First
 2. Entity Framework (EF) / Entity Framework Core (EF Core)
@@ -11,14 +12,17 @@ LINQ to Entity Framework Core Code First 9:
 
 **************************************************
 Standards & DataAnnotations:
-	We can use a lot of 'DataAnnotations' without install any Nugets!
+	We can use a lot of 'DataAnnotations' without install any NuGets!
 **************************************************
 
 **************************************************
 Standards without any DataAnnotations!
 **************************************************
-// Best Practice
-public int/long/Guid Id { get; set; }
+// Best Practice for Primary Key
+
+Model / Entity: Product (Class Name)
+
+public int/long/Guid Id { get; set; } -> Best Practice
 
 public int/long/Guid ID { get; set; }
 
@@ -32,10 +36,10 @@ public int/long/Guid [ClassName]ID { get; set; }
 **************************************************
 When we should use DataAnnotations!
 **************************************************
-// Error!
+// Error! - Bad Practice
 public int Code { get; set; }
 
-[System.ComponentModel.DataAnnotations.Key]
+[System.ComponentModel.DataAnnotations.Key] -> Attribute
 public int Code { get; set; }
 **************************************************
 
@@ -136,7 +140,7 @@ foreach (var file in files)
 **************************************************
 
 **************************************************
-Sample Model (Entity): Category
+Sample Model / Entity: Category
 **************************************************
 
 **************************************************
@@ -160,7 +164,7 @@ POCO -> Plain Old CLR Objects
 **************************************************
 namespace Models;
 
-public class Category(string name) : Base.Entity
+public class Category(string name) : Entity
 {
 	public string Name { get; set; } = name;
 }
@@ -169,6 +173,6 @@ public class Category(string name) : Base.Entity
 **************************************************
 You should install:
 
-- Microsoft SQL Server Developer Edition!
+- Microsoft SQL Server Developer Edition! -> No UI / Just Windows Service
 - Microsoft SQL Server Management Studio (SSMS)
 **************************************************

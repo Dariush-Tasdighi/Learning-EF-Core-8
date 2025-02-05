@@ -1,7 +1,9 @@
 ﻿**************************************************
+using System;
+
 Person person = new Person();
 
-person.Age = 51;
+person.Age = 52;
 person.FullName = "Dariush Tasdighi";
 
 person.ShowInformation();
@@ -14,16 +16,18 @@ public class Person
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
 
 **************************************************
+using System;
+
 Person person = new Person();
 
-person.Age = 51;
+person.Age = 52;
 person.FullName = "Dariush Tasdighi";
 
 person.ShowInformation();
@@ -42,8 +46,8 @@ public class Person : [[[object]]]
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
@@ -51,12 +55,14 @@ public class Person : [[[object]]]
 **************************************************
 الزامی است FullName فرض کنید که
 **************************************************
+using System;
+
 [[[
 //Person person = new Person();
 Person person = new Person(fullName: "Dariush Tasdighi");
 ]]]
 
-person.Age = 51;
+person.Age = 52;
 
 [[[
 //person.FullName = "Dariush Tasdighi";
@@ -79,8 +85,8 @@ public class Person : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
@@ -95,10 +101,12 @@ public class Person : object
                          2
 (2,0) + (2,1) + (2,2) = 2  = 4 حالت
 **************************************************
+using System;
+
 Person person1 = new Person();
-Person person2 = new Person(age: 51);
+Person person2 = new Person(age: 52);
 Person person3 = new Person(fullName: "Dariush Tasdighi");
-Person person4 = new Person(fullName: "Dariush Tasdighi", age: 51);
+Person person4 = new Person(fullName: "Dariush Tasdighi", age: 52);
 
 public class Person : object
 {
@@ -128,8 +136,8 @@ public class Person : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
@@ -152,14 +160,16 @@ Constructor Overload
 **************************************************
 طریقه حرفه‌ای ساخت شیء
 **************************************************
+using System;
+
 // **********
 //Person person = new Person();
-//person.Age = 51;
+//person.Age = 52;
 //person.FullName = "Dariush Tasdighi";
 // **********
 
 // **********
-//Person person = new Person() { FullName = "Dariush Tasdighi", Age = 5 };
+//Person person = new Person() { FullName = "Dariush Tasdighi", Age = 52 };
 // **********
 
 // **********
@@ -167,7 +177,7 @@ Constructor Overload
 //	new Person()
 //	{
 //		FullName = "Dariush Tasdighi",
-//		Age = 5
+//		Age = 52
 //	};
 // **********
 
@@ -176,7 +186,7 @@ Constructor Overload
 //	new()
 //	{
 //		FullName = "Dariush Tasdighi",
-//		Age = 5
+//		Age = 52
 //	};
 // **********
 
@@ -185,7 +195,7 @@ Constructor Overload
 //	new Person()
 //	{
 //		FullName = "Dariush Tasdighi",
-//		Age = 5
+//		Age = 52
 //	};
 // **********
 
@@ -194,7 +204,7 @@ Constructor Overload
 //	new Person
 //	{
 //		FullName = "Dariush Tasdighi",
-//		Age = 5
+//		Age = 52
 //	};
 // **********
 
@@ -203,7 +213,7 @@ Constructor Overload
 //	new Person
 //	{
 //		FullName = "Dariush Tasdighi",
-//		Age = 5,
+//		Age = 52,
 //	};
 // **********
 
@@ -213,7 +223,7 @@ Constructor Overload
 var person =
 	new Person
 	{
-		Age = 5,
+		Age = 52,
 		FullName = "Dariush Tasdighi",
 	};
 // **********
@@ -230,20 +240,22 @@ public class Person : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
 
 **************************************************
+using System;
+
 // **********
 // Best Practice
 // **********
 var person =
 	new Person(fullName: "Dariush Tasdighi")
 	{
-		Age = 51,
+		Age = 52,
 	};
 
 public class Person : object
@@ -261,8 +273,8 @@ public class Person : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
@@ -270,6 +282,8 @@ public class Person : object
 **************************************************
 Nullable in .NET 6.x
 **************************************************
+using System;
+
 public class Person : object
 {
 	public Person() : base()
@@ -282,10 +296,14 @@ public class Person : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
+**************************************************
+
+**************************************************
+using System;
 
 public class Person : object
 {
@@ -300,8 +318,8 @@ public class Person : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
@@ -309,10 +327,12 @@ public class Person : object
 **************************************************
 جمع‌بندی موارد تا قبل از دات‌نت نسخه ۸
 **************************************************
+using System;
+
 var person =
 	new Person(fullName: "Dariush Tasdighi")
 	{
-		Age = 51,
+		Age = 52,
 	};
 
 public class Person : object
@@ -328,8 +348,8 @@ public class Person : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************
@@ -337,10 +357,12 @@ public class Person : object
 **************************************************
 Primary Constructor in .NET 8.x
 **************************************************
+using System;
+
 var person =
 	new Person(fullName: "Dariush Tasdighi")
 	{
-		Age = 51,
+		Age = 52,
 	};
 
 person.ShowInformation();
@@ -353,8 +375,8 @@ public class Person(string fullName) : object
 
 	public void ShowInformation()
 	{
-		System.Console.WriteLine
-			($"I'm {FullName} and {Age} years old.");
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
 	}
 }
 **************************************************

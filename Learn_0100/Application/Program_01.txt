@@ -1,10 +1,4 @@
 ﻿**************************************************
-در این دوره
-کلی نکات شیء‌گرایی و سی‌شارپ نیز یاد خواهیم گرفت
-خصوصا نکات هیجان‌انگیزی که در دات‌نت ۸ اضافه شده است
-**************************************************
-
-**************************************************
 EF Core 9:
 
 نام کامل:
@@ -13,9 +7,13 @@ LINQ to Entity Framework Core Code First with .NET 9.x
 
 در واقع این دوره، دو دوره است:
 
-LINQ with .NET 9.x
+LINQ
 &
-Entity Framework Core Code First with .NET 9.x
+Entity Framework Core
+&
+Code First
+
+	with .NET 9.x
 **************************************************
 
 **************************************************
@@ -44,9 +42,11 @@ ADO.NET: ActiveX Data Object in .NET Framework	(Database First)
 
 1390 (شمسی):
 
-	ORM: Object-relational Mapper
+	(Code First)
 
-		Object Oriented Thinking / Programming to RDBMS (Relational Database System) Mapper
+		ORM: Object-relational Mapper
+
+			Object Oriented Thinking / RDBMS (Relational Database System) / Mapper
 
 		In JAVA:
 
@@ -61,18 +61,18 @@ ADO.NET: ActiveX Data Object in .NET Framework	(Database First)
 
 	EF											(Database First)
 	EF											(Model First)
-	EF											(Code First!!!)
+	EF											(Code First)
 
-	EF.Core										(Code First) -> فوق‌العاده سریع‌تر
+	EF Core										(Code First) -> فوق‌العاده سریع‌تر
 
 	امکانات عجیب غریب
 
-		Domain Driven Design -> DDD
+		Domain Driven Design -> DDD -> متدولوژی
 **************************************************
 
 **************************************************
 چیست؟ EF Core اگر یکی پرسید مهم‌ترین دلایل استفاده از
-
+**************************************************
 1. Auto Mapping
 2. Independent Database Provider
 

@@ -1,7 +1,7 @@
 ﻿**************************************************
 (Solution Folder)
 [Physical Folder]
-[[Class Library / Project]]
+[[Project: Class Library, ...]]
 **************************************************
 
 **************************************************
@@ -17,13 +17,19 @@ Sample:
 **************************************************
 
 **************************************************
+docs -> Documents / ...
+src  -> Source / Sources / SourceCodes / ...
+test / tests
+**************************************************
+
+**************************************************
 آموزش یک تناظر ساده
 **************************************************
-Table (1..N)				Database (1..1)
+Table (1..N)				Database (1)
 
-DataTable (1..N)			DataSet (1..1)
+DataTable (1..N)			DataSet (1)
 
-Model / Entity (1..N)		ApplicationDbContext (1..1)
+Model / Entity (1..N)		ApplicationDbContext (1)
 **************************************************
 
 **************************************************
@@ -86,11 +92,9 @@ DTAT -> Dtat
 	User.cs
 	Product.cs
 
-[[Infrastructure]]
+[[Persistance]]
 
-	[Persistance]
-
-		ApplicationDbContext.cs
+	ApplicationDbContext.cs
 **************************************************
 
 **************************************************
@@ -101,7 +105,9 @@ DTAT -> Dtat
 	User.cs
 	Product.cs
 
-[[Persistance]]
+[[Infrastructure]]
 
-	ApplicationDbContext.cs
+	[Persistance]
+
+		ApplicationDbContext.cs
 **************************************************

@@ -1,71 +1,22 @@
-﻿//// **********
-////Person person = new Person();
+﻿using System;
 
-////person.FullName = "Dariush Tasdighi";
-////person.Age = 52;
-//// **********
+var person =
+	new Person(fullName: "Dariush Tasdighi")
+	{
+		Age = 52,
+	};
 
-//// **********
-////Person person = new Person() { FullName = "Dariush Tasdighi", Age = 52 };
-//// **********
+person.ShowInformation();
 
-//// **********
-////Person person = new() { FullName = "Dariush Tasdighi", Age = 52 };
-//// **********
+public class Person(string fullName) : object
+{
+	public int Age { get; set; }
 
-//// **********
-////var person = new Person() { FullName = "Dariush Tasdighi", Age = 52 };
-//// **********
+	public string FullName { get; set; } = fullName;
 
-//// **********
-////var person =
-////	new Person()
-////	{
-////		FullName = "Dariush Tasdighi",
-////		Age = 52
-////	};
-//// **********
-
-//// **********
-////var person =
-////	new Person
-////	{
-////		FullName = "Dariush Tasdighi",
-////		Age = 52
-////	};
-//// **********
-
-//// **********
-////var person =
-////	new Person
-////	{
-////		FullName = "Dariush Tasdighi",
-////		Age = 52,
-////	};
-//// **********
-
-//// **********
-//var person =
-//	new Person
-//	{
-//		Age = 52,
-//		FullName = "Dariush Tasdighi",
-//	};
-//// **********
-
-//public class Person : object
-//{
-//	public Person() : base()
-//	{
-//	}
-
-//	public int Age { get; set; }
-
-//	public string FullName { get; set; }
-
-//	public void ShowInformation()
-//	{
-//		System.Console.WriteLine
-//			($"I'm {FullName} and {Age} years old.");
-//	}
-//}
+	public void ShowInformation()
+	{
+		Console.WriteLine
+			(value: $"I'm {FullName} and {Age} years old.");
+	}
+}
