@@ -29,143 +29,163 @@
 //	// **********
 //	// ToList() -> using System.Linq;
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories.ToList();
+//	{
+//		var categories =
+//			applicationDbContext.Categories.ToList();
+//	}
 //	// **********
 
 //	// **********
 //	// آیین نگارش
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.ToList()
+//			;
 
-//	//foreach (var category in categories)
-//	//{
-//	//	Console.WriteLine(value: category.ToString());
-//	//}
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
+//	}
 //	// **********
 
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6 && current.IsActive)
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(predicate: current => current.Id <= 6 && current.IsActive)
+//			.ToList()
+//			;
+//	}
 //	// **********
 
 //	// **********
 //	// Best Practice
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6)
-//	//	.Where(predicate: current => current.IsActive)
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(predicate: current => current.Id <= 6)
+//			.Where(predicate: current => current.IsActive)
+//			.ToList()
+//			;
+//	}
 //	// **********
 
 //	// **********
 //	// برای نوشتن دستور ذیل، راه دیگری وجود ندارد
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6 || current.IsActive)
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(predicate: current => current.Id <= 6 || current.IsActive)
+//			.ToList()
+//			;
+//	}
 //	// **********
 
 //	// **********
-//	//var search = "Category";
+//	{
+//		var search = "Category";
 
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6)
-//	//	.Where(predicate: current => current.IsActive)
-//	//	.Where(predicate: current => current.Name != null &&
-//	//		current.Name.ToLower().Contains(search.ToLower()))
-//	//	.ToList()
-//	//	;
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(predicate: current => current.Id <= 6)
+//			.Where(predicate: current => current.IsActive)
+//			.Where(predicate: current => current.Name != null &&
+//				current.Name.ToLower().Contains(search.ToLower()))
+//			.ToList()
+//			;
+//	}
 //	// **********
 
 //	// **********
 //	// نوشتن دستورات ذیل، با ترتیبی
 //	// که نوشته شده است را توصیه نمی‌کنم
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.OrderBy(keySelector: current => current.IsActive)
-//	//	.Where(predicate: current => current.Id <= 6)
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.OrderBy(keySelector: current => current.IsActive)
+//			.Where(predicate: current => current.Id <= 6)
+//			.ToList()
+//			;
 
-//	//foreach (var category in categories)
-//	//{
-//	//	Console.WriteLine(value: category.ToString());
-//	//}
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
+//	}
 //	// **********
 
 //	// **********
 //	// Best Practice
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6)
-//	//	.OrderBy(keySelector: current => current.IsActive)
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(predicate: current => current.Id <= 6)
+//			.OrderBy(keySelector: current => current.IsActive)
+//			.ToList()
+//			;
 
-//	//foreach (var category in categories)
-//	//{
-//	//	Console.WriteLine(value: category.ToString());
-//	//}
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
+//	}
 //	// **********
 
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6)
-//	//	.OrderByDescending(keySelector: current => current.IsActive)
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(predicate: current => current.Id <= 6)
+//			.OrderByDescending(keySelector: current => current.IsActive)
+//			.ToList()
+//			;
 
-//	//foreach (var category in categories)
-//	//{
-//	//	Console.WriteLine(value: category.ToString());
-//	//}
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
+//	}
 //	// **********
 
 //	// **********
 //	// دستور ذیل غلط است و درست کار نمی‌کند
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6)
-//	//	.OrderBy(keySelector: current => current.IsActive)
-//	//	.OrderBy(keySelector: current => current.Id)
-//	//	.ToList()
-//	//	;
+//	{
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(predicate: current => current.Id <= 6)
+//			.OrderBy(keySelector: current => current.IsActive)
+//			.OrderBy(keySelector: current => current.Id)
+//			.ToList()
+//			;
 
-//	//foreach (var category in categories)
-//	//{
-//	//	Console.WriteLine(value: category.ToString());
-//	//}
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
+//	}
 //	// **********
 
 //	// **********
-//	//var categories =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Id <= 6)
-//	//	.OrderBy(keySelector: current => current.IsActive)
-//	//	.ThenBy(keySelector: current => current.Id)
-//	//	.ToList()
-//	//	;
+//	var categories =
+//		applicationDbContext.Categories
+//		.Where(predicate: current => current.Id <= 6)
+//		.OrderBy(keySelector: current => current.IsActive)
+//		.ThenBy(keySelector: current => current.Id)
+//		.ToList()
+//		;
 
-//	//foreach (var category in categories)
-//	//{
-//	//	Console.WriteLine(value: category.ToString());
-//	//}
+//	foreach (var category in categories)
+//	{
+//		Console.WriteLine(value: category.ToString());
+//	}
 //	// **********
 
 //	// **********

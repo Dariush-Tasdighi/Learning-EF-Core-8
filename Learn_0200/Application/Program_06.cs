@@ -7,14 +7,16 @@
 //	using var applicationDbContext = new ApplicationDbContext();
 
 //	// **************************************************
-//	var categories =
-//		applicationDbContext.Categories.ToList();
-
-//	// SQL = TSQL = SELECT * FROM Categories
-
-//	if (categories.Count == 0)
 //	{
-//		// ایجاد نه طبقه‌بندی
+//		var categories =
+//			applicationDbContext.Categories.ToList();
+
+//		// SQL = TSQL = SELECT * FROM Categories
+
+//		if (categories.Count == 0)
+//		{
+//			// ایجاد نه عدد طبقه‌بندی
+//		}
 //	}
 //	// **************************************************
 
@@ -25,73 +27,81 @@
 //	// **************************************************
 
 //	// **************************************************
-//	//var categoryCount =
-//	//	applicationDbContext.Categories.Count();
+//	{
+//		var categoryCount =
+//			applicationDbContext.Categories.Count();
 
-//	//// SQL = TSQL = SELECT COUNT(*) FROM Categories
+//		// SQL = TSQL = SELECT COUNT(*) FROM Categories
 
-//	//if (categoryCount == 0)
-//	//{
-//	//	// ایجاد نه طبقه‌بندی
-//	//}
+//		if (categoryCount == 0)
+//		{
+//			// ایجاد نه عدد طبقه‌بندی
+//		}
+//	}
 //	// **************************************************
 
 //	// **************************************************
-//	//var hasAnyCategory =
-//	//	applicationDbContext.Categories.Any();
+//	{
+//		var hasAnyCategory =
+//			applicationDbContext.Categories.Any();
 
-//	//if (hasAnyCategory == false)
-//	//{
-//	//	// ایجاد نه طبقه‌بندی
-//	//}
+//		if (hasAnyCategory == false)
+//		{
+//			// ایجاد نه عدد طبقه‌بندی
+//		}
+//	}
 //	// **************************************************
 
 //	// **************************************************
 //	// Non-Transactional
 //	// **************************************************
-//	//var hasAnyCategory =
-//	//	applicationDbContext.Categories.Any();
+//	{
+//		var hasAnyCategory =
+//			applicationDbContext.Categories.Any();
 
-//	//if (hasAnyCategory == false)
-//	//{
-//	//	for (var index = 1; index <= 9; index++)
-//	//	{
-//	//		var category =
-//	//			new Category
-//	//			{
-//	//				Name = $"Category {index}",
-//	//				IsActive = (index % 2 == 0),
-//	//			};
+//		if (hasAnyCategory == false)
+//		{
+//			for (var index = 1; index <= 9; index++)
+//			{
+//				var category =
+//					new Category
+//					{
+//						Name = $"Category {index}",
+//						IsActive = (index % 2 == 0),
+//					};
 
-//	//		applicationDbContext.Add(entity: category);
+//				applicationDbContext.Add(entity: category);
 
-//	//		applicationDbContext.SaveChanges();
-//	//	}
-//	//}
+//				applicationDbContext.SaveChanges();
+//			}
+//		}
+//	}
 //	// **************************************************
 
 //	// **************************************************
 //	// Transactional
 //	// **************************************************
-//	//var hasAnyCategory =
-//	//	applicationDbContext.Categories.Any();
+//	{
+//		var hasAnyCategory =
+//			applicationDbContext.Categories.Any();
 
-//	//if (hasAnyCategory == false)
-//	//{
-//	//	for (var index = 1; index <= 9; index++)
-//	//	{
-//	//		var category =
-//	//			new Category
-//	//			{
-//	//				Name = $"Category {index}",
-//	//				IsActive = (index % 2 == 0),
-//	//			};
+//		if (hasAnyCategory == false)
+//		{
+//			for (var index = 1; index <= 9; index++)
+//			{
+//				var category =
+//					new Category
+//					{
+//						Name = $"Category {index}",
+//						IsActive = (index % 2 == 0),
+//					};
 
-//	//		applicationDbContext.Add(entity: category);
-//	//	}
+//				applicationDbContext.Add(entity: category);
+//			}
 
-//	//	applicationDbContext.SaveChanges();
-//	//}
+//			applicationDbContext.SaveChanges();
+//		}
+//	}
 //	// **************************************************
 //}
 //catch (Exception ex)

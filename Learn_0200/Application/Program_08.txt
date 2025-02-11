@@ -7,6 +7,8 @@
 **************************************************
 Update One Record
 **************************************************
+using var applicationDbContext = new ApplicationDbContext();
+
 var foundCategory =
 	applicationDbContext.Categories
 	.Where(current => current.Id == 1)
@@ -90,10 +92,11 @@ C# Technique:
 States:
 
 	applicationDbContext.Entry(entity: someEntity).State:
-		
-		EntityState.Detached;
+
 		EntityState.Added;
-		EntityState.Unchanged;
-		EntityState.Modified;
 		EntityState.Deleted;
+		EntityState.Modified;
+
+		EntityState.Detached;
+		EntityState.Unchanged;
 **************************************************

@@ -46,6 +46,8 @@
 ////applicationDbContext.Categories.Add(entity: category);
 
 ////applicationDbContext.SaveChanges();
+
+////// چندین خط دیگر
 //// **************************************************
 
 //// **************************************************
@@ -106,8 +108,7 @@
 ////	// از نظر مسائل ظاهری و امنیتی دستور ذیل مناسب نمی‌باشد
 ////	//Console.WriteLine(value: ex.Message);
 
-////	Console.WriteLine
-////		(value: "Unexpected Error!");
+////	Console.WriteLine(value: "Unexpected Error!");
 ////}
 //// **************************************************
 

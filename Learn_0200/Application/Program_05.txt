@@ -3,3 +3,11 @@
 
 	For Primary Key [OR] Alternate Key [OR] Everything!
 **************************************************
+
+**************************************************
+Key Types:
+
+1. Primary Key
+2. Foreign Key
+3. Alternate Key
+**************************************************
