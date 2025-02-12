@@ -14,8 +14,7 @@
 //	//if (category == null)
 //	if (category is null)
 //	{
-//		Console.WriteLine
-//			(value: "There is not any category!");
+//		Console.WriteLine(value: "There is not any category!");
 //	}
 //	else
 //	{
@@ -36,34 +35,34 @@
 //	// دستور ذیل را خیلی پیشنهاد نمی‌کنم
 //	// توصیه می‌کنم که به جای دستور ذیل
 //	// استفاده گردد FirstOrDefault از دستور
-//	//var category =
-//	//	applicationDbContext.Categories
-//	//	.Find(keyValues: 1);
+//	var category =
+//		applicationDbContext.Categories
+//		.Find(keyValues: 1);
 
 //	// دستور ذیل را خیلی پیشنهاد نمی‌کنم
-//	//var category =
-//	//	applicationDbContext.Categories
-//	//	.FirstOrDefault(predicate: x => x.Id == 1);
+//	category =
+//		applicationDbContext.Categories
+//		.FirstOrDefault(predicate: x => x.Id == 1);
 
-//	//var category =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: x => x.Id == 1)
-//	//	.FirstOrDefault();
+//	category =
+//		applicationDbContext.Categories
+//		.Where(predicate: x => x.Id == 1)
+//		.FirstOrDefault();
 
-//	//var category =
-//	//	applicationDbContext.Categories
-//	//	.Where(predicate: cagetory => cagetory.Id == 1)
-//	//	.FirstOrDefault();
+//	category =
+//		applicationDbContext.Categories
+//		.Where(predicate: cagetory => cagetory.Id == 1)
+//		.FirstOrDefault();
 
-//	var category =
+//	// Best Practice
+//	category =
 //		applicationDbContext.Categories
 //		.Where(current => current.Id == 1)
 //		.FirstOrDefault();
 
 //	if (category is null)
 //	{
-//		Console.WriteLine
-//			(value: "There is not any category!");
+//		Console.WriteLine(value: "There is not any category!");
 //	}
 //	else
 //	{
@@ -83,32 +82,38 @@
 
 //	var category =
 //		applicationDbContext.Categories
-//		.Where(predicate: current => current.Name == "My Category")
+//		.Where(current => current.Name == "My Category")
 //		.FirstOrDefault();
+
 //	//.ToList(); // بعدا آموزش داده می‌شود
 
 //	// کار می‌کرد EF دستور ذیل در
 //	// کار نمی‌کند EF Core ولی متاسفانه، در
 //	//category =
 //	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => string.Compare(current.Name, "My Category", true) == 0)
+//	//	.Where(current => string.Compare(current.Name, "My Category", true) == 0)
 //	//	.FirstOrDefault();
 
 //	//category =
 //	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Name.ToLower() == "My Category".ToLower()) // OR ToUppoer()
+//	//	.Where(current => current.Name.ToLower() == "My Category".ToLower())
+//	//	.FirstOrDefault();
+
+//	//category =
+//	//	applicationDbContext.Categories
+//	//	.Where(current => current.Name.ToUpper() == "My Category".ToUpper())
 //	//	.FirstOrDefault();
 
 //	// دستور ذیل کار نمی‌کند
 //	//category =
 //	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Name is not null
+//	//	.Where(current => current.Name is not null
 //	//		&& current.Name.ToLower() == "My Category".ToLower())
 //	//	.FirstOrDefault();
 
 //	category =
 //		applicationDbContext.Categories
-//		.Where(predicate: current => current.Name != null
+//		.Where(current => current.Name != null
 //			&& current.Name.ToLower() == "My Category".ToLower())
 //		.FirstOrDefault();
 
@@ -116,26 +121,25 @@
 //	// StartsWith(value: "My") -> value:
 //	//category =
 //	//	applicationDbContext.Categories
-//	//	.Where(predicate: current => current.Name != null &&
+//	//	.Where(current => current.Name != null &&
 //	//		current.Name.ToLower().StartsWith(value: "My".ToLower()))
 //	//	.FirstOrDefault();
 
 //	category =
 //		applicationDbContext.Categories
-//		.Where(predicate:
-//			current => current.Name != null
+//		.Where(current => current.Name != null
 //			&& current.Name.ToLower().StartsWith("My".ToLower()))
 //		.FirstOrDefault();
 
 //	category =
 //		applicationDbContext.Categories
-//		.Where(predicate: current => current.Name != null
+//		.Where(current => current.Name != null
 //			&& current.Name.ToLower().EndsWith("Category".ToLower()))
 //		.FirstOrDefault();
 
 //	category =
 //		applicationDbContext.Categories
-//		.Where(predicate: current => current.Name != null
+//		.Where(current => current.Name != null
 //			&& current.Name.ToLower().Contains("Category".ToLower()))
 //		.FirstOrDefault();
 

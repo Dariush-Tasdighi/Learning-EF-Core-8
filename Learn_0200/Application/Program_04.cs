@@ -17,7 +17,9 @@
 //}
 //catch (Exception ex)
 //{
-//	Console.WriteLine(value: ex.Message);
+//	// Log Error (ex)!
+
+//	Console.WriteLine(value: "Unexpected Error!");
 //}
 
 //public class Category : object

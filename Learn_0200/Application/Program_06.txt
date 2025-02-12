@@ -12,3 +12,25 @@
 
 		- Transactional
 		- Non-Transactional
+
+Bank
+
+	Accounts
+
+	UserId		Amount
+
+	1		100$ -10$ = 90$
+	...
+	9		200$ +10$
+
+Bank
+
+	Accounts
+
+	UserId		Amount
+Transaction
+	1		100$ -10$ = 90$
+	...
+	9		200$ +10$
+Role Back
+Commit

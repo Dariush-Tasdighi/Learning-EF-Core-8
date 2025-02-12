@@ -55,9 +55,14 @@
 //	{
 //		var categories =
 //			applicationDbContext.Categories
-//			.Where(predicate: current => current.Id <= 6 && current.IsActive)
+//			.Where(current => current.Id <= 6 && current.IsActive)
 //			.ToList()
 //			;
+
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
 //	}
 //	// **********
 
@@ -67,10 +72,15 @@
 //	{
 //		var categories =
 //			applicationDbContext.Categories
-//			.Where(predicate: current => current.Id <= 6)
-//			.Where(predicate: current => current.IsActive)
+//			.Where(current => current.Id <= 6)
+//			.Where(current => current.IsActive)
 //			.ToList()
 //			;
+
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
 //	}
 //	// **********
 
@@ -80,9 +90,14 @@
 //	{
 //		var categories =
 //			applicationDbContext.Categories
-//			.Where(predicate: current => current.Id <= 6 || current.IsActive)
+//			.Where(current => current.Id <= 6 || current.IsActive)
 //			.ToList()
 //			;
+
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
 //	}
 //	// **********
 
@@ -92,12 +107,17 @@
 
 //		var categories =
 //			applicationDbContext.Categories
-//			.Where(predicate: current => current.Id <= 6)
-//			.Where(predicate: current => current.IsActive)
-//			.Where(predicate: current => current.Name != null &&
+//			.Where(current => current.Id <= 6)
+//			.Where(current => current.IsActive)
+//			.Where(current => current.Name != null &&
 //				current.Name.ToLower().Contains(search.ToLower()))
 //			.ToList()
 //			;
+
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
 //	}
 //	// **********
 
@@ -108,8 +128,8 @@
 //	{
 //		var categories =
 //			applicationDbContext.Categories
-//			.OrderBy(keySelector: current => current.IsActive)
-//			.Where(predicate: current => current.Id <= 6)
+//			.OrderBy(current => current.IsActive)
+//			.Where(current => current.Id <= 6)
 //			.ToList()
 //			;
 
@@ -126,8 +146,8 @@
 //	{
 //		var categories =
 //			applicationDbContext.Categories
-//			.Where(predicate: current => current.Id <= 6)
-//			.OrderBy(keySelector: current => current.IsActive)
+//			.Where(current => current.Id <= 6)
+//			.OrderBy(current => current.IsActive)
 //			.ToList()
 //			;
 
@@ -142,8 +162,8 @@
 //	{
 //		var categories =
 //			applicationDbContext.Categories
-//			.Where(predicate: current => current.Id <= 6)
-//			.OrderByDescending(keySelector: current => current.IsActive)
+//			.Where(current => current.Id <= 6)
+//			.OrderByDescending(current => current.IsActive)
 //			.ToList()
 //			;
 
@@ -160,9 +180,9 @@
 //	{
 //		var categories =
 //			applicationDbContext.Categories
-//			.Where(predicate: current => current.Id <= 6)
-//			.OrderBy(keySelector: current => current.IsActive)
-//			.OrderBy(keySelector: current => current.Id)
+//			.Where(current => current.Id <= 6)
+//			.OrderBy(current => current.IsActive)
+//			.OrderBy(current => current.Name)
 //			.ToList()
 //			;
 
@@ -174,17 +194,19 @@
 //	// **********
 
 //	// **********
-//	var categories =
-//		applicationDbContext.Categories
-//		.Where(predicate: current => current.Id <= 6)
-//		.OrderBy(keySelector: current => current.IsActive)
-//		.ThenBy(keySelector: current => current.Id)
-//		.ToList()
-//		;
-
-//	foreach (var category in categories)
 //	{
-//		Console.WriteLine(value: category.ToString());
+//		var categories =
+//			applicationDbContext.Categories
+//			.Where(current => current.Id <= 6)
+//			.OrderBy(current => current.IsActive)
+//			.ThenBy(current => current.Name)
+//			.ToList()
+//			;
+
+//		foreach (var category in categories)
+//		{
+//			Console.WriteLine(value: category.ToString());
+//		}
 //	}
 //	// **********
 

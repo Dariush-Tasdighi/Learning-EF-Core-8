@@ -53,32 +53,6 @@
 //	// **************************************************
 
 //	// **************************************************
-//	// Non-Transactional
-//	// **************************************************
-//	{
-//		var hasAnyCategory =
-//			applicationDbContext.Categories.Any();
-
-//		if (hasAnyCategory == false)
-//		{
-//			for (var index = 1; index <= 9; index++)
-//			{
-//				var category =
-//					new Category
-//					{
-//						Name = $"Category {index}",
-//						IsActive = (index % 2 == 0),
-//					};
-
-//				applicationDbContext.Add(entity: category);
-
-//				applicationDbContext.SaveChanges();
-//			}
-//		}
-//	}
-//	// **************************************************
-
-//	// **************************************************
 //	// Transactional
 //	// **************************************************
 //	{
@@ -100,6 +74,32 @@
 //			}
 
 //			applicationDbContext.SaveChanges();
+//		}
+//	}
+//	// **************************************************
+
+//	// **************************************************
+//	// Non-Transactional
+//	// **************************************************
+//	{
+//		var hasAnyCategory =
+//			applicationDbContext.Categories.Any();
+
+//		if (hasAnyCategory == false)
+//		{
+//			for (var index = 1; index <= 9; index++)
+//			{
+//				var category =
+//					new Category
+//					{
+//						Name = $"Category {index}",
+//						IsActive = (index % 2 == 0),
+//					};
+
+//				applicationDbContext.Add(entity: category);
+
+//				applicationDbContext.SaveChanges();
+//			}
 //		}
 //	}
 //	// **************************************************

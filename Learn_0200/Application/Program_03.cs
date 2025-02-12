@@ -4,112 +4,125 @@
 //// **************************************************
 //// دستورات ذیل را در درس قبل یاد گرفته‌ایم
 //// **************************************************
-//var applicationDbContext = new ApplicationDbContext();
+//{
+//	var applicationDbContext = new ApplicationDbContext();
 
-//var category =
-//	new Category
+//	var category =
+//		new Category
+//		{
+//			Name = "My Category 1",
+//		};
+
+//	applicationDbContext.Categories.Add(entity: category);
+
+//	applicationDbContext.SaveChanges();
+
+//	applicationDbContext.Dispose();
+//}
+//// **************************************************
+
+//// **************************************************
+//{
+//	using (var applicationDbContext = new ApplicationDbContext())
 //	{
-//		Name = "My Category 1",
-//	};
+//		var category =
+//			new Category
+//			{
+//				Name = "My Category",
+//			};
 
-//applicationDbContext.Categories.Add(entity: category);
+//		applicationDbContext.Categories.Add(entity: category);
 
-//applicationDbContext.SaveChanges();
-
-//applicationDbContext.Dispose();
+//		applicationDbContext.SaveChanges();
+//	}
+//}
 //// **************************************************
 
 //// **************************************************
-////using (var applicationDbContext = new ApplicationDbContext())
-////{
-////	var category =
-////		new Category
-////		{
-////			Name = "My Category",
-////		};
+//{
+//	using var applicationDbContext = new ApplicationDbContext();
 
-////	applicationDbContext.Categories.Add(entity: category);
+//	var category =
+//		new Category
+//		{
+//			Name = "My Category",
+//		};
 
-////	applicationDbContext.SaveChanges();
-////}
+//	applicationDbContext.Categories.Add(entity: category);
+
+//	applicationDbContext.SaveChanges();
+
+//	// چندین خط دیگر
+//}
 //// **************************************************
 
 //// **************************************************
-////using var applicationDbContext = new ApplicationDbContext();
+//{
+//	using var applicationDbContext = new ApplicationDbContext();
 
-////var category =
-////	new Category
-////	{
-////		Name = "My Category",
-////	};
+//	var category =
+//		new Category
+//		{
+//			Name = "My Category",
+//		};
 
-////applicationDbContext.Categories.Add(entity: category);
+//	// New in EF Core
+//	applicationDbContext.Add(entity: category);
 
-////applicationDbContext.SaveChanges();
-
-////// چندین خط دیگر
+//	applicationDbContext.SaveChanges();
+//}
 //// **************************************************
 
 //// **************************************************
-////using var applicationDbContext = new ApplicationDbContext();
+//{
+//	try
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-////var category =
-////	new Category
-////	{
-////		Name = "My Category",
-////	};
+//		var category =
+//			new Category
+//			{
+//				Name = "My Category",
+//			};
 
-////// New in EF Core
-////applicationDbContext.Add(entity: category);
+//		applicationDbContext.Add(entity: category);
 
-////applicationDbContext.SaveChanges();
+//		applicationDbContext.SaveChanges();
+//	}
+//	catch (Exception ex)
+//	{
+//		// روش احمقانه / خطرناک
+//		// از نظر مسائل ظاهری و امنیتی دستور ذیل مناسب نمی‌باشد
+//		Console.WriteLine(value: ex.Message);
+//	}
+//}
 //// **************************************************
 
 //// **************************************************
-////try
-////{
-////	using var applicationDbContext = new ApplicationDbContext();
+//{
+//	try
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-////	var category =
-////		new Category
-////		{
-////			Name = "My Category",
-////		};
+//		var category =
+//			new Category
+//			{
+//				Name = "My Category",
+//			};
 
-////	applicationDbContext.Add(entity: category);
+//		applicationDbContext.Add(entity: category);
 
-////	applicationDbContext.SaveChanges();
-////}
-////catch (Exception ex)
-////{
-////	Console.WriteLine(value: ex.Message);
-////}
-//// **************************************************
+//		applicationDbContext.SaveChanges();
+//	}
+//	catch (Exception ex)
+//	{
+//		// باید خطا را لاگ کنیم، تا تیم برنامه‌نویسی
+//		// بعدا آن را بررسی کرده و مشکل را برطرف نماید
+//		// Log Error (ex)!
 
-//// **************************************************
-////try
-////{
-////	using var applicationDbContext = new ApplicationDbContext();
-
-////	var category =
-////		new Category
-////		{
-////			Name = "My Category",
-////		};
-
-////	applicationDbContext.Add(entity: category);
-
-////	applicationDbContext.SaveChanges();
-////}
-////catch (Exception ex)
-////{
-////	// Log Error (ex)!
-
-////	// از نظر مسائل ظاهری و امنیتی دستور ذیل مناسب نمی‌باشد
-////	//Console.WriteLine(value: ex.Message);
-
-////	Console.WriteLine(value: "Unexpected Error!");
-////}
+//		Console.WriteLine(value: "Unexpected Error!");
+//	}
+//}
 //// **************************************************
 
 //public class Category : object

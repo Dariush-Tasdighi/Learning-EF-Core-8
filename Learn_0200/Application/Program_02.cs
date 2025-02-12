@@ -95,6 +95,8 @@
 //		// Connect Timeout or Connection Timeout: Default: 15 Seconds
 //		// ******************************************************************
 
+//		// Windows Authentication
+
 //		// ******************************************************************
 //		// *** Windows Authentication Mode without TrustServerCertificate ***
 //		// ******************************************************************
@@ -108,6 +110,8 @@
 //		//var connectionString =
 //		//	"Server=.;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;Trusted_Connection=True;TrustServerCertificate=True;";
 //		// ******************************************************************
+
+//		// SQL Server Authentication
 
 //		// *********************************************************************
 //		// *** SQL Server Authentication Mode without TrustServerCertificate ***
