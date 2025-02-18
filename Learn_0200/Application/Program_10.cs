@@ -31,141 +31,112 @@
 //	// **************************************************
 //	// Update
 //	// **************************************************
-//	//{
-//	//	using var applicationDbContext = new ApplicationDbContext();
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var foundCategory =
-//	//		applicationDbContext.Categories
-//	//		.Where(current => current.Id == 1)
-//	//		.FirstOrDefault();
+//		var foundCategory =
+//			applicationDbContext.Categories
+//			.Where(current => current.Id == 1)
+//			.FirstOrDefault();
 
-//	//	if (foundCategory is null)
-//	//	{
-//	//		var errorMessage =
-//	//			$"There is not any category with this Id (1)!";
+//		if (foundCategory is null)
+//		{
+//			var errorMessage =
+//				$"There is not any category with this Id (1)!";
 
-//	//		Console.WriteLine(value: errorMessage);
-//	//	}
-//	//	else
-//	//	{
-//	//		// Unchanged
-//	//		var state1 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
+//			Console.WriteLine(value: errorMessage);
+//		}
+//		else
+//		{
+//			var state1 = applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		var originalName = foundCategory.Name;
-//	//		foundCategory.Name = originalName;
+//			var originalName = foundCategory.Name;
+//			foundCategory.Name = originalName;
 
-//	//		// Unchanged
-//	//		var state2 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
+//			var state2 = applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		foundCategory.Name = "New Category Name";
+//			foundCategory.Name = "New Category Name";
 
-//	//		// Modified
-//	//		var state3 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
+//			var state3 = applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		foundCategory.Name = originalName;
+//			foundCategory.Name = originalName;
 
-//	//		// Note: ?????
-//	//		var state4 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
+//			var state4 = applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		var affectedRows =
-//	//			applicationDbContext.SaveChanges();
+//			var affectedRows = applicationDbContext.SaveChanges();
 
-//	//		// Unchanged
-//	//		var state6 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
-//	//	}
-//	//}
+//			var state6 = applicationDbContext.Entry(entity: foundCategory).State;
+//		}
+//	}
 //	// **************************************************
 
 //	// **************************************************
 //	// Update and then delete
 //	// **************************************************
-//	//{
-//	//	using var applicationDbContext = new ApplicationDbContext();
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var foundCategory =
-//	//		applicationDbContext.Categories
-//	//		.Where(current => current.Id == 1)
-//	//		.FirstOrDefault();
+//		var foundCategory =
+//			applicationDbContext.Categories
+//			.Where(current => current.Id == 1)
+//			.FirstOrDefault();
 
-//	//	if (foundCategory is null)
-//	//	{
-//	//		var errorMessage =
-//	//			$"There is not any category with this Id (1)!";
+//		if (foundCategory is null)
+//		{
+//			var errorMessage =
+//				$"There is not any category with this Id (1)!";
 
-//	//		Console.WriteLine(value: errorMessage);
-//	//	}
-//	//	else
-//	//	{
-//	//		// Unchanged
-//	//		var state1 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
+//			Console.WriteLine(value: errorMessage);
+//		}
+//		else
+//		{
+//			var state1 = applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		foundCategory.Name = "New Category Name";
+//			foundCategory.Name = "New Category Name";
 
-//	//		// اصلا هزار بار، این رکورد را ویرایش می‌کنیم
+//			// اصلا هزار بار، این رکورد را ویرایش می‌کنیم
 
-//	//		// Modified
-//	//		var state2 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
+//			var state2 = applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		applicationDbContext.Remove(entity: foundCategory);
+//			applicationDbContext.Remove(entity: foundCategory);
 
-//	//		// Note: ?????
-//	//		var state3 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
+//			var state3 = applicationDbContext.Entry(entity: foundCategory).State;
 
-//	//		var affectedRows =
-//	//			applicationDbContext.SaveChanges();
+//			var affectedRows = applicationDbContext.SaveChanges();
 
-//	//		// Detached
-//	//		var state6 =
-//	//			applicationDbContext.Entry(entity: foundCategory).State;
-//	//	}
-//	//}
+//			var state6 = applicationDbContext.Entry(entity: foundCategory).State;
+//		}
+//	}
 //	// **************************************************
 
 //	// **************************************************
 //	// Add (Insert)
 //	// **************************************************
-//	//{
-//	//	using var applicationDbContext = new ApplicationDbContext();
+//	{
+//		using var applicationDbContext = new ApplicationDbContext();
 
-//	//	var newCategory =
-//	//		new Category
-//	//		{
-//	//			IsActive = true,
-//	//			Name = "New Category",
-//	//		};
+//		var newCategory =
+//			new Category
+//			{
+//				IsActive = true,
+//				Name = "New Category",
+//			};
 
-//	//	// Detached
-//	//	var state1 =
-//	//		applicationDbContext.Entry(entity: newCategory).State;
+//		var state1 = applicationDbContext.Entry(entity: newCategory).State;
 
-//	//	applicationDbContext.Add(entity: newCategory);
-//	//	//applicationDbContext.Categories.Add(entity: newCategory);
+//		applicationDbContext.Add(entity: newCategory);
+//		//applicationDbContext.Categories.Add(entity: newCategory);
 
-//	//	// Added
-//	//	var state2 =
-//	//		applicationDbContext.Entry(entity: newCategory).State;
+//		var state2 = applicationDbContext.Entry(entity: newCategory).State;
 
-//	//	applicationDbContext.Remove(entity: newCategory);
+//		applicationDbContext.Remove(entity: newCategory);
 
-//	//	// Note: ?????
-//	//	var state3 =
-//	//		applicationDbContext.Entry(entity: newCategory).State;
+//		var state3 = applicationDbContext.Entry(entity: newCategory).State;
 
-//	//	var affectedRows =
-//	//		applicationDbContext.SaveChanges();
+//		var affectedRows = applicationDbContext.SaveChanges();
 
-//	//	// Detached
-//	//	var state4 =
-//	//		applicationDbContext.Entry(entity: newCategory).State;
-//	//}
+//		var state4 = applicationDbContext.Entry(entity: newCategory).State;
+//	}
 //	// **************************************************
 //}
 //catch (Exception ex)
@@ -203,8 +174,7 @@
 
 //	public DbSet<Category> Categories { get; set; }
 
-//	protected override void OnConfiguring
-//		(DbContextOptionsBuilder optionsBuilder)
+//	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //	{
 //		var connectionString =
 //			"Server=.;User ID=sa;Password=1234512345;Database=LEARNING_EF_CORE_0200;MultipleActiveResultSets=true;TrustServerCertificate=True;";

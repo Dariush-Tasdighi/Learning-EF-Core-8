@@ -73,6 +73,10 @@
 //	Console.WriteLine(value: ex.Message);
 //}
 
+
+//// **************************************************
+//// **************************************************
+//// **************************************************
 ////public class Category : object
 ////{
 ////	public Category() : base()
@@ -81,11 +85,18 @@
 
 ////	public int Id { get; set; }
 
-////	...
-////	...
-////	...
+////	//...
+////	//...
+////	//...
 ////}
+//// **************************************************
+//// **************************************************
+//// **************************************************
 
+
+//// **************************************************
+//// **************************************************
+//// **************************************************
 ////public abstract class Entity : object
 ////{
 ////	protected Entity() : base()
@@ -107,21 +118,55 @@
 ////	//public DateTime InsertDateTime { get; private set; }
 ////	public DateTimeOffset InsertDateTime { get; private set; }
 ////}
+//// **************************************************
+//// **************************************************
+//// **************************************************
 
-//public abstract class Entity : object
-////public abstract class Entity() : object()
-//{
-//	[Key]
-//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
 
-//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
-//}
+//// **************************************************
+//// **************************************************
+//// **************************************************
+////public abstract class Entity : object
+////{
+////	[Key]
+////	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+////	public Guid Id { get; private set; } = Guid.NewGuid();
+
+////	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+////	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
+
+////	public void SomeFunction()
+////	{
+////		Id = Guid.NewGuid();
+////	}
+////}
+//// **************************************************
+//// **************************************************
+//// **************************************************
+
+
+//// **************************************************
+//// **************************************************
+//// **************************************************
+////public abstract class Entity : object
+//////public abstract class Entity() : object()
+////{
+////	[Key]
+////	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+////	public Guid Id { get; init; } = Guid.NewGuid();
+
+////	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+////	public DateTimeOffset InsertDateTime { get; init; } = DateTime.Now;
+
+////	//public void SomeFunction()
+////	//{
+////	//	Id = Guid.NewGuid(); // Error!
+////	//}
+////}
 
 ////public class Category : Entity
 ////{
-////	public Category(string name)
+////	public Category(string name) : base()
 ////	{
 ////		Name = name;
 ////	}
@@ -141,14 +186,30 @@
 ////		return result;
 ////	}
 ////}
+//// **************************************************
+//// **************************************************
+//// **************************************************
+
+
+//// **************************************************
+//// **************************************************
+//// **************************************************
+//public abstract class Entity : object
+//{
+//	[Key]
+//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+//	public Guid Id { get; init; } = Guid.NewGuid();
+
+//	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTime.Now;
+//}
 
 //public class Category(string name) : Entity
 //{
 //	public bool IsActive { get; set; }
 
-//	//[Required]
-//	[Required(AllowEmptyStrings = false)]
 //	[MaxLength(length: 100)]
+//	[Required(AllowEmptyStrings = false)]
 //	public string Name { get; set; } = name;
 
 //	public override string ToString()
@@ -159,6 +220,9 @@
 //		return result;
 //	}
 //}
+//// **************************************************
+//// **************************************************
+//// **************************************************
 
 ///// <summary>
 ///// Fluent API
@@ -184,6 +248,7 @@
 //			.IsUnicode(unicode: false)
 //			;
 
+//		// Alternate Key: Name
 //		//builder
 //		//	.HasIndex(current => current.Name)
 //		//	.IsUnique(unique: true)
@@ -223,6 +288,9 @@
 
 //	protected override void OnModelCreating(ModelBuilder modelBuilder)
 //	{
+//		// ویژگی‌ها تجمیع می‌شوند
+//		// مشترک‌ها، چیزی که آخر نوشته می‌شود
+
 //		// Solution (1)
 //		//modelBuilder
 //		//	.Entity<Category>()

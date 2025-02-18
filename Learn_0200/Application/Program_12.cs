@@ -164,10 +164,10 @@
 //{
 //	[Key]
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public Guid Id { get; private set; } = Guid.NewGuid();
+//	public Guid Id { get; init; } = Guid.NewGuid();
 
 //	[DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.None)]
-//	public DateTimeOffset InsertDateTime { get; private set; } = DateTime.Now;
+//	public DateTimeOffset InsertDateTime { get; init; } = DateTime.Now;
 //}
 
 //public class Category(string name) : Entity
